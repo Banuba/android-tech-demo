@@ -1,0 +1,284 @@
+{
+    "assets": {
+        "attachments": {
+            "ComposerRT_color": {
+                "type": "color"
+            },
+            "EffectRT0_color": {
+                "type": "color"
+            },
+            "EffectRT0_depth": {
+                "clear": [
+                    1.0
+                ],
+                "type": "depth"
+            }
+        },
+        "faces": {
+            "face0": {
+                "index": 0,
+                "mesh": "!glfx_FACE"
+            }
+        },
+        "images": {
+            "camera_image": {
+                "algorithm": "camera_composer",
+                "type": "procedural_texture"
+            },
+            "left_eye": {
+                "active": true,
+                "recognizer_feature_name": "left_eye",
+                "type": "segmentation_mask"
+            },
+            "left_eye_corneosclera": {
+                "active": true,
+                "recognizer_feature_name": "left_eye_corneosclera",
+                "type": "segmentation_mask"
+            },
+            "eyes_low.png": {
+                "file_name": "images/eyes_low.png",
+                "type": "texture"
+            },
+            "null_image.png": {
+                "file_name": "images/null_image.png",
+                "type": "texture"
+            },
+            "null_lut.png": {
+                "file_name": "images/null_lut.png",
+                "type": "texture"
+            },
+            "preview.png": {
+                "file_name": "images/preview.png",
+                "type": "texture"
+            },
+            "right_eye_corneosclera": {
+                "active": true,
+                "recognizer_feature_name": "right_eye_corneosclera",
+                "type": "segmentation_mask"
+            },
+            "right_eye": {
+                "active": true,
+                "recognizer_feature_name": "right_eye",
+                "type": "segmentation_mask"
+            }
+        },
+        "materials": {
+            "$builtin$materials/copy_pixels.-1": {
+                "parameters": {},
+                "samplers": [
+                    {
+                        "image": "camera_image",
+                        "name": "tex_src"
+                    }
+                ],
+                "state": {
+                    "backfaces": true,
+                    "blend": "off",
+                    "colorwrite": true,
+                    "ztest": false,
+                    "zwrite": false
+                }
+            },
+            "$builtin$materials/copy_pixels.0": {
+                "parameters": {},
+                "samplers": [
+                    {
+                        "image": "ComposerRT_color",
+                        "name": "tex_src"
+                    }
+                ],
+                "state": {
+                    "backfaces": true,
+                    "blend": "off",
+                    "colorwrite": true,
+                    "ztest": false,
+                    "zwrite": false
+                }
+            },
+            "shaders/Q0": {
+                "built_in_samplers": [],
+                "samplers": [
+                    {
+                        "image": "left_eye",
+                        "name": "glfx_L_EYE_MASK"
+                    },
+                    {
+                        "image": "left_eye_corneosclera",
+                        "name": "glfx_L_EYE_CORNEOSCLERA_MASK"
+                    },
+                    {
+                        "image": "camera_image",
+                        "name": "camera"
+                    },
+                    {
+                        "image": "eyes_low.png",
+                        "name": "lookupTexEyes"
+                    }
+                ],
+                "state": {
+                    "backfaces": true,
+                    "blend": "off",
+                    "colorwrite": true,
+                    "ztest": false,
+                    "zwrite": false
+                }
+            },
+            "shaders/Q1": {
+                "built_in_samplers": [],
+                "samplers": [
+                    {
+                        "image": "right_eye",
+                        "name": "glfx_R_EYE_MASK"
+                    },
+                    {
+                        "image": "right_eye_corneosclera",
+                        "name": "glfx_R_EYE_CORNEOSCLERA_MASK"
+                    },
+                    {
+                        "image": "camera_image",
+                        "name": "camera"
+                    },
+                    {
+                        "image": "eyes_low.png",
+                        "name": "lookupTexEyes"
+                    }
+                ],
+                "state": {
+                    "backfaces": true,
+                    "blend": "off",
+                    "colorwrite": true,
+                    "ztest": false,
+                    "zwrite": false
+                }
+            }
+        },
+        "media": {
+            "frx": {
+                "type": "video"
+            }
+        },
+        "meshes": {
+            "!glfx_FACE": "$builtin$meshes/face.stream:0",
+            "camera_surface": "$builtin$meshes/fs_tri",
+            "quad.bsm2": "meshes/quad.bsm2"
+        },
+        "morphs": {
+        }
+    },
+    "components": {
+        "ComposerRT_copy": {
+            "materials": [
+                "$builtin$materials/copy_pixels.0"
+            ],
+            "mesh": "camera_surface",
+            "type": "mesh_instance"
+        },
+        "composer_camera_copy": {
+            "materials": [
+                "$builtin$materials/copy_pixels.-1"
+            ],
+            "mesh": "camera_surface",
+            "type": "mesh_instance"
+        },
+        "face_tracker:0": {
+            "face": "face0",
+            "type": "face_tracker"
+        }
+    },
+    "entities": {
+
+        "ComposerRT_copy_append_to_root__": {
+            "components": [
+                "ComposerRT_copy"
+            ],
+            "layer": "ComposerRT_copy"
+        },
+        "composer_camera_copy": {
+            "components": [
+                "composer_camera_copy"
+            ],
+            "layer": "camera_copy"
+        },
+        "face_tracker0": {
+            "components": [
+                "face_tracker:0"
+            ]
+        },
+        "spawn_entity0": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "Q0",
+                "Q1"
+            ]
+        },
+        "spawn_entity1": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "Q0",
+                "Q1"
+            ]
+        }
+    },
+    "global_params": [
+"toggle"
+    ],
+    "hierarchy": {
+        "face_tracker0": [
+            "spawn_entity0",
+            "spawn_entity1"
+
+        ],
+        "root": [
+            "face_tracker0",
+            "composer_camera_copy",
+            "ComposerRT_copy_append_to_root__"
+        ]
+    },
+    "layers": {
+        "ComposerRT_copy": {},
+        "camera_copy": {},
+        "Q0": {},
+        "Q1": {}
+    },
+    "main_camera": {},
+    "render_list": {
+        "default": [
+            {
+                "layer": "camera_copy",
+                "render_target": "ComposerRT"
+            },
+            {
+                "layer": "ComposerRT_copy",
+                "render_target": "EffectRT0"
+            },
+            {
+                "layer": "Q0",
+                "render_target": "EffectRT0",
+                "sub_geometries": [
+                    "Q0"
+                ]
+            },
+            {
+                "layer": "Q1",
+                "render_target": "EffectRT0",
+                "sub_geometries": [
+                    "Q1"
+                ]
+            }
+        ]
+    },
+    "render_targets": {
+        "ComposerRT": [
+            "ComposerRT_color"
+        ],
+        "EffectRT0": [
+            "EffectRT0_color",
+            "EffectRT0_depth"
+        ]
+    },
+    "scene": "test_Eyes",
+    "script": {
+        "entry_point": "config.js",
+        "type": "legacy"
+    }
+}

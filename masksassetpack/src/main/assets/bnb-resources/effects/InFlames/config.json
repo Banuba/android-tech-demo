@@ -1,0 +1,762 @@
+{
+    "assets": {
+        "attachments": {
+            "ComposerRT_color": {
+                "type": "color"
+            },
+            "EffectRT0_color": {
+                "type": "color"
+            },
+            "EffectRT0_depth": {
+                "clear": [
+                    1.0
+                ],
+                "type": "depth"
+            },
+            "EffectRT1_color": {
+                "type": "color"
+            },
+            "EffectRT1_depth": {
+                "clear": [
+                    1.0
+                ],
+                "type": "depth"
+            },
+            "finalColorFilterRT_color": {
+                "type": "color"
+            }
+        },
+        "faces": {
+            "face0": {
+                "index": 0,
+                "mesh": "!glfx_FACE"
+            }
+        },
+        "images": {
+            "FIRE.png": {
+                "file_name": "images/FIRE.png",
+                "type": "texture"
+            },
+            "REDMASK_v3_256.png": {
+                "file_name": "images/REDMASK_v3_256.png",
+                "type": "texture"
+            },
+            "brdf.ktx": {
+                "file_name": "images/brdf.ktx",
+                "type": "texture"
+            },
+            "camera_image": {
+                "algorithm": "camera_composer",
+                "type": "procedural_texture"
+            },
+            "eye_highlight.png": {
+                "file_name": "images/eye_highlight.png",
+                "type": "texture"
+            },
+            "eyes_middle.png": {
+                "file_name": "images/eyes_middle.png",
+                "type": "texture"
+            },
+            "helmet_mat_Base_Color.ktx": {
+                "file_name": "images/helmet_mat_Base_Color.ktx",
+                "type": "texture"
+            },
+            "helmet_mat_MRAO.ktx": {
+                "file_name": "images/helmet_mat_MRAO.ktx",
+                "type": "texture"
+            },
+            "helmet_mat_Normal.ktx": {
+                "file_name": "images/helmet_mat_Normal.ktx",
+                "type": "texture"
+            },
+            "ibl_diff.ktx": {
+                "file_name": "images/ibl_diff.ktx",
+                "type": "cubemap"
+            },
+            "ibl_spec.ktx": {
+                "file_name": "images/ibl_spec.ktx",
+                "type": "cubemap"
+            },
+            "lut.png": {
+                "file_name": "images/lut.png",
+                "type": "texture"
+            },
+            "make_up.png": {
+                "file_name": "images/make_up.png",
+                "type": "texture"
+            },
+            "null_image.png": {
+                "file_name": "images/null_image.png",
+                "type": "texture"
+            },
+            "null_lut.png": {
+                "file_name": "images/null_lut.png",
+                "type": "texture"
+            },
+            "preview.png": {
+                "file_name": "images/preview.png",
+                "type": "texture"
+            },
+            "soft.png": {
+                "file_name": "images/soft.png",
+                "type": "texture"
+            },
+            "teeth_middle.png": {
+                "file_name": "images/teeth_middle.png",
+                "type": "texture"
+            }
+        },
+        "materials": {
+            "$builtin$materials/copy_pixels.-1": {
+                "parameters": {},
+                "samplers": [
+                    {
+                        "image": "camera_image",
+                        "name": "tex_src"
+                    }
+                ],
+                "state": {
+                    "backfaces": true,
+                    "blend": "off",
+                    "colorwrite": true,
+                    "ztest": false,
+                    "zwrite": false
+                }
+            },
+            "$builtin$materials/copy_pixels.0": {
+                "parameters": {},
+                "samplers": [
+                    {
+                        "image": "ComposerRT_color",
+                        "name": "tex_src"
+                    }
+                ],
+                "state": {
+                    "backfaces": true,
+                    "blend": "off",
+                    "colorwrite": true,
+                    "ztest": false,
+                    "zwrite": false
+                }
+            },
+            "$builtin$materials/copy_pixels.1": {
+                "parameters": {},
+                "samplers": [
+                    {
+                        "image": "EffectRT0_color",
+                        "name": "tex_src"
+                    }
+                ],
+                "state": {
+                    "backfaces": true,
+                    "blend": "off",
+                    "colorwrite": true,
+                    "ztest": false,
+                    "zwrite": false
+                }
+            },
+            "shaders/TriMat": {
+                "built_in_samplers": [],
+                "samplers": [
+                    {
+                        "image": "lut.png",
+                        "name": "luttex"
+                    },
+                    {
+                        "image": "EffectRT0_color",
+                        "name": "glfx_BACKGROUND"
+                    }
+                ],
+                "state": {
+                    "backfaces": true,
+                    "blend": "off",
+                    "colorwrite": true,
+                    "ztest": true,
+                    "zwrite": false
+                }
+            },
+            "shaders/finalColorFilter.fsh": {
+                "samplers": [
+                    {
+                        "image": "EffectRT1_color",
+                        "name": "s_src"
+                    },
+                    {
+                        "image": "FIRE.png",
+                        "name": "lookupTexture"
+                    }
+                ],
+                "state": {
+                    "backfaces": true,
+                    "blend": "off",
+                    "colorwrite": true,
+                    "ztest": false,
+                    "zwrite": false
+                }
+            },
+            "shaders/flames_mat": {
+                "built_in_samplers": [
+                    "bnb_BONES",
+                    "bnb_MORPH"
+                ],
+                "samplers": [
+                    {
+                        "image": "frx",
+                        "name": "glfx_VIDEO"
+                    },
+                    {
+                        "name": "bnb_BONES"
+                    },
+                    {
+                        "name": "bnb_MORPH"
+                    }
+                ],
+                "state": {
+                    "backfaces": false,
+                    "blend": "add",
+                    "colorwrite": true,
+                    "ztest": true,
+                    "zwrite": true
+                }
+            },
+            "shaders/helmet_mat": {
+                "built_in_samplers": [
+                    "bnb_BONES",
+                    "bnb_UVMORPH_FISHEYE",
+                    "bnb_MORPH"
+                ],
+                "samplers": [
+                    {
+                        "image": "helmet_mat_Base_Color.ktx",
+                        "name": "tex_diffuse"
+                    },
+                    {
+                        "image": "helmet_mat_Normal.ktx",
+                        "name": "tex_normal"
+                    },
+                    {
+                        "image": "brdf.ktx",
+                        "name": "tex_brdf"
+                    },
+                    {
+                        "image": "ibl_diff.ktx",
+                        "name": "tex_ibl_diff"
+                    },
+                    {
+                        "image": "ibl_spec.ktx",
+                        "name": "tex_ibl_spec"
+                    },
+                    {
+                        "image": "helmet_mat_MRAO.ktx",
+                        "name": "tex_mrao"
+                    },
+                    {
+                        "name": "bnb_BONES"
+                    },
+                    {
+                        "name": "bnb_UVMORPH_FISHEYE"
+                    },
+                    {
+                        "name": "bnb_MORPH"
+                    }
+                ],
+                "state": {
+                    "backfaces": false,
+                    "blend": "premul_alpha",
+                    "colorwrite": true,
+                    "ztest": true,
+                    "zwrite": true
+                }
+            },
+            "shaders/matte_mat": {
+                "built_in_samplers": [
+                    "bnb_BONES",
+                    "bnb_MORPH"
+                ],
+                "samplers": [
+                    {
+                        "name": "bnb_BONES"
+                    },
+                    {
+                        "name": "bnb_MORPH"
+                    }
+                ],
+                "state": {
+                    "backfaces": false,
+                    "blend": "off",
+                    "colorwrite": false,
+                    "ztest": true,
+                    "zwrite": true
+                }
+            },
+            "shaders/retouch": {
+                "built_in_samplers": [],
+                "lagacy_onface_flag": true,
+                "samplers": [
+                    {
+                        "image": "REDMASK_v3_256.png",
+                        "name": "selection_tex"
+                    },
+                    {
+                        "image": "teeth_middle.png",
+                        "name": "lookupTexTeeth"
+                    },
+                    {
+                        "image": "eyes_middle.png",
+                        "name": "lookupTexEyes"
+                    },
+                    {
+                        "image": "soft.png",
+                        "name": "tex_softLight"
+                    },
+                    {
+                        "image": "make_up.png",
+                        "name": "tex_normalMakeup"
+                    },
+                    {
+                        "image": "eye_highlight.png",
+                        "name": "tex_highlight"
+                    },
+                    {
+                        "image": "ComposerRT_color",
+                        "name": "glfx_BACKGROUND"
+                    }
+                ],
+                "state": {
+                    "backfaces": false,
+                    "blend": "off",
+                    "colorwrite": true,
+                    "ztest": true,
+                    "zwrite": true
+                }
+            }
+        },
+        "media": {
+            "frx": {
+                "file_name": "videos/flames.mp4",
+                "looped": false,
+                "play": false,
+                "type": "video"
+            },
+            "music.ogg": {
+                "file_name": "audios/music.ogg",
+                "type": "audio"
+            }
+        },
+        "meshes": {
+            "!glfx_FACE": "$builtin$meshes/face.stream:0",
+            "camera_surface": "$builtin$meshes/fs_tri",
+            "flame.bsm2": "meshes/flame.bsm2",
+            "helmet.bsm2": "meshes/helmet.bsm2",
+            "morph.bsm2": "meshes/morph.bsm2",
+            "tri.bsm2": "meshes/tri.bsm2"
+        },
+        "morphs": {
+            "morph0": {
+                "mesh": "morph.bsm2",
+                "type": "mesh"
+            }
+        }
+    },
+    "components": {
+        "!glfx_UPDATE_BG0": {
+            "materials": [
+                "$builtin$materials/copy_pixels.1"
+            ],
+            "mesh": "camera_surface",
+            "type": "mesh_instance"
+        },
+        "ComposerRT_copy": {
+            "materials": [
+                "$builtin$materials/copy_pixels.0"
+            ],
+            "mesh": "camera_surface",
+            "type": "mesh_instance"
+        },
+        "composer_camera_copy": {
+            "materials": [
+                "$builtin$materials/copy_pixels.-1"
+            ],
+            "mesh": "camera_surface",
+            "type": "mesh_instance"
+        },
+        "face_tracker:0": {
+            "face": "face0",
+            "type": "face_tracker"
+        },
+        "finalColorFilter": {
+            "materials": [
+                "shaders/finalColorFilter.fsh"
+            ],
+            "mesh": "camera_surface",
+            "type": "mesh_instance"
+        },
+        "internal_morph__": {
+            "morph": "morph0",
+            "type": "face_morphing"
+        }
+    },
+    "entities": {
+        "!glfx_UPDATE_BG0": {
+            "components": [
+                "!glfx_UPDATE_BG0"
+            ],
+            "layer": "!glfx_UPDATE_BG0"
+        },
+        "ComposerRT_copy_append_to_root__": {
+            "components": [
+                "ComposerRT_copy"
+            ],
+            "layer": "ComposerRT_copy"
+        },
+        "composer_camera_copy": {
+            "components": [
+                "composer_camera_copy"
+            ],
+            "layer": "camera_copy"
+        },
+        "face_tracker0": {
+            "components": [
+                "face_tracker:0"
+            ]
+        },
+        "finalColorFilter_append_to_root__": {
+            "components": "finalColorFilter",
+            "layer": "finalColorFilter"
+        },
+        "internal_morph": {
+            "components": [
+                "internal_morph__"
+            ],
+            "layer": "internal_face_morph__"
+        },
+        "spawn_entity0": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "matte_mat",
+                "TriMat",
+                "helmet_mat",
+                "flames_mat"
+            ]
+        },
+        "spawn_entity1": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "matte_mat",
+                "TriMat",
+                "helmet_mat",
+                "flames_mat"
+            ]
+        },
+        "spawn_entity10": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "matte_mat",
+                "TriMat",
+                "helmet_mat",
+                "flames_mat"
+            ]
+        },
+        "spawn_entity11": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "matte_mat",
+                "TriMat",
+                "helmet_mat",
+                "flames_mat"
+            ]
+        },
+        "spawn_entity12": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "matte_mat",
+                "TriMat",
+                "helmet_mat",
+                "flames_mat"
+            ]
+        },
+        "spawn_entity13": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "matte_mat",
+                "TriMat",
+                "helmet_mat",
+                "flames_mat"
+            ]
+        },
+        "spawn_entity14": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "matte_mat",
+                "TriMat",
+                "helmet_mat",
+                "flames_mat"
+            ]
+        },
+        "spawn_entity15": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "matte_mat",
+                "TriMat",
+                "helmet_mat",
+                "flames_mat"
+            ]
+        },
+        "spawn_entity16": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "matte_mat",
+                "TriMat",
+                "helmet_mat",
+                "flames_mat"
+            ]
+        },
+        "spawn_entity17": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "matte_mat",
+                "TriMat",
+                "helmet_mat",
+                "flames_mat"
+            ]
+        },
+        "spawn_entity18": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "matte_mat",
+                "TriMat",
+                "helmet_mat",
+                "flames_mat"
+            ]
+        },
+        "spawn_entity19": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "matte_mat",
+                "TriMat",
+                "helmet_mat",
+                "flames_mat"
+            ]
+        },
+        "spawn_entity2": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "matte_mat",
+                "TriMat",
+                "helmet_mat",
+                "flames_mat"
+            ]
+        },
+        "spawn_entity3": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "matte_mat",
+                "TriMat",
+                "helmet_mat",
+                "flames_mat"
+            ]
+        },
+        "spawn_entity4": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "matte_mat",
+                "TriMat",
+                "helmet_mat",
+                "flames_mat"
+            ]
+        },
+        "spawn_entity5": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "matte_mat",
+                "TriMat",
+                "helmet_mat",
+                "flames_mat"
+            ]
+        },
+        "spawn_entity6": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "matte_mat",
+                "TriMat",
+                "helmet_mat",
+                "flames_mat"
+            ]
+        },
+        "spawn_entity7": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "matte_mat",
+                "TriMat",
+                "helmet_mat",
+                "flames_mat"
+            ]
+        },
+        "spawn_entity8": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "matte_mat",
+                "TriMat",
+                "helmet_mat",
+                "flames_mat"
+            ]
+        },
+        "spawn_entity9": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "matte_mat",
+                "TriMat",
+                "helmet_mat",
+                "flames_mat"
+            ]
+        }
+    },
+    "hierarchy": {
+        "face_tracker0": [
+            "internal_morph",
+            "spawn_entity0",
+            "spawn_entity1",
+            "spawn_entity2",
+            "spawn_entity3",
+            "spawn_entity4",
+            "spawn_entity5",
+            "spawn_entity6",
+            "spawn_entity7",
+            "spawn_entity8",
+            "spawn_entity9",
+            "spawn_entity10",
+            "spawn_entity11",
+            "spawn_entity12",
+            "spawn_entity13",
+            "spawn_entity14",
+            "spawn_entity15",
+            "spawn_entity16",
+            "spawn_entity17",
+            "spawn_entity18",
+            "spawn_entity19"
+        ],
+        "root": [
+            "face_tracker0",
+            "composer_camera_copy",
+            "ComposerRT_copy_append_to_root__",
+            "!glfx_UPDATE_BG0",
+            "finalColorFilter_append_to_root__"
+        ]
+    },
+    "layers": {
+        "!glfx_UPDATE_BG0": {},
+        "ComposerRT_copy": {},
+        "TriMat": {},
+        "camera_copy": {},
+        "composer_pre": {},
+        "finalColorFilter": {},
+        "flames_mat": {},
+        "helmet_mat": {},
+        "internal_face_morph__": {},
+        "matte_mat": {},
+        "retouch": {}
+    },
+    "main_camera": {
+        "adjust_znear": 150
+    },
+    "render_list": {
+        "default": [
+            {
+                "layer": "camera_copy",
+                "render_target": "ComposerRT"
+            },
+            {
+                "layer": "ComposerRT_copy",
+                "render_target": "EffectRT0"
+            },
+            {
+                "layer": "retouch",
+                "render_target": "EffectRT0",
+                "sub_geometries": [
+                    "retouch"
+                ]
+            },
+            {
+                "layer": "internal_face_morph__",
+                "render_target": "EffectRT0"
+            },
+            {
+                "layer": "!glfx_UPDATE_BG0",
+                "render_target": "EffectRT1"
+            },
+            {
+                "layer": "matte_mat",
+                "render_target": "EffectRT1",
+                "sub_geometries": [
+                    "matte_mat"
+                ]
+            },
+            {
+                "layer": "TriMat",
+                "render_target": "EffectRT1",
+                "sub_geometries": [
+                    "TriMat"
+                ]
+            },
+            {
+                "layer": "helmet_mat",
+                "render_target": "EffectRT1",
+                "sub_geometries": [
+                    "helmet_mat"
+                ]
+            },
+            {
+                "layer": "flames_mat",
+                "render_target": "EffectRT1",
+                "sub_geometries": [
+                    "flames_mat"
+                ]
+            },
+            {
+                "layer": "finalColorFilter",
+                "render_target": "finalColorFilterRT"
+            }
+        ]
+    },
+    "render_targets": {
+        "ComposerRT": [
+            "ComposerRT_color"
+        ],
+        "EffectRT0": [
+            "EffectRT0_color",
+            "EffectRT0_depth"
+        ],
+        "EffectRT1": [
+            "EffectRT1_color",
+            "EffectRT1_depth"
+        ],
+        "finalColorFilterRT": [
+            "finalColorFilterRT_color"
+        ]
+    },
+    "scene": "InFlames",
+    "script": {
+        "entry_point": "config.js",
+        "type": "legacy"
+    }
+}

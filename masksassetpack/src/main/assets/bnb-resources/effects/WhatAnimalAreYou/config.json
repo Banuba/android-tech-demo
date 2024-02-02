@@ -1,0 +1,980 @@
+{
+    "assets": {
+        "attachments": {
+            "ComposerRT_color": {
+                "type": "color"
+            },
+            "EffectRT0_color": {
+                "type": "color"
+            },
+            "EffectRT0_depth": {
+                "clear": [
+                    1.0
+                ],
+                "type": "depth"
+            },
+            "finalColorFilterRT_color": {
+                "type": "color"
+            }
+        },
+        "faces": {
+            "face0": {
+                "index": 0,
+                "mesh": "!glfx_FACE"
+            }
+        },
+        "images": {
+            "FLARE_40_512.png": {
+                "file_name": "images/FLARE_40_512.png",
+                "type": "texture"
+            },
+            "Metallic.png": {
+                "file_name": "images/Metallic.png",
+                "type": "texture"
+            },
+            "Roughness.png": {
+                "file_name": "images/Roughness.png",
+                "type": "texture"
+            },
+            "WhatAnimalAreYou_makeup.png": {
+                "file_name": "images/WhatAnimalAreYou_makeup.png",
+                "type": "texture"
+            },
+            "WhatAnimalAreYou_soft.png": {
+                "file_name": "images/WhatAnimalAreYou_soft.png",
+                "type": "texture"
+            },
+            "bear_1.png": {
+                "file_name": "images/bear_1.png",
+                "type": "texture"
+            },
+            "bear_ears.png": {
+                "file_name": "images/bear_ears.png",
+                "type": "texture"
+            },
+            "bear_nose.png": {
+                "file_name": "images/bear_nose.png",
+                "type": "texture"
+            },
+            "beaver_1.png": {
+                "file_name": "images/beaver_1.png",
+                "type": "texture"
+            },
+            "beaver_ears.png": {
+                "file_name": "images/beaver_ears.png",
+                "type": "texture"
+            },
+            "beaver_nose.png": {
+                "file_name": "images/beaver_nose.png",
+                "type": "texture"
+            },
+            "btn_restart.png": {
+                "file_name": "images/btn_restart.png",
+                "type": "texture"
+            },
+            "btn_start.png": {
+                "file_name": "images/btn_start.png",
+                "type": "texture"
+            },
+            "camera_image": {
+                "algorithm": "camera_composer",
+                "type": "procedural_texture"
+            },
+            "cat2_1.png": {
+                "file_name": "images/cat2_1.png",
+                "type": "texture"
+            },
+            "cat_1.png": {
+                "file_name": "images/cat_1.png",
+                "type": "texture"
+            },
+            "cat_2_ears.png": {
+                "file_name": "images/cat_2_ears.png",
+                "type": "texture"
+            },
+            "cat_2_nose.png": {
+                "file_name": "images/cat_2_nose.png",
+                "type": "texture"
+            },
+            "cat_ears.png": {
+                "file_name": "images/cat_ears.png",
+                "type": "texture"
+            },
+            "cat_nose.png": {
+                "file_name": "images/cat_nose.png",
+                "type": "texture"
+            },
+            "dog_1.png": {
+                "file_name": "images/dog_1.png",
+                "type": "texture"
+            },
+            "dog_ears.png": {
+                "file_name": "images/dog_ears.png",
+                "type": "texture"
+            },
+            "dog_nose.png": {
+                "file_name": "images/dog_nose.png",
+                "type": "texture"
+            },
+            "fox_1.png": {
+                "file_name": "images/fox_1.png",
+                "type": "texture"
+            },
+            "fox_ears.png": {
+                "file_name": "images/fox_ears.png",
+                "type": "texture"
+            },
+            "fox_nose.png": {
+                "file_name": "images/fox_nose.png",
+                "type": "texture"
+            },
+            "hedgehog_1.png": {
+                "file_name": "images/hedgehog_1.png",
+                "type": "texture"
+            },
+            "hedgehog_ears.png": {
+                "file_name": "images/hedgehog_ears.png",
+                "type": "texture"
+            },
+            "hedgehog_nose.png": {
+                "file_name": "images/hedgehog_nose.png",
+                "type": "texture"
+            },
+            "lemur_1.png": {
+                "file_name": "images/lemur_1.png",
+                "type": "texture"
+            },
+            "lemur_ears.png": {
+                "file_name": "images/lemur_ears.png",
+                "type": "texture"
+            },
+            "lemur_nose.png": {
+                "file_name": "images/lemur_nose.png",
+                "type": "texture"
+            },
+            "lut3d_EYES_medium.png": {
+                "file_name": "images/lut3d_EYES_medium.png",
+                "type": "lut",
+                "weight": 1
+            },
+            "lut3d_TEETH_medium.png": {
+                "file_name": "images/lut3d_TEETH_medium.png",
+                "type": "lut",
+                "weight": 1
+            },
+            "monkey_1.png": {
+                "file_name": "images/monkey_1.png",
+                "type": "texture"
+            },
+            "monkey_ears.png": {
+                "file_name": "images/monkey_ears.png",
+                "type": "texture"
+            },
+            "monkey_nose.png": {
+                "file_name": "images/monkey_nose.png",
+                "type": "texture"
+            },
+            "no_Base_Color.png": {
+                "file_name": "images/no_Base_Color.png",
+                "type": "texture"
+            },
+            "no_Metallic.png": {
+                "file_name": "images/no_Metallic.png",
+                "type": "texture"
+            },
+            "no_Normal.png": {
+                "file_name": "images/no_Normal.png",
+                "type": "texture"
+            },
+            "no_Roughness.png": {
+                "file_name": "images/no_Roughness.png",
+                "type": "texture"
+            },
+            "null_image.png": {
+                "file_name": "images/null_image.png",
+                "type": "texture"
+            },
+            "null_lut.png": {
+                "file_name": "images/null_lut.png",
+                "type": "texture"
+            },
+            "panda_1.png": {
+                "file_name": "images/panda_1.png",
+                "type": "texture"
+            },
+            "panda_ears.png": {
+                "file_name": "images/panda_ears.png",
+                "type": "texture"
+            },
+            "panda_nose.png": {
+                "file_name": "images/panda_nose.png",
+                "type": "texture"
+            },
+            "pig_1.png": {
+                "file_name": "images/pig_1.png",
+                "type": "texture"
+            },
+            "pig_ears.png": {
+                "file_name": "images/pig_ears.png",
+                "type": "texture"
+            },
+            "pig_nose.png": {
+                "file_name": "images/pig_nose.png",
+                "type": "texture"
+            },
+            "preview.png": {
+                "file_name": "images/preview.png",
+                "type": "texture"
+            },
+            "sloth_1.png": {
+                "file_name": "images/sloth_1.png",
+                "type": "texture"
+            },
+            "sloth_ears.png": {
+                "file_name": "images/sloth_ears.png",
+                "type": "texture"
+            },
+            "sloth_nose.png": {
+                "file_name": "images/sloth_nose.png",
+                "type": "texture"
+            },
+            "squirell_1.png": {
+                "file_name": "images/squirell_1.png",
+                "type": "texture"
+            },
+            "squirrel_ears.png": {
+                "file_name": "images/squirrel_ears.png",
+                "type": "texture"
+            },
+            "squirrel_nose.png": {
+                "file_name": "images/squirrel_nose.png",
+                "type": "texture"
+            },
+            "sunny.png": {
+                "file_name": "images/sunny.png",
+                "type": "texture"
+            },
+            "yury.png": {
+                "file_name": "images/yury.png",
+                "type": "texture"
+            }
+        },
+        "materials": {
+            "$builtin$materials/copy_pixels.-1": {
+                "parameters": {},
+                "samplers": [
+                    {
+                        "image": "camera_image",
+                        "name": "tex_src"
+                    }
+                ],
+                "state": {
+                    "backfaces": true,
+                    "blend": "off",
+                    "colorwrite": true,
+                    "ztest": false,
+                    "zwrite": false
+                }
+            },
+            "$builtin$materials/copy_pixels.0": {
+                "parameters": {},
+                "samplers": [
+                    {
+                        "image": "ComposerRT_color",
+                        "name": "tex_src"
+                    }
+                ],
+                "state": {
+                    "backfaces": true,
+                    "blend": "off",
+                    "colorwrite": true,
+                    "ztest": false,
+                    "zwrite": false
+                }
+            },
+            "shaders/Ear_mat": {
+                "built_in_samplers": [
+                    "bnb_BONES",
+                    "bnb_UVMORPH_FISHEYE",
+                    "bnb_MORPH"
+                ],
+                "samplers": [
+                    {
+                        "image": "null_image.png",
+                        "legacy_meshfx_index": 0,
+                        "name": "tex_diffuse"
+                    },
+                    {
+                        "image": "Metallic.png",
+                        "name": "tex_metallic"
+                    },
+                    {
+                        "image": "Roughness.png",
+                        "name": "tex_roughness"
+                    },
+                    {
+                        "name": "bnb_BONES"
+                    },
+                    {
+                        "name": "bnb_UVMORPH_FISHEYE"
+                    },
+                    {
+                        "name": "bnb_MORPH"
+                    }
+                ],
+                "state": {
+                    "backfaces": false,
+                    "blend": "alpha",
+                    "colorwrite": true,
+                    "ztest": true,
+                    "zwrite": true
+                }
+            },
+            "shaders/Nose_mat": {
+                "built_in_samplers": [
+                    "bnb_BONES",
+                    "bnb_UVMORPH_FISHEYE",
+                    "bnb_MORPH"
+                ],
+                "samplers": [
+                    {
+                        "image": "null_image.png",
+                        "legacy_meshfx_index": 1,
+                        "name": "tex_diffuse"
+                    },
+                    {
+                        "image": "Metallic.png",
+                        "name": "tex_metallic"
+                    },
+                    {
+                        "image": "Roughness.png",
+                        "name": "tex_roughness"
+                    },
+                    {
+                        "name": "bnb_BONES"
+                    },
+                    {
+                        "name": "bnb_UVMORPH_FISHEYE"
+                    },
+                    {
+                        "name": "bnb_MORPH"
+                    }
+                ],
+                "state": {
+                    "backfaces": false,
+                    "blend": "alpha",
+                    "colorwrite": true,
+                    "ztest": true,
+                    "zwrite": true
+                }
+            },
+            "shaders/Quad_L1": {
+                "built_in_samplers": [],
+                "samplers": [
+                    {
+                        "image": "null_image.png",
+                        "legacy_meshfx_index": 0,
+                        "name": "tex"
+                    }
+                ],
+                "state": {
+                    "backfaces": true,
+                    "blend": "alpha",
+                    "colorwrite": true,
+                    "ztest": true,
+                    "zwrite": true
+                }
+            },
+            "shaders/facemat": {
+                "built_in_samplers": [
+                    "bnb_BONES",
+                    "bnb_UVMORPH_FISHEYE",
+                    "bnb_MORPH"
+                ],
+                "samplers": [
+                    {
+                        "name": "bnb_BONES"
+                    },
+                    {
+                        "name": "bnb_UVMORPH_FISHEYE"
+                    },
+                    {
+                        "name": "bnb_MORPH"
+                    }
+                ],
+                "state": {
+                    "backfaces": false,
+                    "blend": "off",
+                    "colorwrite": false,
+                    "ztest": true,
+                    "zwrite": true
+                }
+            },
+            "shaders/finalColorFilter.fsh": {
+                "samplers": [
+                    {
+                        "image": "EffectRT0_color",
+                        "name": "s_src"
+                    },
+                    {
+                        "image": "yury.png",
+                        "name": "lookupTexture"
+                    }
+                ],
+                "state": {
+                    "backfaces": true,
+                    "blend": "off",
+                    "colorwrite": true,
+                    "ztest": false,
+                    "zwrite": false
+                }
+            },
+            "shaders/plane_0": {
+                "built_in_samplers": [
+                    "bnb_BONES",
+                    "bnb_UVMORPH_FISHEYE",
+                    "bnb_MORPH"
+                ],
+                "samplers": [
+                    {
+                        "image": "frx",
+                        "name": "glfx_VIDEO"
+                    },
+                    {
+                        "name": "bnb_BONES"
+                    },
+                    {
+                        "name": "bnb_UVMORPH_FISHEYE"
+                    },
+                    {
+                        "name": "bnb_MORPH"
+                    }
+                ],
+                "state": {
+                    "backfaces": true,
+                    "blend": "alpha",
+                    "colorwrite": true,
+                    "ztest": false,
+                    "zwrite": false
+                }
+            },
+            "shaders/plane_2": {
+                "built_in_samplers": [
+                    "bnb_BONES"
+                ],
+                "samplers": [
+                    {
+                        "image": "null_image.png",
+                        "legacy_meshfx_index": 0,
+                        "name": "tex"
+                    },
+                    {
+                        "name": "bnb_BONES"
+                    }
+                ],
+                "state": {
+                    "backfaces": true,
+                    "blend": "alpha",
+                    "colorwrite": true,
+                    "ztest": true,
+                    "zwrite": false
+                }
+            },
+            "shaders/retouch": {
+                "built_in_samplers": [],
+                "lagacy_onface_flag": true,
+                "samplers": [
+                    {
+                        "image": "lut3d_TEETH_medium.png",
+                        "name": "lookupTexTeeth"
+                    },
+                    {
+                        "image": "lut3d_EYES_medium.png",
+                        "name": "lookupTexEyes"
+                    },
+                    {
+                        "image": "WhatAnimalAreYou_soft.png",
+                        "name": "tex_softLight"
+                    },
+                    {
+                        "image": "WhatAnimalAreYou_makeup.png",
+                        "name": "tex_normalMakeup"
+                    },
+                    {
+                        "image": "FLARE_40_512.png",
+                        "name": "tex_highlight"
+                    },
+                    {
+                        "image": "ComposerRT_color",
+                        "name": "glfx_BACKGROUND"
+                    }
+                ],
+                "state": {
+                    "backfaces": false,
+                    "blend": "off",
+                    "colorwrite": true,
+                    "ztest": true,
+                    "zwrite": true
+                }
+            }
+        },
+        "media": {
+            "frx": {
+                "file_name": "videos/hinttap3D.mp4",
+                "looped": false,
+                "play": false,
+                "type": "video"
+            }
+        },
+        "meshes": {
+            "!glfx_FACE": "$builtin$meshes/face.stream:0",
+            "Morph.bsm2": "meshes/Morph.bsm2",
+            "Planes.bsm2": "meshes/Planes.bsm2",
+            "camera_surface": "$builtin$meshes/fs_tri",
+            "plane.bsm2": "meshes/plane.bsm2",
+            "plane2.bsm2": "meshes/plane2.bsm2",
+            "quad_L1.bsm2": "meshes/quad_L1.bsm2"
+        },
+        "morphs": {
+            "morph0": {
+                "mesh": "Morph.bsm2",
+                "type": "mesh"
+            }
+        }
+    },
+    "components": {
+        "ComposerRT_copy": {
+            "materials": [
+                "$builtin$materials/copy_pixels.0"
+            ],
+            "mesh": "camera_surface",
+            "type": "mesh_instance"
+        },
+        "composer_camera_copy": {
+            "materials": [
+                "$builtin$materials/copy_pixels.-1"
+            ],
+            "mesh": "camera_surface",
+            "type": "mesh_instance"
+        },
+        "face_tracker:0": {
+            "face": "face0",
+            "type": "face_tracker"
+        },
+        "finalColorFilter": {
+            "materials": [
+                "shaders/finalColorFilter.fsh"
+            ],
+            "mesh": "camera_surface",
+            "type": "mesh_instance"
+        },
+        "internal_morph__": {
+            "morph": "morph0",
+            "type": "face_morphing"
+        }
+    },
+    "entities": {
+        "ComposerRT_copy_append_to_root__": {
+            "components": [
+                "ComposerRT_copy"
+            ],
+            "layer": "ComposerRT_copy"
+        },
+        "composer_camera_copy": {
+            "components": [
+                "composer_camera_copy"
+            ],
+            "layer": "camera_copy"
+        },
+        "face_tracker0": {
+            "components": [
+                "face_tracker:0"
+            ]
+        },
+        "finalColorFilter_append_to_root__": {
+            "components": "finalColorFilter",
+            "layer": "finalColorFilter"
+        },
+        "internal_morph": {
+            "components": [
+                "internal_morph__"
+            ],
+            "layer": "internal_face_morph__"
+        },
+        "spawn_entity0": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "facemat",
+                "Ear_mat",
+                "Nose_mat",
+                "plane_2",
+                "Quad_L1",
+                "plane_0"
+            ]
+        },
+        "spawn_entity1": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "facemat",
+                "Ear_mat",
+                "Nose_mat",
+                "plane_2",
+                "Quad_L1",
+                "plane_0"
+            ]
+        },
+        "spawn_entity10": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "facemat",
+                "Ear_mat",
+                "Nose_mat",
+                "plane_2",
+                "Quad_L1",
+                "plane_0"
+            ]
+        },
+        "spawn_entity11": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "facemat",
+                "Ear_mat",
+                "Nose_mat",
+                "plane_2",
+                "Quad_L1",
+                "plane_0"
+            ]
+        },
+        "spawn_entity12": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "facemat",
+                "Ear_mat",
+                "Nose_mat",
+                "plane_2",
+                "Quad_L1",
+                "plane_0"
+            ]
+        },
+        "spawn_entity13": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "facemat",
+                "Ear_mat",
+                "Nose_mat",
+                "plane_2",
+                "Quad_L1",
+                "plane_0"
+            ]
+        },
+        "spawn_entity14": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "facemat",
+                "Ear_mat",
+                "Nose_mat",
+                "plane_2",
+                "Quad_L1",
+                "plane_0"
+            ]
+        },
+        "spawn_entity15": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "facemat",
+                "Ear_mat",
+                "Nose_mat",
+                "plane_2",
+                "Quad_L1",
+                "plane_0"
+            ]
+        },
+        "spawn_entity16": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "facemat",
+                "Ear_mat",
+                "Nose_mat",
+                "plane_2",
+                "Quad_L1",
+                "plane_0"
+            ]
+        },
+        "spawn_entity17": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "facemat",
+                "Ear_mat",
+                "Nose_mat",
+                "plane_2",
+                "Quad_L1",
+                "plane_0"
+            ]
+        },
+        "spawn_entity18": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "facemat",
+                "Ear_mat",
+                "Nose_mat",
+                "plane_2",
+                "Quad_L1",
+                "plane_0"
+            ]
+        },
+        "spawn_entity19": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "facemat",
+                "Ear_mat",
+                "Nose_mat",
+                "plane_2",
+                "Quad_L1",
+                "plane_0"
+            ]
+        },
+        "spawn_entity2": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "facemat",
+                "Ear_mat",
+                "Nose_mat",
+                "plane_2",
+                "Quad_L1",
+                "plane_0"
+            ]
+        },
+        "spawn_entity3": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "facemat",
+                "Ear_mat",
+                "Nose_mat",
+                "plane_2",
+                "Quad_L1",
+                "plane_0"
+            ]
+        },
+        "spawn_entity4": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "facemat",
+                "Ear_mat",
+                "Nose_mat",
+                "plane_2",
+                "Quad_L1",
+                "plane_0"
+            ]
+        },
+        "spawn_entity5": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "facemat",
+                "Ear_mat",
+                "Nose_mat",
+                "plane_2",
+                "Quad_L1",
+                "plane_0"
+            ]
+        },
+        "spawn_entity6": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "facemat",
+                "Ear_mat",
+                "Nose_mat",
+                "plane_2",
+                "Quad_L1",
+                "plane_0"
+            ]
+        },
+        "spawn_entity7": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "facemat",
+                "Ear_mat",
+                "Nose_mat",
+                "plane_2",
+                "Quad_L1",
+                "plane_0"
+            ]
+        },
+        "spawn_entity8": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "facemat",
+                "Ear_mat",
+                "Nose_mat",
+                "plane_2",
+                "Quad_L1",
+                "plane_0"
+            ]
+        },
+        "spawn_entity9": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "facemat",
+                "Ear_mat",
+                "Nose_mat",
+                "plane_2",
+                "Quad_L1",
+                "plane_0"
+            ]
+        }
+    },
+    "hierarchy": {
+        "face_tracker0": [
+            "internal_morph",
+            "spawn_entity0",
+            "spawn_entity1",
+            "spawn_entity2",
+            "spawn_entity3",
+            "spawn_entity4",
+            "spawn_entity5",
+            "spawn_entity6",
+            "spawn_entity7",
+            "spawn_entity8",
+            "spawn_entity9",
+            "spawn_entity10",
+            "spawn_entity11",
+            "spawn_entity12",
+            "spawn_entity13",
+            "spawn_entity14",
+            "spawn_entity15",
+            "spawn_entity16",
+            "spawn_entity17",
+            "spawn_entity18",
+            "spawn_entity19"
+        ],
+        "root": [
+            "face_tracker0",
+            "composer_camera_copy",
+            "ComposerRT_copy_append_to_root__",
+            "finalColorFilter_append_to_root__"
+        ]
+    },
+    "layers": {
+        "ComposerRT_copy": {},
+        "Ear_mat": {},
+        "Nose_mat": {},
+        "Quad_L1": {},
+        "camera_copy": {},
+        "composer_pre": {},
+        "facemat": {},
+        "finalColorFilter": {},
+        "internal_face_morph__": {},
+        "plane_0": {},
+        "plane_2": {},
+        "retouch": {}
+    },
+    "main_camera": {
+        "adjust_zfar": 1500,
+        "adjust_znear": 500
+    },
+    "render_list": {
+        "default": [
+            {
+                "layer": "camera_copy",
+                "render_target": "ComposerRT"
+            },
+            {
+                "layer": "ComposerRT_copy",
+                "render_target": "EffectRT0"
+            },
+            {
+                "layer": "retouch",
+                "render_target": "EffectRT0",
+                "sub_geometries": [
+                    "retouch"
+                ]
+            },
+            {
+                "layer": "internal_face_morph__",
+                "render_target": "EffectRT0"
+            },
+            {
+                "layer": "facemat",
+                "render_target": "EffectRT0",
+                "sub_geometries": [
+                    "facemat"
+                ]
+            },
+            {
+                "layer": "Ear_mat",
+                "render_target": "EffectRT0",
+                "sub_geometries": [
+                    "Ear_mat"
+                ]
+            },
+            {
+                "layer": "Nose_mat",
+                "render_target": "EffectRT0",
+                "sub_geometries": [
+                    "Nose_mat"
+                ]
+            },
+            {
+                "layer": "plane_2",
+                "render_target": "EffectRT0",
+                "sub_geometries": [
+                    "plane_2"
+                ]
+            },
+            {
+                "layer": "Quad_L1",
+                "render_target": "EffectRT0",
+                "sub_geometries": [
+                    "Quad_L1"
+                ]
+            },
+            {
+                "layer": "plane_0",
+                "render_target": "EffectRT0",
+                "sub_geometries": [
+                    "plane_0"
+                ]
+            },
+            {
+                "layer": "finalColorFilter",
+                "render_target": "finalColorFilterRT"
+            }
+        ]
+    },
+    "render_targets": {
+        "ComposerRT": [
+            "ComposerRT_color"
+        ],
+        "EffectRT0": [
+            "EffectRT0_color",
+            "EffectRT0_depth"
+        ],
+        "finalColorFilterRT": [
+            "finalColorFilterRT_color"
+        ]
+    },
+    "scene": "WhatAnimalAreYou",
+    "script": {
+        "entry_point": "config.js",
+        "type": "legacy"
+    }
+}

@@ -1,0 +1,1103 @@
+{
+    "assets": {
+        "attachments": {
+            "ComposerRT_color": {
+                "type": "color"
+            },
+            "EffectRT0_color": {
+                "type": "color"
+            },
+            "EffectRT0_depth": {
+                "clear": [
+                    1.0
+                ],
+                "type": "depth"
+            },
+            "backgroundSeparationRT_color": {
+                "type": "color"
+            },
+            "finalColorFilterRT_color": {
+                "type": "color"
+            }
+        },
+        "faces": {
+            "face0": {
+                "index": 0,
+                "mesh": "!glfx_FACE"
+            }
+        },
+        "images": {
+            "BG_plain.png": {
+                "file_name": "images/BG_plain.png",
+                "type": "texture"
+            },
+            "Face_mat_Base_Color.png": {
+                "file_name": "images/Face_mat_Base_Color.png",
+                "type": "texture"
+            },
+            "Gun_mat_Base_Color.ktx": {
+                "file_name": "images/Gun_mat_Base_Color.ktx",
+                "type": "texture"
+            },
+            "Gun_mat_MRAO.ktx": {
+                "file_name": "images/Gun_mat_MRAO.ktx",
+                "type": "texture"
+            },
+            "Gun_mat_Normal.ktx": {
+                "file_name": "images/Gun_mat_Normal.ktx",
+                "type": "texture"
+            },
+            "Main_mat_Base_Color.ktx": {
+                "file_name": "images/Main_mat_Base_Color.ktx",
+                "type": "texture"
+            },
+            "Main_mat_MRAO.ktx": {
+                "file_name": "images/Main_mat_MRAO.ktx",
+                "type": "texture"
+            },
+            "Main_mat_Normal.ktx": {
+                "file_name": "images/Main_mat_Normal.ktx",
+                "type": "texture"
+            },
+            "background": {
+                "active": true,
+                "recognizer_feature_name": "background",
+                "type": "segmentation_mask"
+            },
+            "brdf.ktx": {
+                "file_name": "images/brdf.ktx",
+                "type": "texture"
+            },
+            "camera_image": {
+                "algorithm": "camera_composer",
+                "type": "procedural_texture"
+            },
+            "chicago.png": {
+                "file_name": "images/chicago.png",
+                "type": "texture"
+            },
+            "hend_mat_Base_Color.ktx": {
+                "file_name": "images/hend_mat_Base_Color.ktx",
+                "type": "texture"
+            },
+            "hend_mat_MRAO.ktx": {
+                "file_name": "images/hend_mat_MRAO.ktx",
+                "type": "texture"
+            },
+            "hend_mat_Normal.ktx": {
+                "file_name": "images/hend_mat_Normal.ktx",
+                "type": "texture"
+            },
+            "ibl_diff.ktx": {
+                "file_name": "images/ibl_diff.ktx",
+                "type": "cubemap"
+            },
+            "ibl_spec.ktx": {
+                "file_name": "images/ibl_spec.ktx",
+                "type": "cubemap"
+            },
+            "mustage.png": {
+                "file_name": "images/mustage.png",
+                "type": "texture"
+            },
+            "no_Base_Color.ktx": {
+                "file_name": "images/no_Base_Color.ktx",
+                "type": "texture"
+            },
+            "no_MRAO.ktx": {
+                "file_name": "images/no_MRAO.ktx",
+                "type": "texture"
+            },
+            "no_Normal.ktx": {
+                "file_name": "images/no_Normal.ktx",
+                "type": "texture"
+            },
+            "null_image.png": {
+                "file_name": "images/null_image.png",
+                "type": "texture"
+            },
+            "null_lut.png": {
+                "file_name": "images/null_lut.png",
+                "type": "texture"
+            },
+            "preview.png": {
+                "file_name": "images/preview.png",
+                "type": "texture"
+            },
+            "redmask_v3.png": {
+                "file_name": "images/redmask_v3.png",
+                "type": "texture"
+            },
+            "reflection.ktx": {
+                "file_name": "images/reflection.ktx",
+                "type": "texture"
+            },
+            "soft_not_red_low.png": {
+                "file_name": "images/soft_not_red_low.png",
+                "type": "texture"
+            },
+            "teeth_low.png": {
+                "file_name": "images/teeth_low.png",
+                "type": "texture"
+            }
+        },
+        "materials": {
+            "$builtin$materials/copy_pixels.-1": {
+                "parameters": {},
+                "samplers": [
+                    {
+                        "image": "camera_image",
+                        "name": "tex_src"
+                    }
+                ],
+                "state": {
+                    "backfaces": true,
+                    "blend": "off",
+                    "colorwrite": true,
+                    "ztest": false,
+                    "zwrite": false
+                }
+            },
+            "$builtin$materials/copy_pixels.0": {
+                "parameters": {},
+                "samplers": [
+                    {
+                        "image": "backgroundSeparationRT_color",
+                        "name": "tex_src"
+                    }
+                ],
+                "state": {
+                    "backfaces": true,
+                    "blend": "off",
+                    "colorwrite": true,
+                    "ztest": false,
+                    "zwrite": false
+                }
+            },
+            "$builtin$materials/copy_pixels.1": {
+                "parameters": {},
+                "samplers": [
+                    {
+                        "image": "ComposerRT_color",
+                        "name": "tex_src"
+                    }
+                ],
+                "state": {
+                    "backfaces": true,
+                    "blend": "off",
+                    "colorwrite": true,
+                    "ztest": false,
+                    "zwrite": false
+                }
+            },
+            "shaders/Fire_mat": {
+                "built_in_samplers": [
+                    "bnb_BONES",
+                    "bnb_UVMORPH",
+                    "bnb_STATICPOS",
+                    "bnb_MORPH"
+                ],
+                "samplers": [
+                    {
+                        "image": "Main_mat_Base_Color.ktx",
+                        "name": "tex_diff"
+                    },
+                    {
+                        "name": "bnb_BONES"
+                    },
+                    {
+                        "name": "bnb_UVMORPH"
+                    },
+                    {
+                        "name": "bnb_STATICPOS"
+                    },
+                    {
+                        "name": "bnb_MORPH"
+                    }
+                ],
+                "state": {
+                    "backfaces": false,
+                    "blend": "add",
+                    "colorwrite": true,
+                    "ztest": true,
+                    "zwrite": true
+                }
+            },
+            "shaders/default": {
+                "built_in_samplers": [],
+                "lagacy_onface_flag": true,
+                "samplers": [],
+                "state": {
+                    "backfaces": false,
+                    "blend": "off",
+                    "colorwrite": false,
+                    "ztest": true,
+                    "zwrite": true
+                }
+            },
+
+            "shaders/Gun_mat": {
+                "built_in_samplers": [
+                    "bnb_BONES",
+                    "bnb_UVMORPH",
+                    "bnb_STATICPOS",
+                    "bnb_MORPH"
+                ],
+                "samplers": [
+                    {
+                        "image": "Gun_mat_Base_Color.ktx",
+                        "name": "tex_diffuse"
+                    },
+                    {
+                        "image": "Gun_mat_Normal.ktx",
+                        "name": "tex_normal"
+                    },
+                    {
+                        "image": "Gun_mat_MRAO.ktx",
+                        "name": "tex_mrao"
+                    },
+                    {
+                        "image": "brdf.ktx",
+                        "name": "tex_brdf"
+                    },
+                    {
+                        "image": "ibl_diff.ktx",
+                        "name": "tex_ibl_diff"
+                    },
+                    {
+                        "image": "ibl_spec.ktx",
+                        "name": "tex_ibl_spec"
+                    },
+                    {
+                        "name": "bnb_BONES"
+                    },
+                    {
+                        "name": "bnb_UVMORPH"
+                    },
+                    {
+                        "name": "bnb_STATICPOS"
+                    },
+                    {
+                        "name": "bnb_MORPH"
+                    }
+                ],
+                "state": {
+                    "backfaces": false,
+                    "blend": "off",
+                    "colorwrite": true,
+                    "ztest": true,
+                    "zwrite": true
+                }
+            },
+            "shaders/Lins_mat": {
+                "built_in_samplers": [
+                    "bnb_BONES",
+                    "bnb_UVMORPH",
+                    "bnb_STATICPOS",
+                    "bnb_MORPH"
+                ],
+                "samplers": [
+                    {
+                        "image": "no_Base_Color.ktx",
+                        "name": "tex_diffuse"
+                    },
+                    {
+                        "image": "no_Normal.ktx",
+                        "name": "tex_normal"
+                    },
+                    {
+                        "image": "no_MRAO.ktx",
+                        "name": "tex_mrao"
+                    },
+                    {
+                        "image": "brdf.ktx",
+                        "name": "tex_brdf"
+                    },
+                    {
+                        "image": "ibl_diff.ktx",
+                        "name": "tex_ibl_diff"
+                    },
+                    {
+                        "image": "ibl_spec.ktx",
+                        "name": "tex_ibl_spec"
+                    },
+                    {
+                        "image": "reflection.ktx",
+                        "name": "tex_refl"
+                    },
+                    {
+                        "name": "bnb_BONES"
+                    },
+                    {
+                        "name": "bnb_UVMORPH"
+                    },
+                    {
+                        "name": "bnb_STATICPOS"
+                    },
+                    {
+                        "name": "bnb_MORPH"
+                    }
+                ],
+                "state": {
+                    "backfaces": false,
+                    "blend": "alpha",
+                    "colorwrite": true,
+                    "ztest": true,
+                    "zwrite": true
+                }
+            },
+            "shaders/Main_mat": {
+                "built_in_samplers": [
+                    "bnb_BONES",
+                    "bnb_UVMORPH",
+                    "bnb_STATICPOS",
+                    "bnb_MORPH"
+                ],
+                "samplers": [
+                    {
+                        "image": "Main_mat_Base_Color.ktx",
+                        "name": "tex_diffuse"
+                    },
+                    {
+                        "image": "Main_mat_Normal.ktx",
+                        "name": "tex_normal"
+                    },
+                    {
+                        "image": "Main_mat_MRAO.ktx",
+                        "name": "tex_mrao"
+                    },
+                    {
+                        "image": "brdf.ktx",
+                        "name": "tex_brdf"
+                    },
+                    {
+                        "image": "ibl_diff.ktx",
+                        "name": "tex_ibl_diff"
+                    },
+                    {
+                        "image": "ibl_spec.ktx",
+                        "name": "tex_ibl_spec"
+                    },
+                    {
+                        "name": "bnb_BONES"
+                    },
+                    {
+                        "name": "bnb_UVMORPH"
+                    },
+                    {
+                        "name": "bnb_STATICPOS"
+                    },
+                    {
+                        "name": "bnb_MORPH"
+                    }
+                ],
+                "state": {
+                    "backfaces": false,
+                    "blend": "premul_alpha",
+                    "colorwrite": true,
+                    "ztest": true,
+                    "zwrite": true
+                }
+            },
+            "shaders/Shadow_mat": {
+                "built_in_samplers": [
+                    "bnb_BONES",
+                    "bnb_UVMORPH",
+                    "bnb_STATICPOS",
+                    "bnb_MORPH"
+                ],
+                "samplers": [
+                    {
+                        "image": "Main_mat_Base_Color.ktx",
+                        "name": "tex_diff"
+                    },
+                    {
+                        "name": "bnb_BONES"
+                    },
+                    {
+                        "name": "bnb_UVMORPH"
+                    },
+                    {
+                        "name": "bnb_STATICPOS"
+                    },
+                    {
+                        "name": "bnb_MORPH"
+                    }
+                ],
+                "state": {
+                    "backfaces": false,
+                    "blend": "alpha",
+                    "colorwrite": true,
+                    "ztest": true,
+                    "zwrite": true
+                }
+            },
+            "shaders/finalColorFilter.fsh": {
+                "samplers": [
+                    {
+                        "image": "EffectRT0_color",
+                        "name": "s_src"
+                    },
+                    {
+                        "image": "chicago.png",
+                        "name": "lookupTexture"
+                    }
+                ],
+                "state": {
+                    "backfaces": true,
+                    "blend": "off",
+                    "colorwrite": true,
+                    "ztest": false,
+                    "zwrite": false
+                }
+            },
+            "shaders/hand_mat": {
+                "built_in_samplers": [
+                    "bnb_BONES",
+                    "bnb_UVMORPH",
+                    "bnb_STATICPOS",
+                    "bnb_MORPH"
+                ],
+                "samplers": [
+                    {
+                        "image": "hend_mat_Base_Color.ktx",
+                        "name": "tex_diffuse"
+                    },
+                    {
+                        "image": "hend_mat_Normal.ktx",
+                        "name": "tex_normal"
+                    },
+                    {
+                        "image": "hend_mat_MRAO.ktx",
+                        "name": "tex_mrao"
+                    },
+                    {
+                        "image": "brdf.ktx",
+                        "name": "tex_brdf"
+                    },
+                    {
+                        "image": "ibl_diff.ktx",
+                        "name": "tex_ibl_diff"
+                    },
+                    {
+                        "image": "ibl_spec.ktx",
+                        "name": "tex_ibl_spec"
+                    },
+                    {
+                        "name": "bnb_BONES"
+                    },
+                    {
+                        "name": "bnb_UVMORPH"
+                    },
+                    {
+                        "name": "bnb_STATICPOS"
+                    },
+                    {
+                        "name": "bnb_MORPH"
+                    }
+                ],
+                "state": {
+                    "backfaces": false,
+                    "blend": "off",
+                    "colorwrite": true,
+                    "ztest": true,
+                    "zwrite": true
+                }
+            },
+            "shaders/matting_mat": {
+                "built_in_samplers": [
+                    "bnb_BONES",
+                    "bnb_UVMORPH",
+                    "bnb_STATICPOS",
+                    "bnb_MORPH"
+                ],
+                "samplers": [
+                    {
+                        "image": "no_Base_Color.ktx",
+                        "name": "tex_diffuse"
+                    },
+                    {
+                        "image": "no_Normal.ktx",
+                        "name": "tex_normal"
+                    },
+                    {
+                        "image": "no_MRAO.ktx",
+                        "name": "tex_mrao"
+                    },
+                    {
+                        "name": "bnb_BONES"
+                    },
+                    {
+                        "name": "bnb_UVMORPH"
+                    },
+                    {
+                        "name": "bnb_STATICPOS"
+                    },
+                    {
+                        "name": "bnb_MORPH"
+                    }
+                ],
+                "state": {
+                    "backfaces": false,
+                    "blend": "off",
+                    "colorwrite": false,
+                    "ztest": true,
+                    "zwrite": true
+                }
+            },
+            "shaders/retouch": {
+                "built_in_samplers": [],
+                "lagacy_onface_flag": true,
+                "samplers": [
+                    {
+                        "image": "redmask_v3.png",
+                        "name": "selection_tex"
+                    },
+                    {
+                        "image": "teeth_low.png",
+                        "name": "lookupTexTeeth"
+                    },
+                    {
+                        "image": "soft_not_red_low.png",
+                        "name": "tex_softLight"
+                    },
+                    {
+                        "image": "mustage.png",
+                        "name": "tex_normalMakeup"
+                    },
+                    {
+                        "image": "Face_mat_Base_Color.png",
+                        "name": "tex_shadow"
+                    },
+                    {
+                        "image": "ComposerRT_color",
+                        "name": "glfx_BACKGROUND"
+                    }
+                ],
+                "state": {
+                    "backfaces": false,
+                    "blend": "off",
+                    "colorwrite": true,
+                    "ztest": true,
+                    "zwrite": true
+                }
+            }
+        },
+        "media": {
+            "frx": {
+                "type": "video"
+            },
+            "gun_sfx.ogg": {
+                "file_name": "audios/gun_sfx.ogg",
+                "type": "audio"
+            },
+            "music.ogg": {
+                "file_name": "audios/music.ogg",
+                "type": "audio"
+            }
+        },
+        "meshes": {
+            "!glfx_FACE": "$builtin$meshes/face.stream:0",
+            "Beauty06.bsm2": "meshes/Beauty06.bsm2",
+            "Gangster.bsm2": "meshes/Gangster.bsm2",
+            "camera_surface": "$builtin$meshes/fs_tri"
+        },
+        "morphs": {
+            "morph0": {
+                "mesh": "Beauty06.bsm2",
+                "type": "mesh"
+            }
+        }
+    },
+    "components": {
+        "ComposerRT_copy": {
+            "materials": [
+                "$builtin$materials/copy_pixels.0"
+            ],
+            "mesh": "camera_surface",
+            "type": "mesh_instance"
+        },
+        "bg_separation_copy__": {
+            "materials": [
+                "$builtin$materials/copy_pixels.1"
+            ],
+            "mesh": "camera_surface",
+            "type": "mesh_instance"
+        },
+        "composer_camera_copy": {
+            "materials": [
+                "$builtin$materials/copy_pixels.-1"
+            ],
+            "mesh": "camera_surface",
+            "type": "mesh_instance"
+        },
+        "face_tracker:0": {
+            "face": "face0",
+            "type": "face_tracker"
+        },
+        "finalColorFilter": {
+            "materials": [
+                "shaders/finalColorFilter.fsh"
+            ],
+            "mesh": "camera_surface",
+            "type": "mesh_instance"
+        },
+        "internal_morph__": {
+            "morph": "morph0",
+            "type": "face_morphing"
+        }
+    },
+    "entities": {
+        "ComposerRT_copy_append_to_root__": {
+            "components": [
+                "ComposerRT_copy"
+            ],
+            "layer": "ComposerRT_copy"
+        },
+        "bg_separation_copy_append_to_root__": {
+            "components": "bg_separation_copy__",
+            "layer": "bg_separation_copy__"
+        },
+        "composer_camera_copy": {
+            "components": [
+                "composer_camera_copy"
+            ],
+            "layer": "camera_copy"
+        },
+        "face_tracker0": {
+            "components": [
+                "face_tracker:0"
+            ]
+        },
+        "finalColorFilter_append_to_root__": {
+            "components": "finalColorFilter",
+            "layer": "finalColorFilter"
+        },
+        "internal_morph": {
+            "components": [
+                "internal_morph__"
+            ],
+            "layer": "internal_face_morph__"
+        },
+        "spawn_entity0": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "matting_mat",
+                "Shadow_mat",
+                "Main_mat",
+                "Lins_mat",
+                "hand_mat",
+                "Gun_mat",
+                "Fire_mat"
+            ]
+        },
+        "spawn_entity1": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "matting_mat",
+                "Shadow_mat",
+                "Main_mat",
+                "Lins_mat",
+                "hand_mat",
+                "Gun_mat",
+                "Fire_mat"
+            ]
+        },
+        "spawn_entity10": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "matting_mat",
+                "Shadow_mat",
+                "Main_mat",
+                "Lins_mat",
+                "hand_mat",
+                "Gun_mat",
+                "Fire_mat"
+            ]
+        },
+        "spawn_entity11": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "matting_mat",
+                "Shadow_mat",
+                "Main_mat",
+                "Lins_mat",
+                "hand_mat",
+                "Gun_mat",
+                "Fire_mat"
+            ]
+        },
+        "spawn_entity12": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "matting_mat",
+                "Shadow_mat",
+                "Main_mat",
+                "Lins_mat",
+                "hand_mat",
+                "Gun_mat",
+                "Fire_mat"
+            ]
+        },
+        "spawn_entity13": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "matting_mat",
+                "Shadow_mat",
+                "Main_mat",
+                "Lins_mat",
+                "hand_mat",
+                "Gun_mat",
+                "Fire_mat"
+            ]
+        },
+        "spawn_entity14": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "matting_mat",
+                "Shadow_mat",
+                "Main_mat",
+                "Lins_mat",
+                "hand_mat",
+                "Gun_mat",
+                "Fire_mat"
+            ]
+        },
+        "spawn_entity15": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "matting_mat",
+                "Shadow_mat",
+                "Main_mat",
+                "Lins_mat",
+                "hand_mat",
+                "Gun_mat",
+                "Fire_mat"
+            ]
+        },
+        "spawn_entity16": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "matting_mat",
+                "Shadow_mat",
+                "Main_mat",
+                "Lins_mat",
+                "hand_mat",
+                "Gun_mat",
+                "Fire_mat"
+            ]
+        },
+        "spawn_entity17": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "matting_mat",
+                "Shadow_mat",
+                "Main_mat",
+                "Lins_mat",
+                "hand_mat",
+                "Gun_mat",
+                "Fire_mat"
+            ]
+        },
+        "spawn_entity18": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "matting_mat",
+                "Shadow_mat",
+                "Main_mat",
+                "Lins_mat",
+                "hand_mat",
+                "Gun_mat",
+                "Fire_mat"
+            ]
+        },
+        "spawn_entity19": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "matting_mat",
+                "Shadow_mat",
+                "Main_mat",
+                "Lins_mat",
+                "hand_mat",
+                "Gun_mat",
+                "Fire_mat"
+            ]
+        },
+        "spawn_entity2": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "matting_mat",
+                "Shadow_mat",
+                "Main_mat",
+                "Lins_mat",
+                "hand_mat",
+                "Gun_mat",
+                "Fire_mat"
+            ]
+        },
+        "spawn_entity3": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "matting_mat",
+                "Shadow_mat",
+                "Main_mat",
+                "Lins_mat",
+                "hand_mat",
+                "Gun_mat",
+                "Fire_mat"
+            ]
+        },
+        "spawn_entity4": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "matting_mat",
+                "Shadow_mat",
+                "Main_mat",
+                "Lins_mat",
+                "hand_mat",
+                "Gun_mat",
+                "Fire_mat"
+            ]
+        },
+        "spawn_entity5": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "matting_mat",
+                "Shadow_mat",
+                "Main_mat",
+                "Lins_mat",
+                "hand_mat",
+                "Gun_mat",
+                "Fire_mat"
+            ]
+        },
+        "spawn_entity6": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "matting_mat",
+                "Shadow_mat",
+                "Main_mat",
+                "Lins_mat",
+                "hand_mat",
+                "Gun_mat",
+                "Fire_mat"
+            ]
+        },
+        "spawn_entity7": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "matting_mat",
+                "Shadow_mat",
+                "Main_mat",
+                "Lins_mat",
+                "hand_mat",
+                "Gun_mat",
+                "Fire_mat"
+            ]
+        },
+        "spawn_entity8": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "matting_mat",
+                "Shadow_mat",
+                "Main_mat",
+                "Lins_mat",
+                "hand_mat",
+                "Gun_mat",
+                "Fire_mat"
+            ]
+        },
+        "spawn_entity9": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "matting_mat",
+                "Shadow_mat",
+                "Main_mat",
+                "Lins_mat",
+                "hand_mat",
+                "Gun_mat",
+                "Fire_mat"
+            ]
+        }
+    },
+    "hierarchy": {
+        "face_tracker0": [
+            "internal_morph",
+            "spawn_entity0",
+            "spawn_entity1",
+            "spawn_entity2",
+            "spawn_entity3",
+            "spawn_entity4",
+            "spawn_entity5",
+            "spawn_entity6",
+            "spawn_entity7",
+            "spawn_entity8",
+            "spawn_entity9",
+            "spawn_entity10",
+            "spawn_entity11",
+            "spawn_entity12",
+            "spawn_entity13",
+            "spawn_entity14",
+            "spawn_entity15",
+            "spawn_entity16",
+            "spawn_entity17",
+            "spawn_entity18",
+            "spawn_entity19"
+        ],
+        "root": [
+            "face_tracker0",
+            "composer_camera_copy",
+            "ComposerRT_copy_append_to_root__",
+            "finalColorFilter_append_to_root__",
+            "bg_separation_copy_append_to_root__"
+        ]
+    },
+    "layers": {
+        "ComposerRT_copy": {},
+        "Fire_mat": {},
+        "Gun_mat": {},
+        "Lins_mat": {},
+        "Main_mat": {},
+        "Shadow_mat": {},
+        "bg_separation_copy__": {},
+        "camera_copy": {},
+        "composer_pre": {},
+        "default": {},
+        "finalColorFilter": {},
+        "hand_mat": {},
+        "internal_face_morph__": {},
+        "matting_mat": {},
+        "retouch": {}
+    },
+    "main_camera": {
+        "adjust_zfar": 1000,
+        "adjust_znear": 500
+    },
+    "render_list": {
+        "default": [
+            {
+                "layer": "camera_copy",
+                "render_target": "ComposerRT"
+            },
+            {
+                "layer": "bg_separation_copy__",
+                "render_target": "backgroundSeparationRT"
+            },
+            {
+                "layer": "ComposerRT_copy",
+                "render_target": "EffectRT0"
+            },
+            {
+                "layer": "retouch",
+                "render_target": "EffectRT0",
+                "sub_geometries": [
+                    "retouch"
+                ]
+            },
+            {
+                "layer": "internal_face_morph__",
+                "render_target": "EffectRT0"
+            },
+            {
+                "layer": "default",
+                "render_target": "EffectRT0",
+                "sub_geometries": [
+                    "default"
+                ]
+            },
+            {
+                "layer": "matting_mat",
+                "render_target": "EffectRT0",
+                "sub_geometries": [
+                    "matting_mat"
+                ]
+            },
+            {
+                "layer": "Shadow_mat",
+                "render_target": "EffectRT0",
+                "sub_geometries": [
+                    "Shadow_mat"
+                ]
+            },
+            {
+                "layer": "Main_mat",
+                "render_target": "EffectRT0",
+                "sub_geometries": [
+                    "Main_mat"
+                ]
+            },
+            {
+                "layer": "Lins_mat",
+                "render_target": "EffectRT0",
+                "sub_geometries": [
+                    "Lins_mat"
+                ]
+            },
+            {
+                "layer": "hand_mat",
+                "render_target": "EffectRT0",
+                "sub_geometries": [
+                    "hand_mat"
+                ]
+            },
+            {
+                "layer": "Gun_mat",
+                "render_target": "EffectRT0",
+                "sub_geometries": [
+                    "Gun_mat"
+                ]
+            },
+            {
+                "layer": "Fire_mat",
+                "render_target": "EffectRT0",
+                "sub_geometries": [
+                    "Fire_mat"
+                ]
+            },
+            {
+                "layer": "finalColorFilter",
+                "render_target": "finalColorFilterRT"
+            }
+        ]
+    },
+    "render_targets": {
+        "ComposerRT": [
+            "ComposerRT_color"
+        ],
+        "EffectRT0": [
+            "EffectRT0_color",
+            "EffectRT0_depth"
+        ],
+        "backgroundSeparationRT": [
+            "backgroundSeparationRT_color"
+        ],
+        "finalColorFilterRT": [
+            "finalColorFilterRT_color"
+        ]
+    },
+    "scene": "Gangster",
+    "script": {
+        "entry_point": "config.js",
+        "type": "legacy"
+    }
+}

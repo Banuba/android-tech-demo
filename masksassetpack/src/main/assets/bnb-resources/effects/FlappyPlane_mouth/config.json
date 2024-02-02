@@ -1,0 +1,894 @@
+{
+    "assets": {
+        "attachments": {
+            "ComposerRT_color": {
+                "type": "color"
+            },
+            "EffectRT0_color": {
+                "type": "color"
+            },
+            "EffectRT0_depth": {
+                "clear": [
+                    1.0
+                ],
+                "type": "depth"
+            }
+        },
+        "faces": {
+            "face0": {
+                "index": 0,
+                "mesh": "!glfx_FACE"
+            }
+        },
+        "images": {
+            "camera_image": {
+                "algorithm": "camera_composer",
+                "type": "procedural_texture"
+            },
+            "plane": {
+                "file_name": "images/plane.png",
+                "type": "texture"
+            },
+            "tube": {
+                "file_name": "images/tube.png",
+                "type": "texture"
+            },
+            "bg": {
+                "file_name": "images/sky_uk.png",
+                "type": "texture"
+            },
+            "bd1": {
+                "file_name": "images/bd_uk.png",
+                "type": "texture"
+            },
+            "bd2": {
+                "file_name": "images/bd_uk1.png",
+                "type": "texture"
+            },
+            "bd3": {
+                "file_name": "images/bd_uk2.png",
+                "type": "texture"
+            },
+            "border": {
+                "file_name": "images/border_london.png",
+                "type": "texture"
+            },
+            "face": {
+                "file_name": "images/face.png",
+                "type": "texture"
+            },
+            "mask": {
+                "file_name": "images/mask.png",
+                "type": "texture"
+            },
+            "text": {
+                "type": "text_texture",
+                "font": "3X5.ttf",
+                "width": 500,
+                "height": 100,
+                "text": "Score: 0"
+            },
+            "text_start": {
+                "type": "text_texture",
+                "font": "3X5.ttf",
+                "width": 500,
+                "height": 100,
+                "text": "    Smile to start     and Open mouth to fly"
+            },
+            "text_lose": {
+                "type": "text_texture",
+                "font": "3X5.ttf",
+                "width": 500,
+                "height": 100,
+                "text": "You lose!\nSmile to restart"
+            },
+            "skin": {
+                "active": true,
+                "recognizer_feature_name": "face",
+                "type": "segmentation_mask"
+            }
+        },
+        "materials": {
+            "$builtin$materials/copy_pixels.-1": {
+                "parameters": {},
+                "samplers": [
+                    {
+                        "image": "camera_image",
+                        "name": "tex_src"
+                    }
+                ],
+                "state": {
+                    "backfaces": true,
+                    "blend": "off",
+                    "colorwrite": true,
+                    "ztest": false,
+                    "zwrite": false
+                }
+            },
+            "$builtin$materials/copy_pixels.0": {
+                "parameters": {},
+                "samplers": [
+                    {
+                        "image": "ComposerRT_color",
+                        "name": "tex_src"
+                    }
+                ],
+                "state": {
+                    "backfaces": true,
+                    "blend": "off",
+                    "colorwrite": true,
+                    "ztest": false,
+                    "zwrite": false
+                }
+            },
+            "text": {
+                "path": "shaders/bg_2",
+                "samplers": [
+                    {
+                        "name": "s_text",
+                        "image": "text"
+                    }
+                ],
+                "state": {
+                    "blend": "alpha",
+                    "backfaces": false,
+                    "colorwrite": true,
+                    "ztest": false,
+                    "zwrite": false
+                }
+            },
+            "text_start": {
+                "path": "shaders/bg_2",
+                "samplers": [
+                    {
+                        "name": "s_text",
+                        "image": "text_start"
+                    }
+                ],
+                "state": {
+                    "blend": "alpha",
+                    "backfaces": false,
+                    "colorwrite": true,
+                    "ztest": false,
+                    "zwrite": false
+                }
+            },
+            "text_lose": {
+                "path": "shaders/bg_2",
+                "samplers": [
+                    {
+                        "name": "s_text",
+                        "image": "text_lose"
+                    }
+                ],
+                "state": {
+                    "blend": "alpha",
+                    "backfaces": false,
+                    "colorwrite": true,
+                    "ztest": false,
+                    "zwrite": false
+                }
+            },
+            "mat_square": {
+                "path": "shaders/plane_2",
+                "built_in_samplers": [
+                    "bnb_BONES",
+                    "bnb_UVMORPH_FISHEYE",
+                    "bnb_MORPH"
+                ],
+                "samplers": [
+                    {
+                        "name": "bnb_BONES"
+                    },
+                    {
+                        "name": "bnb_UVMORPH_FISHEYE"
+                    },
+                    {
+                        "name": "bnb_MORPH"
+                    },
+                    {
+                        "name": "plane",
+                        "image": "plane"
+                    }
+                ],
+                "state": {
+                    "backfaces": false,
+                    "blend": "alpha",
+                    "colorwrite": true,
+                    "ztest": false,
+                    "zwrite": false
+                },
+                "parameters": {
+                    "bpos": {
+                        "type": "vec4",
+                        "value": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ]
+                    }
+                }
+            },
+            "mat_rectangular": {
+                "path": "shaders/plane",
+                "built_in_samplers": [
+                    "bnb_BONES",
+                    "bnb_UVMORPH_FISHEYE",
+                    "bnb_MORPH"
+                ],
+                "samplers": [
+                    {
+                        "name": "bnb_BONES"
+                    },
+                    {
+                        "name": "bnb_UVMORPH_FISHEYE"
+                    },
+                    {
+                        "name": "bnb_MORPH"
+                    },
+                    {
+                        "name": "tube",
+                        "image": "tube"
+                    }
+                ],
+                "state": {
+                    "backfaces": true,
+                    "blend": "alpha",
+                    "colorwrite": true,
+                    "ztest": false,
+                    "zwrite": false
+                },
+                "parameters": {
+                    "tpos": {
+                        "type": "vec4",
+                        "value": [
+                            250,
+                            -150,
+                            0,
+                            0
+                        ]
+                    }
+                }
+            },
+            "Quad_V2": {
+                "path": "shaders/helmet",
+                "built_in_samplers": [
+                    "bnb_BONES",
+                    "bnb_STATICPOS",
+                    "bnb_UVMORPH",
+                    "bnb_UVMORPH_FISHEYE"
+                ],
+                "samplers": [
+                    {
+                        "name": "bnb_BONES"
+                    },
+                    {
+                        "name": "bnb_STATICPOS"
+                    },
+                    {
+                        "name": "bnb_UVMORPH_FISHEYE"
+                    },
+                    {
+                        "name": "face",
+                        "image": "face"
+                    }
+                ],
+                "state": {
+                    "backfaces": false,
+                    "blend": "alpha",
+                    "colorwrite": true,
+                    "ztest": false,
+                    "zwrite": false
+                },
+                "parameters": {
+                    "hpos": {
+                        "type": "vec4",
+                        "value": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ]
+                    }
+                }
+            },
+            "Quad_V1": {
+                "path": "shaders/bd",
+                "built_in_samplers": [
+                    "bnb_BONES",
+                    "bnb_STATICPOS",
+                    "bnb_UVMORPH",
+                    "bnb_UVMORPH_FISHEYE"
+                ],
+                "samplers": [
+                    {
+                        "name": "bnb_BONES"
+                    },
+                    {
+                        "name": "bnb_STATICPOS"
+                    },
+                    {
+                        "name": "bnb_UVMORPH_FISHEYE"
+                    },
+                    {
+                        "name": "bd1",
+                        "image": "bd1"
+                    },
+                    {
+                        "name": "bd2",
+                        "image": "bd2"
+                    },
+                    {
+                        "name": "bd3",
+                        "image": "bd3"
+                    }
+                ],
+                "state": {
+                    "backfaces": false,
+                    "blend": "alpha",
+                    "colorwrite": true,
+                    "ztest": false,
+                    "zwrite": false
+                },
+                "parameters": {
+                    "bdpos": {
+                        "type": "vec4",
+                        "value": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ]
+                    },
+                    "bdimage": {
+                        "type": "vec4",
+                        "value": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ]
+                    }
+                },
+                "instance_count": 6
+            },
+            "Quad_V4": {
+                "path": "shaders/floor",
+                "built_in_samplers": [
+                    "bnb_BONES",
+                    "bnb_STATICPOS",
+                    "bnb_UVMORPH",
+                    "bnb_UVMORPH_FISHEYE"
+                ],
+                "samplers": [
+                    {
+                        "name": "bnb_BONES"
+                    },
+                    {
+                        "name": "bnb_STATICPOS"
+                    },
+                    {
+                        "name": "bnb_UVMORPH_FISHEYE"
+                    },
+                    {
+                        "name": "border",
+                        "image": "border"
+                    }
+                ],
+                "state": {
+                    "backfaces": false,
+                    "blend": "alpha",
+                    "colorwrite": true,
+                    "ztest": false,
+                    "zwrite": false
+                },
+                "parameters": {
+                    "borderpos": {
+                        "type": "vec4",
+                        "value": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ]
+                    }
+                }
+            },
+            "bg": {
+                "path": "shaders/bg",
+                "built_in_samplers": [
+                    "bnb_BONES",
+                    "bnb_UVMORPH_FISHEYE",
+                    "bnb_MORPH"
+                ],
+                "samplers": [
+                    {
+                        "name": "bg",
+                        "image": "bg"
+                    }
+                ],
+                "state": {
+                    "backfaces": true,
+                    "blend": "off",
+                    "colorwrite": true,
+                    "ztest": false,
+                    "zwrite": false
+                },
+                "parameters": {
+                    "pos": {
+                        "type": "vec4",
+                        "value": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ]
+                    }
+                }
+            },
+            "retouch": {
+                "path": "shaders/retouch",
+                "built_in_samplers": [],
+                "samplers": [
+                    {
+                        "image": "ComposerRT_color",
+                        "name": "glfx_BACKGROUND"
+                    }
+                ],
+                "state": {
+                    "backfaces": false,
+                    "blend": "alpha",
+                    "colorwrite": true,
+                    "ztest": false,
+                    "zwrite": false
+                },
+                "parameters": {
+                    "qpos": {
+                        "type": "vec4",
+                        "value": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ]
+                    }
+                }
+            }
+        },
+        "media": {
+            "Airplane.ogg": {
+                "file_name": "audios/Airplane.ogg",
+                "type": "audio",
+                "looped": true,
+                "play": false
+            }
+        },
+        "meshes": {
+            "!glfx_FACE": "$builtin$meshes/face.stream:0",
+            "camera_surface": "$builtin$meshes/fs_tri",
+            "quad": "meshes/quad_video.bsm2",
+            "quad2": "meshes/quad.bsm2",
+            "quad_surface": "meshes/quad3.bsm2",
+            "tri": "$builtin$meshes/fs_tri",
+            "square.bsm2": "meshes/square.bsm2",
+            "rectangular.bsm2": "meshes/rectangular.bsm2",
+            "sprite.bsm2": "meshes/sprite.bsm2",
+            "border.bsm2": "meshes/border.bsm2"
+        }
+    },
+    "components": {
+        "ComposerRT_copy": {
+            "materials": [
+                "$builtin$materials/copy_pixels.0"
+            ],
+            "mesh": "camera_surface",
+            "type": "mesh_instance"
+        },
+        "composer_camera_copy": {
+            "materials": [
+                "$builtin$materials/copy_pixels.-1"
+            ],
+            "mesh": "camera_surface",
+            "type": "mesh_instance"
+        },
+        "face_tracker:0": {
+            "face": "face0",
+            "type": "face_tracker"
+        }
+    },
+    "entities": {
+        "ComposerRT_copy_append_to_root__": {
+            "components": [
+                "ComposerRT_copy"
+            ],
+            "layer": "ComposerRT_copy"
+        },
+        "composer_camera_copy": {
+            "components": [
+                "composer_camera_copy"
+            ],
+            "layer": "camera_copy"
+        },
+        "face_tracker0": {
+            "components": [
+                "face_tracker:0"
+            ]
+        },
+        "text_surface": {
+            "components": {
+                "mesh_instance": {
+                    "materials": [
+                        "text"
+                    ],
+                    "mesh": "quad_surface"
+                },
+                "transformation_3d": {
+                    "rotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "scale": [
+                        0.4,
+                        0.1,
+                        1
+                    ],
+                    "translation": [
+                        0,
+                        0.8,
+                        0
+                    ]
+                }
+            },
+            "layer": "text"
+        },
+        "retouch": {
+            "components": {
+                "mesh_instance": {
+                    "materials": [
+                        "retouch"
+                    ],
+                    "mesh": "!glfx_FACE"
+                },
+                "transformation_3d": {
+                    "rotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "scale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "translation": [
+                        0,
+                        0,
+                        0
+                    ]
+                }
+            },
+            "layer": "retouch"
+        },
+        "bd": {
+            "components": {
+                "mesh_instance": {
+                    "materials": [
+                        "Quad_V1"
+                    ],
+                    "mesh": "sprite.bsm2"
+                },
+                "transformation_3d": {
+                    "rotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "scale": [
+                        90,
+                        90,
+                        1
+                    ],
+                    "translation": [
+                        -50,
+                        -100,
+                        -600
+                    ]
+                }
+            },
+            "layer": "bd"
+        },
+        "border": {
+            "components": {
+                "mesh_instance": {
+                    "materials": [
+                        "Quad_V4"
+                    ],
+                    "mesh": "border.bsm2"
+                },
+                "transformation_3d": {
+                    "rotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "scale": [
+                        120,
+                        10,
+                        1
+                    ],
+                    "translation": [
+                        0,
+                        0,
+                        -600
+                    ]
+                }
+            },
+            "layer": "border"
+        },
+        "text_start": {
+            "components": {
+                "mesh_instance": {
+                    "materials": [
+                        "text_start"
+                    ],
+                    "mesh": "quad_surface"
+                },
+                "transformation_3d": {
+                    "rotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "scale": [
+                        0.8,
+                        0.2,
+                        1
+                    ],
+                    "translation": [
+                        0,
+                        0.35,
+                        0
+                    ]
+                }
+            },
+            "layer": "text"
+        },
+        "text_lose": {
+            "components": {
+                "mesh_instance": {
+                    "materials": [
+                        "text_lose"
+                    ],
+                    "mesh": "quad_surface"
+                },
+                "transformation_3d": {
+                    "rotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "scale": [
+                        0.8,
+                        0.2,
+                        1
+                    ],
+                    "translation": [
+                        0,
+                        0.35,
+                        0
+                    ]
+                }
+            },
+            "layer": "text"
+        },
+        "helmet": {
+            "components": {
+                "mesh_instance": {
+                    "mesh": "quad2",
+                    "materials": [
+                        "Quad_V2"
+                    ]
+                }
+            },
+            "layer": "helmet"
+        },
+        "plane": {
+            "components": {
+                "mesh_instance": {
+                    "mesh": "rectangular.bsm2",
+                    "materials": [
+                        "mat_rectangular"
+                    ]
+                },
+                "transformation_3d": {
+                    "rotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "scale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "translation": [
+                        0,
+                        0,
+                        0
+                    ]
+                }
+            },
+            "layer": "plane_2"
+        },
+        "plane_3": {
+            "components": {
+                "mesh_instance": {
+                    "mesh": "square.bsm2",
+                    "materials": [
+                        "mat_square"
+                    ]
+                },
+                "transformation_3d": {
+                    "rotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "scale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "translation": [
+                        0,
+                        0,
+                        0
+                    ]
+                }
+            },
+            "layer": "plane"
+        },
+        "bg": {
+            "components": {
+                "mesh_instance": {
+                    "mesh": "tri",
+                    "materials": [
+                        "bg"
+                    ]
+                },
+                "transformation_3d": {
+                    "rotation": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "scale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "translation": [
+                        0,
+                        0,
+                        -600
+                    ]
+                }
+            },
+            "layer": "bg"
+        }
+    },
+    "hierarchy": {
+        "face_tracker0": [
+            "helmet",
+            "retouch"
+        ],
+        "root": [
+            "face_tracker0",
+            "plane",
+            "plane_3",
+            "bg",
+            "bd",
+            "border",
+            "text_start",
+            "text_surface",
+            "text_lose",
+            "composer_camera_copy",
+            "ComposerRT_copy_append_to_root__"
+        ]
+    },
+    "layers": {
+        "!glfx_UPDATE_BG0": {},
+        "ComposerRT_copy": {},
+        "camera_copy": {},
+        "plane_2": {},
+        "plane": {},
+        "bg": {},
+        "border": {},
+        "bd": {},
+        "helmet": {},
+        "text": {},
+        "composer_pre": {}
+    },
+    "main_camera": {
+        "adjust_zfar": 1500,
+        "adjust_znear": 500
+    },
+    "render_list": {
+        "default": [
+            {
+                "layer": "camera_copy",
+                "render_target": "ComposerRT"
+            },
+            {
+                "layer": "ComposerRT_copy",
+                "render_target": "EffectRT0"
+            },
+            {
+                "layer": "bg",
+                "render_target": "EffectRT0"
+            },
+            {
+                "layer": "bd",
+                "render_target": "EffectRT0",
+                "sub_geometries": [
+                    "Quad_V1"
+                ]
+            },
+            {
+                "layer": "border",
+                "render_target": "EffectRT0",
+                "sub_geometries": [
+                    "Quad_V4"
+                ]
+            },
+            {
+                "layer": "plane_2",
+                "render_target": "EffectRT0",
+                "sub_geometries": [
+                    "mat_rectangular"
+                ]
+            },
+            {
+                "layer": "plane",
+                "render_target": "EffectRT0",
+                "sub_geometries": [
+                    "mat_square"
+                ]
+            },
+            {
+                "layer": "retouch",
+                "render_target": "EffectRT0",
+                "sub_geometries": [
+                    "retouch"
+                ]
+            },
+            {
+                "layer": "helmet",
+                "render_target": "EffectRT0",
+                "sub_geometries": [
+                    "Quad_V2"
+                ]
+            },
+            {
+                "layer": "text",
+                "render_target": "EffectRT0"
+            }
+        ]
+    },
+    "render_targets": {
+        "ComposerRT": [
+            "ComposerRT_color"
+        ],
+        "EffectRT0": [
+            "EffectRT0_color",
+            "EffectRT0_depth"
+        ]
+    },
+    "scene": "FlappyPlane",
+    "script": {
+        "entry_point": "config.js",
+        "type": "latest"
+    }
+}

@@ -1,0 +1,94 @@
+{
+    "assets": {
+        "attachments": {
+            "camera_color": {
+                "type": "color"
+            }
+        },
+        "images": {
+            "camera: tex_rgb": {
+                "format": "rgba",
+                "type": "camera"
+            },
+            "camera: tex_uv": {
+                "format": "uv",
+                "type": "camera"
+            },
+            "camera: tex_y": {
+                "format": "y",
+                "type": "camera"
+            }
+        },
+        "materials": {
+            "$builtin$materials/camera": {
+                "samplers": [
+                    {
+                        "image": "camera: tex_y",
+                        "name": "tex_y"
+                    },
+                    {
+                        "image": "camera: tex_uv",
+                        "name": "tex_uv"
+                    },
+                    {
+                        "image": "camera: tex_rgb",
+                        "name": "tex_rgb"
+                    }
+                ],
+                "state": {
+                    "backfaces": true,
+                    "blend": "off",
+                    "colorwrite": true,
+                    "ztest": false,
+                    "zwrite": false
+                }
+            }
+        },
+        "meshes": {
+            "camera_surface": "$builtin$meshes/fs_tri"
+        }
+    },
+    "components": {
+        "camera_surface": {
+            "materials": [
+                "$builtin$materials/camera"
+            ],
+            "mesh": "camera_surface",
+            "type": "mesh_instance"
+        }
+    },
+    "entities": {
+        "camera": {
+            "components": [
+                "camera_surface"
+            ],
+            "layer": "camera"
+        }
+    },
+    "hierarchy": {
+        "root": [
+            "camera"
+        ]
+    },
+    "layers": {
+        "camera": {}
+    },
+    "render_list": {
+        "default": [
+            {
+                "layer": "camera",
+                "render_target": "camera"
+            }
+        ]
+    },
+    "render_targets": {
+        "camera": [
+            "camera_color"
+        ]
+    },
+    "scene": "test_Faceacne",
+    "script": {
+        "entry_point": "config.js",
+        "type": "scene"
+    }
+}

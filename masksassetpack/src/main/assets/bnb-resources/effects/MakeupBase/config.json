@@ -1,0 +1,1439 @@
+{
+	"assets": 
+	{
+		"attachments": 
+		{
+			"lipsliner1": { "type": "color", "format": "r8", "clear": [0,0,0,0], "load_state": "dont_care", "store_state": "save", "width": 384, "height": 384, "filtering": "linear" },
+			"lipsliner":  { "type": "color", "format": "r8", "clear": [0,0,0,0], "load_state": "dont_care", "store_state": "save", "width": 384, "height": 384, "filtering": "linear" },
+
+			"skin_brows_lips_nn": { "type": "color", "format": "rgba8", "clear": [ 1, 1, 1, 1 ], "load_state": "clear",     "store_state": "save" },
+			"nn_z":               { "type": "depth",                    "clear": [ 1 ],          "load_state": "clear",     "store_state": "discard" },
+
+			"blur_hsv": { "type": "color", "format": "rgba8",   "clear": [ 0, 0, 0, 0 ], "load_state": "dont_care", "store_state": "save" },
+			"mean0":    { "type": "color", "format": "rgba16f",   "clear": [ 0, 0, 0, 0 ], "load_state": "dont_care", "store_state": "save", "width": 256, "height": 256, "filtering": "linear" },
+			"ms1":    { "type": "color", "format": "rgba16f",   "clear": [ 0, 0, 0, 0 ], "load_state": "dont_care", "store_state": "save", "width": 128, "height": 128, "filtering": "linear" },
+			"ms2":    { "type": "color", "format": "rgba16f",   "clear": [ 0, 0, 0, 0 ], "load_state": "dont_care", "store_state": "save", "width": 64, "height": 64, "filtering": "linear" },
+			"ms3":    { "type": "color", "format": "rgba16f",   "clear": [ 0, 0, 0, 0 ], "load_state": "dont_care", "store_state": "save", "width": 32, "height": 32, "filtering": "linear" },
+			"ms4":    { "type": "color", "format": "rgba16f",   "clear": [ 0, 0, 0, 0 ], "load_state": "dont_care", "store_state": "save", "width": 16, "height": 16, "filtering": "linear" },
+			"ms5":    { "type": "color", "format": "rgba16f",   "clear": [ 0, 0, 0, 0 ], "load_state": "dont_care", "store_state": "save", "width": 8, "height": 8, "filtering": "linear" },
+			"ms6":    { "type": "color", "format": "rgba16f",   "clear": [ 0, 0, 0, 0 ], "load_state": "dont_care", "store_state": "save", "width": 4, "height": 4, "filtering": "linear" },
+			"ms7":    { "type": "color", "format": "rgba16f",   "clear": [ 0, 0, 0, 0 ], "load_state": "dont_care", "store_state": "save", "width": 2, "height": 2, "filtering": "linear" },
+			"mean8":    { "type": "color", "format": "rgba16f",   "clear": [ 0, 0, 0, 0 ], "load_state": "dont_care", "store_state": "save", "width": 1, "height": 1, "filtering": "linear" },
+			"stddev0":  { "type": "color", "format": "rgba16f", "clear": [ 0, 0, 0, 0 ], "load_state": "dont_care", "store_state": "save", "width": 256, "height": 256, "filtering": "linear" },
+			"stddev8":  { "type": "color", "format": "rgba16f", "clear": [ 0, 0, 0, 0 ], "load_state": "dont_care", "store_state": "save", "width": 1, "height": 1, "filtering": "linear" },
+
+			"consiler_contour_highlighter_blush_tex_c":    { "type": "color", "format": "rgba8",   "clear": [ 0, 0, 0, 0 ], "load_state": "clear",     "store_state": "save" },
+			"shadows_eyeliner_tex_c":    { "type": "color", "format": "rgba8",   "clear": [ 0, 0, 0, 0 ], "load_state": "clear",     "store_state": "save" },
+			"tex_z":    { "type": "depth",                      "clear": [ 1 ],          "load_state": "clear",     "store_state": "discard" },
+
+			"tone0":     { "type": "color", "format": "rgba8",   "clear": [ 0, 0, 0, 0 ], "load_state": "dont_care", "store_state": "save" },
+			"tone1":     { "type": "color", "format": "rgba8",   "clear": [ 0, 0, 0, 0 ], "load_state": "dont_care", "store_state": "save" }
+		},
+		"images":
+		{
+			"camera": { "type": "procedural_texture", "algorithm": "camera_composer" },
+
+			"lbrow_nn": { "recognizer_feature_name": "left_brow",  "active": true, "type": "segmentation_mask" },
+			"rbrow_nn": { "recognizer_feature_name": "right_brow", "active": true, "type": "segmentation_mask" },
+			"skin_nn":  { "recognizer_feature_name": "skin",       "active": true, "type": "segmentation_mask" },
+			"face_nn":  { "recognizer_feature_name": "face",       "active": true, "type": "segmentation_mask" },
+			"lips_nn":  { "recognizer_feature_name": "lips",       "active": true, "type": "segmentation_mask" },
+			"consiler_contour_highlighter_blush_tex": { "file_name": "textures/consiler_contour_highlighter_blush.png", "type": "texture", "mips": true, "filter": "linear" },
+			"shadows_eyeliner_tex": { "file_name": "textures/shadows_arrows.png", "type": "texture", "mips": true, "filter": "linear" },
+			"eyelashes_tex": { "file_name": "textures/lashes_tex1.ktx", "type": "texture", "mips": true, "filter": "linear" }
+		},
+		"materials": 
+		{
+			"shaders/lipsliner/liner0": 
+			{
+				"samplers": 
+				[
+					{ "name": "lips_mask", "image": "lips_nn" }
+				],
+				"state": { "blend": "off", "backfaces": true, "colorwrite": true, "ztest": false, "zwrite": false }
+			},
+			"shaders/lipsliner/liner1": 
+			{
+				"samplers": 
+				[
+					{ "name": "liner0", "image": "lipsliner" }
+				],
+				"state": { "blend": "off", "backfaces": true, "colorwrite": true, "ztest": false, "zwrite": false }
+			},
+			"shaders/lipsliner/liner2":
+			{
+				"samplers": 
+				[
+					{ "name": "liner1", "image": "lipsliner1" }
+				],
+				"state": { "blend": "off", "backfaces": true, "colorwrite": true, "ztest": false, "zwrite": false },
+				"parameters": 
+				{
+					"lipsliner_r1_r2": { "type": "vec4", "value": [1, 1, 0, 0] }
+				}
+			},
+			"shaders/fake_skin_eyes_lips": 
+			{
+				"samplers": [],
+				"state": { "blend": "off", "backfaces": false, "colorwrite": true, "ztest": true, "zwrite": true }
+			},
+			"shaders/nn_combine": 
+			{
+				"samplers": 
+				[
+					{ "name": "tex_lbrow", "image": "lbrow_nn" },
+					{ "name": "tex_rbrow", "image": "rbrow_nn" },
+					{ "name": "tex_face",  "image": "face_nn" },
+					{ "name": "tex_skin",  "image": "skin_nn" },
+					{ "name": "tex_lips",  "image": "lips_nn" },
+					{ "name": "tex_liner", "image": "lipsliner" }
+				],
+				"state": { "blend": "multiply", "backfaces": true, "colorwrite": true, "ztest": false, "zwrite": false },
+				"parameters": 
+				{
+					"fake_skin_nn_active": { "type": "vec4", "value": [0, 0, 0, 0] }
+				}
+			},
+
+			"shaders/mean": 
+			{
+				"samplers": 
+				[
+					{ "name": "tex_blur_hsv", "image": "blur_hsv" }
+				],
+				"state": { "blend": "off", "backfaces": true, "colorwrite": true, "ztest": false, "zwrite": false }
+			},
+			"shaders/mean0": { "path": "shaders/downscale", "samplers": [{"name": "tex", "image": "mean0"}], "state": { "blend": "off", "backfaces": true, "colorwrite": true, "ztest": false, "zwrite": false } },
+			"shaders/mean1": { "path": "shaders/downscale", "samplers": [{"name": "tex", "image": "ms1"}], "state": { "blend": "off", "backfaces": true, "colorwrite": true, "ztest": false, "zwrite": false } },
+			"shaders/mean2": { "path": "shaders/downscale", "samplers": [{"name": "tex", "image": "ms2"}], "state": { "blend": "off", "backfaces": true, "colorwrite": true, "ztest": false, "zwrite": false } },
+			"shaders/mean3": { "path": "shaders/downscale", "samplers": [{"name": "tex", "image": "ms3"}], "state": { "blend": "off", "backfaces": true, "colorwrite": true, "ztest": false, "zwrite": false } },
+			"shaders/mean4": { "path": "shaders/downscale", "samplers": [{"name": "tex", "image": "ms4"}], "state": { "blend": "off", "backfaces": true, "colorwrite": true, "ztest": false, "zwrite": false } },
+			"shaders/mean5": { "path": "shaders/downscale", "samplers": [{"name": "tex", "image": "ms5"}], "state": { "blend": "off", "backfaces": true, "colorwrite": true, "ztest": false, "zwrite": false } },
+			"shaders/mean6": { "path": "shaders/downscale", "samplers": [{"name": "tex", "image": "ms6"}], "state": { "blend": "off", "backfaces": true, "colorwrite": true, "ztest": false, "zwrite": false } },
+			"shaders/mean7": { "path": "shaders/downscale", "samplers": [{"name": "tex", "image": "ms7"}], "state": { "blend": "off", "backfaces": true, "colorwrite": true, "ztest": false, "zwrite": false } },
+
+			"shaders/stddev": 
+			{
+				"path": "shaders/stddev",
+				"samplers": 
+				[
+					{ "name": "tex_mean_full", "image": "mean0" },
+					{ "name": "tex_mean",      "image": "mean8" }
+				],
+				"state": { "blend": "off", "backfaces": true, "colorwrite": true, "ztest": false, "zwrite": false }
+			},
+			"shaders/stddev0": { "path": "shaders/downscale", "samplers": [{"name": "tex", "image": "stddev0"}], "state": { "blend": "off", "backfaces": true, "colorwrite": true, "ztest": false, "zwrite": false } },
+			"shaders/stddev1": { "path": "shaders/downscale", "samplers": [{"name": "tex", "image": "ms1"}], "state": { "blend": "off", "backfaces": true, "colorwrite": true, "ztest": false, "zwrite": false } },
+			"shaders/stddev2": { "path": "shaders/downscale", "samplers": [{"name": "tex", "image": "ms2"}], "state": { "blend": "off", "backfaces": true, "colorwrite": true, "ztest": false, "zwrite": false } },
+			"shaders/stddev3": { "path": "shaders/downscale", "samplers": [{"name": "tex", "image": "ms3"}], "state": { "blend": "off", "backfaces": true, "colorwrite": true, "ztest": false, "zwrite": false } },
+			"shaders/stddev4": { "path": "shaders/downscale", "samplers": [{"name": "tex", "image": "ms4"}], "state": { "blend": "off", "backfaces": true, "colorwrite": true, "ztest": false, "zwrite": false } },
+			"shaders/stddev5": { "path": "shaders/downscale", "samplers": [{"name": "tex", "image": "ms5"}], "state": { "blend": "off", "backfaces": true, "colorwrite": true, "ztest": false, "zwrite": false } },
+			"shaders/stddev6": { "path": "shaders/downscale", "samplers": [{"name": "tex", "image": "ms6"}], "state": { "blend": "off", "backfaces": true, "colorwrite": true, "ztest": false, "zwrite": false } },
+			"shaders/stddev7": { "path": "shaders/downscale", "samplers": [{"name": "tex", "image": "ms7"}], "state": { "blend": "off", "backfaces": true, "colorwrite": true, "ztest": false, "zwrite": false } },
+
+			"shaders/face_tex": 
+			{
+				"samplers": 
+				[
+					{ "name": "tex0", "image": "consiler_contour_highlighter_blush_tex" },
+					{ "name": "tex1", "image": "shadows_eyeliner_tex" },
+					{ "name": "mask", "image": "skin_brows_lips_nn" },
+					{ "name": "face", "image": "face_nn" }
+				],
+				"state": { "blend": "off", "backfaces": false, "colorwrite": true, "ztest": true, "zwrite": true }
+			},
+
+			"shaders/foundation/blur_hsv": 
+			{
+				"path": "shaders/blur_hsv",
+				"samplers": 
+				[
+					{ "name": "tex_input", "image": "camera" },
+					{ "name": "tex_mask",  "image": "skin_brows_lips_nn" }
+				],
+				"state": { "blend": "off", "backfaces": true, "colorwrite": true, "ztest": false, "zwrite": false }
+			},
+			"shaders/foundation/tone": 
+			{
+				"path": "shaders/tone",
+				"samplers": 
+				[
+					{ "name": "tex_input",    "image": "camera" },
+					{ "name": "tex_blur_hsv", "image": "blur_hsv" },
+					{ "name": "tex_mean",     "image": "mean8" },
+					{ "name": "tex_stddev",   "image": "stddev8" },
+					{ "name": "tex_mask",     "image": "skin_brows_lips_nn" }
+				],
+				"state": { "blend": "off", "backfaces": true, "colorwrite": true, "ztest": false, "zwrite": false },
+				"parameters": 
+				{
+					"foundation_abcd":     { "type": "vec4", "value": [1, 0, 1, 0] },
+					"foundation_krp":      { "type": "vec4", "value": [0.5, 1, -1, 0] },
+					"foundation_rgb_maxa": { "type": "vec4", "value": [0.6, 0.36, 0.21, 1] }
+				}
+			},
+			"shaders/concealer/blur_hsv": 
+			{
+				"path": "shaders/blur_hsv",
+				"samplers": 
+				[
+					{ "name": "tex_input", "image": "tone0" },
+					{ "name": "tex_mask",  "image": "consiler_contour_highlighter_blush_tex_c" }
+				],
+				"state": { "blend": "off", "backfaces": true, "colorwrite": true, "ztest": false, "zwrite": false }
+			},
+			"shaders/concealer/tone": 
+			{
+				"path": "shaders/tone",
+				"samplers": 
+				[
+					{ "name": "tex_input",    "image": "tone0" },
+					{ "name": "tex_blur_hsv", "image": "blur_hsv" },
+					{ "name": "tex_mean",     "image": "mean8" },
+					{ "name": "tex_stddev",   "image": "stddev8" },
+					{ "name": "tex_mask",     "image": "consiler_contour_highlighter_blush_tex_c" }
+				],
+				"state": { "blend": "off", "backfaces": true, "colorwrite": true, "ztest": false, "zwrite": false },
+				"parameters": 
+				{
+					"concealer_abcd":     { "type": "vec4", "value": [1, 0, 1, 0] },
+					"concealer_krp":      { "type": "vec4", "value": [0.5, 0, 0, 0] },
+					"concealer_rgb_maxa": { "type": "vec4", "value": [0.06, 0.024, 0.015, 0.64314] }
+				}
+			},
+			"shaders/contour/blur_hsv": 
+			{
+				"path": "shaders/blur_hsv",
+				"samplers": 
+				[
+					{ "name": "tex_input", "image": "tone1" },
+					{ "name": "tex_mask",  "image": "consiler_contour_highlighter_blush_tex_c" }
+				],
+				"state": { "blend": "off", "backfaces": true, "colorwrite": true, "ztest": false, "zwrite": false }
+			},
+			"shaders/contour/tone": 
+			{
+				"path": "shaders/tone",
+				"samplers": 
+				[
+					{ "name": "tex_input",    "image": "tone1" },
+					{ "name": "tex_blur_hsv", "image": "blur_hsv" },
+					{ "name": "tex_mean",     "image": "mean8" },
+					{ "name": "tex_stddev",   "image": "stddev8" },
+					{ "name": "tex_mask",     "image": "consiler_contour_highlighter_blush_tex_c" }
+				],
+				"state": { "blend": "off", "backfaces": true, "colorwrite": true, "ztest": false, "zwrite": false },
+				"parameters": 
+				{
+					"contour_abcd":     { "type": "vec4", "value": [1, 0, 1, 0] },
+					"contour_krp":      { "type": "vec4", "value": [0.5, 0, 0, 0] },
+					"contour_rgb_maxa": { "type": "vec4", "value": [0.86, 0.70, 0.64, 1] }
+				}
+			},
+			"shaders/highlighter/blur_hsv": 
+			{
+				"path": "shaders/blur_hsv",
+				"samplers": 
+				[
+					{ "name": "tex_input", "image": "tone0" },
+					{ "name": "tex_mask",  "image": "consiler_contour_highlighter_blush_tex_c" }
+				],
+				"state": { "blend": "off", "backfaces": true, "colorwrite": true, "ztest": false, "zwrite": false }
+			},
+			"shaders/highlighter/tone": 
+			{
+				"path": "shaders/tone",
+				"samplers": 
+				[
+					{ "name": "tex_input",    "image": "tone0" },
+					{ "name": "tex_blur_hsv", "image": "blur_hsv" },
+					{ "name": "tex_mean",     "image": "mean8" },
+					{ "name": "tex_stddev",   "image": "stddev8" },
+					{ "name": "tex_mask",     "image": "consiler_contour_highlighter_blush_tex_c" }
+				],
+				"state": { "blend": "off", "backfaces": true, "colorwrite": true, "ztest": false, "zwrite": false },
+				"parameters": 
+				{
+					"highlighter_abcd":     { "type": "vec4", "value": [1, 0, 1, 0] },
+					"highlighter_krp":      { "type": "vec4", "value": [0.5, 0, 0, 0] },
+					"highlighter_rgb_maxa": { "type": "vec4", "value": [0.94, 0.85, 0.65, 0.83529] }
+				}
+			},
+			"shaders/blush/blur_hsv": 
+			{
+				"path": "shaders/blur_hsv",
+				"samplers": 
+				[
+					{ "name": "tex_input", "image": "tone1" },
+					{ "name": "tex_mask",  "image": "consiler_contour_highlighter_blush_tex_c" }
+				],
+				"state": { "blend": "off", "backfaces": true, "colorwrite": true, "ztest": false, "zwrite": false }
+			},
+			"shaders/blush/tone": 
+			{
+				"path": "shaders/tone",
+				"samplers": 
+				[
+					{ "name": "tex_input",    "image": "tone1" },
+					{ "name": "tex_blur_hsv", "image": "blur_hsv" },
+					{ "name": "tex_mean",     "image": "mean8" },
+					{ "name": "tex_stddev",   "image": "stddev8" },
+					{ "name": "tex_mask",     "image": "consiler_contour_highlighter_blush_tex_c" }
+				],
+				"state": { "blend": "off", "backfaces": true, "colorwrite": true, "ztest": false, "zwrite": false },
+				"parameters": 
+				{
+					"blush_abcd":     { "type": "vec4", "value": [1, 0, 1, 0] },
+					"blush_krp":      { "type": "vec4", "value": [0.5, 1, -1, 0] },
+					"blush_rgb_maxa": { "type": "vec4", "value": [0.29, 0.059, 0.059, 0.51373] }
+				}
+			},
+			"shaders/lipstick/blur_hsv": 
+			{
+				"path": "shaders/blur_hsv",
+				"samplers": 
+				[
+					{ "name": "tex_input", "image": "tone0" },
+					{ "name": "tex_mask",  "image": "skin_brows_lips_nn" }
+				],
+				"state": { "blend": "off", "backfaces": true, "colorwrite": true, "ztest": false, "zwrite": false }
+			},
+			"shaders/lipstick/tone": 
+			{
+				"path": "shaders/tone",
+				"samplers": 
+				[
+					{ "name": "tex_input",    "image": "tone0" },
+					{ "name": "tex_blur_hsv", "image": "blur_hsv" },
+					{ "name": "tex_mean",     "image": "mean8" },
+					{ "name": "tex_stddev",   "image": "stddev8" },
+					{ "name": "tex_mask",     "image": "skin_brows_lips_nn" }
+				],
+				"state": { "blend": "off", "backfaces": true, "colorwrite": true, "ztest": false, "zwrite": false },
+				"parameters": 
+				{
+					"lipstick_abcd":     { "type": "vec4", "value": [1.3, 0, 1.2, 0] },
+					"lipstick_krp":      { "type": "vec4", "value": [0.5, 2, -1, 0] },
+					"lipstick_rgb_maxa": { "type": "vec4", "value": [0.3, 0.09, 0.12, 1] }
+				}
+			},
+			"shaders/lipsliner/blur_hsv": 
+			{
+				"path": "shaders/blur_hsv",
+				"samplers": 
+				[
+					{ "name": "tex_input", "image": "tone1" },
+					{ "name": "tex_mask",  "image": "skin_brows_lips_nn" }
+				],
+				"state": { "blend": "off", "backfaces": true, "colorwrite": true, "ztest": false, "zwrite": false }
+			},
+			"shaders/lipsliner/tone": 
+			{
+				"path": "shaders/tone",
+				"samplers": 
+				[
+					{ "name": "tex_input",    "image": "tone1" },
+					{ "name": "tex_blur_hsv", "image": "blur_hsv" },
+					{ "name": "tex_mean",     "image": "mean8" },
+					{ "name": "tex_stddev",   "image": "stddev8" },
+					{ "name": "tex_mask",     "image": "skin_brows_lips_nn" }
+				],
+				"state": { "blend": "off", "backfaces": true, "colorwrite": true, "ztest": false, "zwrite": false },
+				"parameters": 
+				{
+					"lipsliner_abcd":     { "type": "vec4", "value": [1.3, 0, 1.2, 0] },
+					"lipsliner_krp":      { "type": "vec4", "value": [0.5, 2, -1, 0] },
+					"lipsliner_rgb_maxa": { "type": "vec4", "value": [0.3, 0.09, 0.12, 1] }
+				}
+			},
+			"shaders/eyeshadow0/blur_hsv": 
+			{
+				"path": "shaders/blur_hsv",
+				"samplers": 
+				[
+					{ "name": "tex_input", "image": "tone0" },
+					{ "name": "tex_mask",  "image": "shadows_eyeliner_tex_c" }
+				],
+				"state": { "blend": "off", "backfaces": true, "colorwrite": true, "ztest": false, "zwrite": false }
+			},
+			"shaders/eyeshadow0/tone": 
+			{
+				"path": "shaders/tone",
+				"samplers": 
+				[
+					{ "name": "tex_input",    "image": "tone0" },
+					{ "name": "tex_blur_hsv", "image": "blur_hsv" },
+					{ "name": "tex_mean",     "image": "mean8" },
+					{ "name": "tex_stddev",   "image": "stddev8" },
+					{ "name": "tex_mask",     "image": "shadows_eyeliner_tex_c" }
+				],
+				"state": { "blend": "off", "backfaces": true, "colorwrite": true, "ztest": false, "zwrite": false },
+				"parameters": 
+				{
+					"eyeshadow0_abcd":     { "type": "vec4", "value": [1, 0, 1, 0] },
+					"eyeshadow0_krp":      { "type": "vec4", "value": [1, 1, -1, 0] },
+					"eyeshadow0_rgb_maxa": { "type": "vec4", "value": [0.24, 0.05, 0.16, 0.8] }
+				}
+			},
+			"shaders/eyeshadow1/blur_hsv": 
+			{
+				"path": "shaders/blur_hsv",
+				"samplers": 
+				[
+					{ "name": "tex_input", "image": "tone1" },
+					{ "name": "tex_mask",  "image": "shadows_eyeliner_tex_c" }
+				],
+				"state": { "blend": "off", "backfaces": true, "colorwrite": true, "ztest": false, "zwrite": false }
+			},
+			"shaders/eyeshadow1/tone": 
+			{
+				"path": "shaders/tone",
+				"samplers": 
+				[
+					{ "name": "tex_input",    "image": "tone1" },
+					{ "name": "tex_blur_hsv", "image": "blur_hsv" },
+					{ "name": "tex_mean",     "image": "mean8" },
+					{ "name": "tex_stddev",   "image": "stddev8" },
+					{ "name": "tex_mask",     "image": "shadows_eyeliner_tex_c" }
+				],
+				"state": { "blend": "off", "backfaces": true, "colorwrite": true, "ztest": false, "zwrite": false },
+				"parameters": 
+				{
+					"eyeshadow1_abcd":     { "type": "vec4", "value": [1, 0, 1, 0] },
+					"eyeshadow1_krp":      { "type": "vec4", "value": [1, 1, -1, 0] },
+					"eyeshadow1_rgb_maxa": { "type": "vec4", "value": [0.37, 0.26, 0.21, 1] }
+				}
+			},
+			"shaders/eyeshadow2/blur_hsv": 
+			{
+				"path": "shaders/blur_hsv",
+				"samplers": 
+				[
+					{ "name": "tex_input", "image": "tone0" },
+					{ "name": "tex_mask",  "image": "shadows_eyeliner_tex_c" }
+				],
+				"state": { "blend": "off", "backfaces": true, "colorwrite": true, "ztest": false, "zwrite": false }
+			},
+			"shaders/eyeshadow2/tone": 
+			{
+				"path": "shaders/tone",
+				"samplers": 
+				[
+					{ "name": "tex_input",    "image": "tone0" },
+					{ "name": "tex_blur_hsv", "image": "blur_hsv" },
+					{ "name": "tex_mean",     "image": "mean8" },
+					{ "name": "tex_stddev",   "image": "stddev8" },
+					{ "name": "tex_mask",     "image": "shadows_eyeliner_tex_c" }
+				],
+				"state": { "blend": "off", "backfaces": true, "colorwrite": true, "ztest": false, "zwrite": false },
+				"parameters": 
+				{
+					"eyeshadow2_abcd":     { "type": "vec4", "value": [1, 0, 1, 0] },
+					"eyeshadow2_krp":      { "type": "vec4", "value": [1, 1, -1, 0] },
+					"eyeshadow2_rgb_maxa": { "type": "vec4", "value": [0.77, 0.78, 0.73, 0.7451] }
+				}
+			},
+			"shaders/eyeliner/blur_hsv": 
+			{
+				"path": "shaders/blur_hsv",
+				"samplers": 
+				[
+					{ "name": "tex_input", "image": "tone1" },
+					{ "name": "tex_mask",  "image": "shadows_eyeliner_tex_c" }
+				],
+				"state": { "blend": "off", "backfaces": true, "colorwrite": true, "ztest": false, "zwrite": false }
+			},
+			"shaders/eyeliner/tone": 
+			{
+				"path": "shaders/tone",
+				"samplers": 
+				[
+					{ "name": "tex_input",    "image": "tone1" },
+					{ "name": "tex_blur_hsv", "image": "blur_hsv" },
+					{ "name": "tex_mean",     "image": "mean8" },
+					{ "name": "tex_stddev",   "image": "stddev8" },
+					{ "name": "tex_mask",     "image": "shadows_eyeliner_tex_c" }
+				],
+				"state": { "blend": "off", "backfaces": true, "colorwrite": true, "ztest": false, "zwrite": false },
+				"parameters": 
+				{
+					"eyeliner_abcd":     { "type": "vec4", "value": [1, 0, 0.2, 0] },
+					"eyeliner_krp":      { "type": "vec4", "value": [1, 1, -1, 0] },
+					"eyeliner_rgb_maxa": { "type": "vec4", "value": [0.43, 0.37, 0.81, 0.88235] }
+				}
+			},
+			"shaders/eyebrows/blur_hsv": 
+			{
+				"path": "shaders/blur_hsv",
+				"samplers": 
+				[
+					{ "name": "tex_input", "image": "tone0" },
+					{ "name": "tex_mask",  "image": "skin_brows_lips_nn" }
+				],
+				"state": { "blend": "off", "backfaces": true, "colorwrite": true, "ztest": false, "zwrite": false }
+			},
+			"shaders/eyebrows/tone": 
+			{
+				"path": "shaders/tone",
+				"samplers": 
+				[
+					{ "name": "tex_input",    "image": "tone0" },
+					{ "name": "tex_blur_hsv", "image": "blur_hsv" },
+					{ "name": "tex_mean",     "image": "mean8" },
+					{ "name": "tex_stddev",   "image": "stddev8" },
+					{ "name": "tex_mask",     "image": "skin_brows_lips_nn" }
+				],
+				"state": { "blend": "off", "backfaces": true, "colorwrite": true, "ztest": false, "zwrite": false },
+				"parameters": 
+				{
+					"eyebrows_abcd":     { "type": "vec4", "value": [2, 0, 1, 0] },
+					"eyebrows_krp":      { "type": "vec4", "value": [0.2, 2, -1, 0] },
+					"eyebrows_rgb_maxa": { "type": "vec4", "value": [0.005, 0.005, 0.005, 1] }
+				}
+			},
+			"shaders/eyelashes/tone": 
+			{
+				"samplers": 
+				[
+					{ "name": "tex_mask", "image": "eyelashes_tex" }
+				],
+				"state": { "blend": "alpha", "backfaces": true, "colorwrite": true, "ztest": true, "zwrite": true },
+				"parameters": 
+				{
+					"eyelashes_abcd":     { "type": "vec4", "value": [2, 0, 1, 0] },
+					"eyelashes_krp":      { "type": "vec4", "value": [0.2, 2, -1, 0] },
+					"eyelashes_rgb_maxa": { "type": "vec4", "value": [0.005, 0.005, 0.005, 1] },
+					"eyelashes_len_coef": { "type": "vec4", "value": [1.3, 0, 0, 0] }
+				}
+			}
+		},
+		"faces": 
+		{ 
+			"face0": { "index": 0, "mesh": "!bnb_FACE" } 
+		},
+		"meshes": 
+		{
+			"fs_tri": "$builtin$meshes/fs_tri",
+			"!bnb_FACE": "$builtin$meshes/face.stream:0",
+			"!bnb_BEAUTY_FACE": "$builtin$meshes/beauty_corrected_face.stream:0",
+			"!bnb_LIPS_MORPH": "$builtin$meshes/lips_morph"
+		},
+		"morphs": {
+			"lips_morphing": {
+					"type": "lips",
+					"mesh": "!bnb_LIPS_MORPH"
+			}
+		}
+	},
+	"components": 
+	{
+		"face_tracker:0": { "face": "face0", "type": "face_tracker" },
+		"lips_morphing": { "type": "face_morphing", "morph": "lips_morphing", "weight": 0 }
+	},
+	"entities": 
+	{
+		"liner0_ent": { "components": { "mesh_instance" : { "materials": ["shaders/lipsliner/liner0"], "mesh": "fs_tri" } }, "layer": "liner0_layer" },
+		"liner1_ent": { "components": { "mesh_instance" : { "materials": ["shaders/lipsliner/liner1"], "mesh": "fs_tri" } }, "layer": "liner1_layer" },
+		"liner2_ent": { "components": { "mesh_instance" : { "materials": ["shaders/lipsliner/liner2"], "mesh": "fs_tri" } }, "layer": "liner2_layer" },
+
+		"fake_skin_nn_face_ent": { "components": { "mesh_instance" : {"materials": ["shaders/fake_skin_eyes_lips"], "mesh": "!bnb_FACE"} },   "layer": "nn_face_layer" },
+		"nn_combine_ent": { "components": { "mesh_instance" : { "materials": ["shaders/nn_combine"], "mesh": "fs_tri" } }, "layer": "nn_combine_layer" },
+
+		"face_tracker0": { "components": [ "face_tracker:0" ] },
+
+		"lips_morphing": { "components": ["lips_morphing"], "layer": "lips_morphing" },
+
+		"face_tex_ent": { "components": { "mesh_instance" : {"materials": ["shaders/face_tex"], "mesh": "!bnb_BEAUTY_FACE"} }, "layer": "face_tex_layer" },
+
+		"foundation_ent": { 
+			"components": { "mesh_instance" : {
+				"materials":[
+					"shaders/foundation/blur_hsv",
+					"shaders/mean",
+					"shaders/mean0",
+					"shaders/mean1",
+					"shaders/mean2",
+					"shaders/mean3",
+					"shaders/mean4",
+					"shaders/mean5",
+					"shaders/mean6",
+					"shaders/mean7",
+					"shaders/stddev",
+					"shaders/stddev0",
+					"shaders/stddev1",
+					"shaders/stddev2",
+					"shaders/stddev3",
+					"shaders/stddev4",
+					"shaders/stddev5",
+					"shaders/stddev6",
+					"shaders/stddev7",
+					"shaders/foundation/tone"
+				],
+				"mesh": "meshes/foundation.bsm2"} }, 
+			"layers": [
+				"foundation_blur_hsv_layer",
+				"foundation_mean_layer",
+				"foundation_mean0_layer",
+				"foundation_mean1_layer",
+				"foundation_mean2_layer",
+				"foundation_mean3_layer",
+				"foundation_mean4_layer",
+				"foundation_mean5_layer",
+				"foundation_mean6_layer",
+				"foundation_mean7_layer",
+				"foundation_stddev_layer",
+				"foundation_stddev0_layer",
+				"foundation_stddev1_layer",
+				"foundation_stddev2_layer",
+				"foundation_stddev3_layer",
+				"foundation_stddev4_layer",
+				"foundation_stddev5_layer",
+				"foundation_stddev6_layer",
+				"foundation_stddev7_layer",
+				"foundation_tone_layer"
+			] },
+		"concealer_ent": { 
+			"components": { "mesh_instance" : {
+				"materials":[
+					"shaders/concealer/blur_hsv",
+					"shaders/mean",
+					"shaders/mean0",
+					"shaders/mean1",
+					"shaders/mean2",
+					"shaders/mean3",
+					"shaders/mean4",
+					"shaders/mean5",
+					"shaders/mean6",
+					"shaders/mean7",
+					"shaders/stddev",
+					"shaders/stddev0",
+					"shaders/stddev1",
+					"shaders/stddev2",
+					"shaders/stddev3",
+					"shaders/stddev4",
+					"shaders/stddev5",
+					"shaders/stddev6",
+					"shaders/stddev7",
+					"shaders/concealer/tone"
+				],
+			"mesh": "meshes/concealer.bsm2"} }, 
+			"layers": [
+				"concealer_blur_hsv_layer",
+				"concealer_mean_layer",
+				"concealer_mean0_layer",
+				"concealer_mean1_layer",
+				"concealer_mean2_layer",
+				"concealer_mean3_layer",
+				"concealer_mean4_layer",
+				"concealer_mean5_layer",
+				"concealer_mean6_layer",
+				"concealer_mean7_layer",
+				"concealer_stddev_layer",
+				"concealer_stddev0_layer",
+				"concealer_stddev1_layer",
+				"concealer_stddev2_layer",
+				"concealer_stddev3_layer",
+				"concealer_stddev4_layer",
+				"concealer_stddev5_layer",
+				"concealer_stddev6_layer",
+				"concealer_stddev7_layer",
+				"concealer_tone_layer"
+			] },
+		"contour_ent": { 
+			"components": { "mesh_instance" : {
+			"materials":[
+					"shaders/contour/blur_hsv",
+					"shaders/mean",
+					"shaders/mean0",
+					"shaders/mean1",
+					"shaders/mean2",
+					"shaders/mean3",
+					"shaders/mean4",
+					"shaders/mean5",
+					"shaders/mean6",
+					"shaders/mean7",
+					"shaders/stddev",
+					"shaders/stddev0",
+					"shaders/stddev1",
+					"shaders/stddev2",
+					"shaders/stddev3",
+					"shaders/stddev4",
+					"shaders/stddev5",
+					"shaders/stddev6",
+					"shaders/stddev7",
+					"shaders/contour/tone"
+				],
+			"mesh": "meshes/contour.bsm2"} }, 
+			"layers": [
+				"contour_blur_hsv_layer",
+				"contour_mean_layer",
+				"contour_mean0_layer",
+				"contour_mean1_layer",
+				"contour_mean2_layer",
+				"contour_mean3_layer",
+				"contour_mean4_layer",
+				"contour_mean5_layer",
+				"contour_mean6_layer",
+				"contour_mean7_layer",
+				"contour_stddev_layer",
+				"contour_stddev0_layer",
+				"contour_stddev1_layer",
+				"contour_stddev2_layer",
+				"contour_stddev3_layer",
+				"contour_stddev4_layer",
+				"contour_stddev5_layer",
+				"contour_stddev6_layer",
+				"contour_stddev7_layer",
+				"contour_tone_layer"
+			] },
+		"highlighter_ent": { 
+			"components": { "mesh_instance" : {
+				"materials":[
+					"shaders/highlighter/blur_hsv",
+					"shaders/mean",
+					"shaders/mean0",
+					"shaders/mean1",
+					"shaders/mean2",
+					"shaders/mean3",
+					"shaders/mean4",
+					"shaders/mean5",
+					"shaders/mean6",
+					"shaders/mean7",
+					"shaders/stddev",
+					"shaders/stddev0",
+					"shaders/stddev1",
+					"shaders/stddev2",
+					"shaders/stddev3",
+					"shaders/stddev4",
+					"shaders/stddev5",
+					"shaders/stddev6",
+					"shaders/stddev7",
+					"shaders/highlighter/tone"
+				],
+			"mesh": "meshes/highlighter.bsm2"} }, 
+			"layers": [
+				"highlighter_blur_hsv_layer",
+				"highlighter_mean_layer",
+				"highlighter_mean0_layer",
+				"highlighter_mean1_layer",
+				"highlighter_mean2_layer",
+				"highlighter_mean3_layer",
+				"highlighter_mean4_layer",
+				"highlighter_mean5_layer",
+				"highlighter_mean6_layer",
+				"highlighter_mean7_layer",
+				"highlighter_stddev_layer",
+				"highlighter_stddev0_layer",
+				"highlighter_stddev1_layer",
+				"highlighter_stddev2_layer",
+				"highlighter_stddev3_layer",
+				"highlighter_stddev4_layer",
+				"highlighter_stddev5_layer",
+				"highlighter_stddev6_layer",
+				"highlighter_stddev7_layer",
+				"highlighter_tone_layer"
+			] },
+		"blush_ent": { 
+			"components": { "mesh_instance" : {
+				"materials":[
+					"shaders/blush/blur_hsv",
+					"shaders/mean",
+					"shaders/mean0",
+					"shaders/mean1",
+					"shaders/mean2",
+					"shaders/mean3",
+					"shaders/mean4",
+					"shaders/mean5",
+					"shaders/mean6",
+					"shaders/mean7",
+					"shaders/stddev",
+					"shaders/stddev0",
+					"shaders/stddev1",
+					"shaders/stddev2",
+					"shaders/stddev3",
+					"shaders/stddev4",
+					"shaders/stddev5",
+					"shaders/stddev6",
+					"shaders/stddev7",
+					"shaders/blush/tone"
+				],
+				"mesh": "meshes/blush.bsm2"} }, 
+			"layers": [
+				"blush_blur_hsv_layer",
+				"blush_mean_layer",
+				"blush_mean0_layer",
+				"blush_mean1_layer",
+				"blush_mean2_layer",
+				"blush_mean3_layer",
+				"blush_mean4_layer",
+				"blush_mean5_layer",
+				"blush_mean6_layer",
+				"blush_mean7_layer",
+				"blush_stddev_layer",
+				"blush_stddev0_layer",
+				"blush_stddev1_layer",
+				"blush_stddev2_layer",
+				"blush_stddev3_layer",
+				"blush_stddev4_layer",
+				"blush_stddev5_layer",
+				"blush_stddev6_layer",
+				"blush_stddev7_layer",
+				"blush_tone_layer"
+			] },
+		"lipstick_ent": { 
+			"components": { "mesh_instance" : {
+				"materials":[
+					"shaders/lipstick/blur_hsv",
+					"shaders/mean",
+					"shaders/mean0",
+					"shaders/mean1",
+					"shaders/mean2",
+					"shaders/mean3",
+					"shaders/mean4",
+					"shaders/mean5",
+					"shaders/mean6",
+					"shaders/mean7",
+					"shaders/stddev",
+					"shaders/stddev0",
+					"shaders/stddev1",
+					"shaders/stddev2",
+					"shaders/stddev3",
+					"shaders/stddev4",
+					"shaders/stddev5",
+					"shaders/stddev6",
+					"shaders/stddev7",
+					"shaders/lipstick/tone"
+				],
+				"mesh": "meshes/lipstick.bsm2"} }, 
+			"layers": [
+				"lipstick_blur_hsv_layer",
+				"lipstick_mean_layer",
+				"lipstick_mean0_layer",
+				"lipstick_mean1_layer",
+				"lipstick_mean2_layer",
+				"lipstick_mean3_layer",
+				"lipstick_mean4_layer",
+				"lipstick_mean5_layer",
+				"lipstick_mean6_layer",
+				"lipstick_mean7_layer",
+				"lipstick_stddev_layer",
+				"lipstick_stddev0_layer",
+				"lipstick_stddev1_layer",
+				"lipstick_stddev2_layer",
+				"lipstick_stddev3_layer",
+				"lipstick_stddev4_layer",
+				"lipstick_stddev5_layer",
+				"lipstick_stddev6_layer",
+				"lipstick_stddev7_layer",
+				"lipstick_tone_layer"
+			] },
+		"lipsliner_ent": { 
+			"components": { "mesh_instance" : {
+				"materials":[
+					"shaders/lipsliner/blur_hsv",
+					"shaders/mean",
+					"shaders/mean0",
+					"shaders/mean1",
+					"shaders/mean2",
+					"shaders/mean3",
+					"shaders/mean4",
+					"shaders/mean5",
+					"shaders/mean6",
+					"shaders/mean7",
+					"shaders/stddev",
+					"shaders/stddev0",
+					"shaders/stddev1",
+					"shaders/stddev2",
+					"shaders/stddev3",
+					"shaders/stddev4",
+					"shaders/stddev5",
+					"shaders/stddev6",
+					"shaders/stddev7",
+					"shaders/lipsliner/tone"
+				],
+				"mesh": "meshes/lipsliner.bsm2"} }, 
+			"layers": [
+				"lipsliner_blur_hsv_layer",
+				"lipsliner_mean_layer",
+				"lipsliner_mean0_layer",
+				"lipsliner_mean1_layer",
+				"lipsliner_mean2_layer",
+				"lipsliner_mean3_layer",
+				"lipsliner_mean4_layer",
+				"lipsliner_mean5_layer",
+				"lipsliner_mean6_layer",
+				"lipsliner_mean7_layer",
+				"lipsliner_stddev_layer",
+				"lipsliner_stddev0_layer",
+				"lipsliner_stddev1_layer",
+				"lipsliner_stddev2_layer",
+				"lipsliner_stddev3_layer",
+				"lipsliner_stddev4_layer",
+				"lipsliner_stddev5_layer",
+				"lipsliner_stddev6_layer",
+				"lipsliner_stddev7_layer",
+				"lipsliner_tone_layer"
+			] },
+		"eyeshadow0_ent": { 
+			"components": { "mesh_instance" : {
+				"materials":[
+					"shaders/eyeshadow0/blur_hsv",
+					"shaders/mean",
+					"shaders/mean0",
+					"shaders/mean1",
+					"shaders/mean2",
+					"shaders/mean3",
+					"shaders/mean4",
+					"shaders/mean5",
+					"shaders/mean6",
+					"shaders/mean7",
+					"shaders/stddev",
+					"shaders/stddev0",
+					"shaders/stddev1",
+					"shaders/stddev2",
+					"shaders/stddev3",
+					"shaders/stddev4",
+					"shaders/stddev5",
+					"shaders/stddev6",
+					"shaders/stddev7",
+					"shaders/eyeshadow0/tone"
+				],
+				"mesh": "meshes/eyeshadow0.bsm2"} }, 
+			"layers": [
+				"eyeshadow0_blur_hsv_layer",
+				"eyeshadow0_mean_layer",
+				"eyeshadow0_mean0_layer",
+				"eyeshadow0_mean1_layer",
+				"eyeshadow0_mean2_layer",
+				"eyeshadow0_mean3_layer",
+				"eyeshadow0_mean4_layer",
+				"eyeshadow0_mean5_layer",
+				"eyeshadow0_mean6_layer",
+				"eyeshadow0_mean7_layer",
+				"eyeshadow0_stddev_layer",
+				"eyeshadow0_stddev0_layer",
+				"eyeshadow0_stddev1_layer",
+				"eyeshadow0_stddev2_layer",
+				"eyeshadow0_stddev3_layer",
+				"eyeshadow0_stddev4_layer",
+				"eyeshadow0_stddev5_layer",
+				"eyeshadow0_stddev6_layer",
+				"eyeshadow0_stddev7_layer",
+				"eyeshadow0_tone_layer"
+			] },
+		"eyeshadow1_ent": { 
+			"components": { "mesh_instance" : {
+				"materials":[
+					"shaders/eyeshadow1/blur_hsv",
+					"shaders/mean",
+					"shaders/mean0",
+					"shaders/mean1",
+					"shaders/mean2",
+					"shaders/mean3",
+					"shaders/mean4",
+					"shaders/mean5",
+					"shaders/mean6",
+					"shaders/mean7",
+					"shaders/stddev",
+					"shaders/stddev0",
+					"shaders/stddev1",
+					"shaders/stddev2",
+					"shaders/stddev3",
+					"shaders/stddev4",
+					"shaders/stddev5",
+					"shaders/stddev6",
+					"shaders/stddev7",
+					"shaders/eyeshadow1/tone"
+				],
+				"mesh": "meshes/eyeshadow1.bsm2"} }, 
+			"layers": [
+				"eyeshadow1_blur_hsv_layer",
+				"eyeshadow1_mean_layer",
+				"eyeshadow1_mean0_layer",
+				"eyeshadow1_mean1_layer",
+				"eyeshadow1_mean2_layer",
+				"eyeshadow1_mean3_layer",
+				"eyeshadow1_mean4_layer",
+				"eyeshadow1_mean5_layer",
+				"eyeshadow1_mean6_layer",
+				"eyeshadow1_mean7_layer",
+				"eyeshadow1_stddev_layer",
+				"eyeshadow1_stddev0_layer",
+				"eyeshadow1_stddev1_layer",
+				"eyeshadow1_stddev2_layer",
+				"eyeshadow1_stddev3_layer",
+				"eyeshadow1_stddev4_layer",
+				"eyeshadow1_stddev5_layer",
+				"eyeshadow1_stddev6_layer",
+				"eyeshadow1_stddev7_layer",
+				"eyeshadow1_tone_layer"
+			] },
+		"eyeshadow2_ent": { 
+			"components": { "mesh_instance" : {
+				"materials":[
+					"shaders/eyeshadow2/blur_hsv",
+					"shaders/mean",
+					"shaders/mean0",
+					"shaders/mean1",
+					"shaders/mean2",
+					"shaders/mean3",
+					"shaders/mean4",
+					"shaders/mean5",
+					"shaders/mean6",
+					"shaders/mean7",
+					"shaders/stddev",
+					"shaders/stddev0",
+					"shaders/stddev1",
+					"shaders/stddev2",
+					"shaders/stddev3",
+					"shaders/stddev4",
+					"shaders/stddev5",
+					"shaders/stddev6",
+					"shaders/stddev7",
+					"shaders/eyeshadow2/tone"
+				],
+				"mesh": "meshes/eyeshadow2.bsm2"} }, 
+			"layers": [
+				"eyeshadow2_blur_hsv_layer",
+				"eyeshadow2_mean_layer",
+				"eyeshadow2_mean0_layer",
+				"eyeshadow2_mean1_layer",
+				"eyeshadow2_mean2_layer",
+				"eyeshadow2_mean3_layer",
+				"eyeshadow2_mean4_layer",
+				"eyeshadow2_mean5_layer",
+				"eyeshadow2_mean6_layer",
+				"eyeshadow2_mean7_layer",
+				"eyeshadow2_stddev_layer",
+				"eyeshadow2_stddev0_layer",
+				"eyeshadow2_stddev1_layer",
+				"eyeshadow2_stddev2_layer",
+				"eyeshadow2_stddev3_layer",
+				"eyeshadow2_stddev4_layer",
+				"eyeshadow2_stddev5_layer",
+				"eyeshadow2_stddev6_layer",
+				"eyeshadow2_stddev7_layer",
+				"eyeshadow2_tone_layer"
+			] },
+		"eyeliner_ent": { 
+			"components": { "mesh_instance" : {
+				"materials":[
+					"shaders/eyeliner/blur_hsv",
+					"shaders/mean",
+					"shaders/mean0",
+					"shaders/mean1",
+					"shaders/mean2",
+					"shaders/mean3",
+					"shaders/mean4",
+					"shaders/mean5",
+					"shaders/mean6",
+					"shaders/mean7",
+					"shaders/stddev",
+					"shaders/stddev0",
+					"shaders/stddev1",
+					"shaders/stddev2",
+					"shaders/stddev3",
+					"shaders/stddev4",
+					"shaders/stddev5",
+					"shaders/stddev6",
+					"shaders/stddev7",
+					"shaders/eyeliner/tone"
+				],
+				"mesh": "meshes/eyeliner.bsm2"} }, 
+			"layers": [
+				"eyeliner_blur_hsv_layer",
+				"eyeliner_mean_layer",
+				"eyeliner_mean0_layer",
+				"eyeliner_mean1_layer",
+				"eyeliner_mean2_layer",
+				"eyeliner_mean3_layer",
+				"eyeliner_mean4_layer",
+				"eyeliner_mean5_layer",
+				"eyeliner_mean6_layer",
+				"eyeliner_mean7_layer",
+				"eyeliner_stddev_layer",
+				"eyeliner_stddev0_layer",
+				"eyeliner_stddev1_layer",
+				"eyeliner_stddev2_layer",
+				"eyeliner_stddev3_layer",
+				"eyeliner_stddev4_layer",
+				"eyeliner_stddev5_layer",
+				"eyeliner_stddev6_layer",
+				"eyeliner_stddev7_layer",
+				"eyeliner_tone_layer"
+			] },
+		"eyebrows_ent": { 
+			"components": { "mesh_instance" : {
+				"materials":[
+					"shaders/eyebrows/blur_hsv",
+					"shaders/mean",
+					"shaders/mean0",
+					"shaders/mean1",
+					"shaders/mean2",
+					"shaders/mean3",
+					"shaders/mean4",
+					"shaders/mean5",
+					"shaders/mean6",
+					"shaders/mean7",
+					"shaders/stddev",
+					"shaders/stddev0",
+					"shaders/stddev1",
+					"shaders/stddev2",
+					"shaders/stddev3",
+					"shaders/stddev4",
+					"shaders/stddev5",
+					"shaders/stddev6",
+					"shaders/stddev7",
+					"shaders/eyebrows/tone"
+				],
+				"mesh": "meshes/eyebrows.bsm2"} }, 
+			"layers": [
+				"eyebrows_blur_hsv_layer",
+				"eyebrows_mean_layer",
+				"eyebrows_mean0_layer",
+				"eyebrows_mean1_layer",
+				"eyebrows_mean2_layer",
+				"eyebrows_mean3_layer",
+				"eyebrows_mean4_layer",
+				"eyebrows_mean5_layer",
+				"eyebrows_mean6_layer",
+				"eyebrows_mean7_layer",
+				"eyebrows_stddev_layer",
+				"eyebrows_stddev0_layer",
+				"eyebrows_stddev1_layer",
+				"eyebrows_stddev2_layer",
+				"eyebrows_stddev3_layer",
+				"eyebrows_stddev4_layer",
+				"eyebrows_stddev5_layer",
+				"eyebrows_stddev6_layer",
+				"eyebrows_stddev7_layer",
+				"eyebrows_tone_layer"
+			] },
+
+		"eyelashes_tone_ent": { "components": { "mesh_instance" : {"materials": ["shaders/eyelashes/tone"], "mesh": "$builtin$meshes/lashes.stream:0"} }, "layer": "eyelashes_tone_layer" }
+	},
+	"hierarchy": 
+	{
+		"face_tracker0": ["lips_morphing", "fake_skin_nn_face_ent", "face_tex_ent", "eyelashes_tone_ent"],
+
+		"root": 
+		[ 
+			"liner0_ent", "liner1_ent", "liner2_ent",
+			"nn_combine_ent",
+
+			"face_tracker0",
+			"foundation_ent",
+			"concealer_ent",
+			"contour_ent",
+			"highlighter_ent",
+			"blush_ent",
+			"lipstick_ent",
+			"lipsliner_ent",
+			"eyeshadow0_ent",
+			"eyeshadow1_ent",
+			"eyeshadow2_ent",
+			"eyeliner_ent",
+			"eyebrows_ent"
+		]
+	},
+	"render_list": 
+	{
+		"default": 
+		[
+			{ "layer": "liner0_layer", "render_target": "liner_rt" },
+			{ "layer": "liner1_layer", "render_target": "liner1_rt" },
+			{ "layer": "liner2_layer", "render_target": "liner_rt" },
+
+			{ "layer": "nn_face_layer",    "render_target": "nn_combine_rt" },
+			{ "layer": "nn_combine_layer", "render_target": "nn_combine_rt" },
+
+			{ "layer": "face_tex_layer", "render_target": "face_tex_rt" },
+
+			{ "layer": "foundation_blur_hsv_layer", "sub_geometries":["foundation/blur_hsv"], "render_target": "blur_hsv_rt" },
+			{ "layer": "foundation_mean_layer",     "sub_geometries":["mean"], "render_target": "mean_rt" },
+			{ "layer": "foundation_mean0_layer",    "sub_geometries":["mean0"], "render_target": "ms0_rt" },
+			{ "layer": "foundation_mean1_layer",    "sub_geometries":["mean1"], "render_target": "ms1_rt" },
+			{ "layer": "foundation_mean2_layer",    "sub_geometries":["mean2"], "render_target": "ms2_rt" },
+			{ "layer": "foundation_mean3_layer",    "sub_geometries":["mean3"], "render_target": "ms3_rt" },
+			{ "layer": "foundation_mean4_layer",    "sub_geometries":["mean4"], "render_target": "ms4_rt" },
+			{ "layer": "foundation_mean5_layer",    "sub_geometries":["mean5"], "render_target": "ms5_rt" },
+			{ "layer": "foundation_mean6_layer",    "sub_geometries":["mean6"], "render_target": "ms6_rt" },
+			{ "layer": "foundation_mean7_layer",    "sub_geometries":["mean7"], "render_target": "mean7_rt" },
+			{ "layer": "foundation_stddev_layer",   "sub_geometries":["stddev"], "render_target": "stddev_rt" },
+			{ "layer": "foundation_stddev0_layer",  "sub_geometries":["stddev0"], "render_target": "ms0_rt" },
+			{ "layer": "foundation_stddev1_layer",  "sub_geometries":["stddev1"], "render_target": "ms1_rt" },
+			{ "layer": "foundation_stddev2_layer",  "sub_geometries":["stddev2"], "render_target": "ms2_rt" },
+			{ "layer": "foundation_stddev3_layer",  "sub_geometries":["stddev3"], "render_target": "ms3_rt" },
+			{ "layer": "foundation_stddev4_layer",  "sub_geometries":["stddev4"], "render_target": "ms4_rt" },
+			{ "layer": "foundation_stddev5_layer",  "sub_geometries":["stddev5"], "render_target": "ms5_rt" },
+			{ "layer": "foundation_stddev6_layer",  "sub_geometries":["stddev6"], "render_target": "ms6_rt" },
+			{ "layer": "foundation_stddev7_layer",  "sub_geometries":["stddev7"], "render_target": "ms7_rt" },
+			{ "layer": "foundation_tone_layer",     "sub_geometries":["foundation/tone"], "render_target": "tone0_rt" },
+
+			{ "layer": "concealer_blur_hsv_layer", "sub_geometries":["concealer/blur_hsv"],"render_target": "blur_hsv_rt" },
+			{ "layer": "concealer_mean_layer",     "sub_geometries":["mean"], "render_target": "mean_rt" },
+			{ "layer": "concealer_mean0_layer",    "sub_geometries":["mean0"], "render_target": "ms0_rt" },
+			{ "layer": "concealer_mean1_layer",    "sub_geometries":["mean1"], "render_target": "ms1_rt" },
+			{ "layer": "concealer_mean2_layer",    "sub_geometries":["mean2"], "render_target": "ms2_rt" },
+			{ "layer": "concealer_mean3_layer",    "sub_geometries":["mean3"], "render_target": "ms3_rt" },
+			{ "layer": "concealer_mean4_layer",    "sub_geometries":["mean4"], "render_target": "ms4_rt" },
+			{ "layer": "concealer_mean5_layer",    "sub_geometries":["mean5"], "render_target": "ms5_rt" },
+			{ "layer": "concealer_mean6_layer",    "sub_geometries":["mean6"], "render_target": "ms6_rt" },
+			{ "layer": "concealer_mean7_layer",    "sub_geometries":["mean7"], "render_target": "mean7_rt" },
+			{ "layer": "concealer_stddev_layer",   "sub_geometries":["stddev"], "render_target": "stddev_rt" },
+			{ "layer": "concealer_stddev0_layer",  "sub_geometries":["stddev0"], "render_target": "ms0_rt" },
+			{ "layer": "concealer_stddev1_layer",  "sub_geometries":["stddev1"], "render_target": "ms1_rt" },
+			{ "layer": "concealer_stddev2_layer",  "sub_geometries":["stddev2"], "render_target": "ms2_rt" },
+			{ "layer": "concealer_stddev3_layer",  "sub_geometries":["stddev3"], "render_target": "ms3_rt" },
+			{ "layer": "concealer_stddev4_layer",  "sub_geometries":["stddev4"], "render_target": "ms4_rt" },
+			{ "layer": "concealer_stddev5_layer",  "sub_geometries":["stddev5"], "render_target": "ms5_rt" },
+			{ "layer": "concealer_stddev6_layer",  "sub_geometries":["stddev6"], "render_target": "ms6_rt" },
+			{ "layer": "concealer_stddev7_layer",  "sub_geometries":["stddev7"], "render_target": "ms7_rt" },
+			{ "layer": "concealer_tone_layer",     "sub_geometries":["concealer/tone"],"render_target": "tone1_rt" },
+
+			{ "layer": "contour_blur_hsv_layer", "sub_geometries":["contour/blur_hsv"],"render_target": "blur_hsv_rt" },
+			{ "layer": "contour_mean_layer",     "sub_geometries":["mean"], "render_target": "mean_rt" },
+			{ "layer": "contour_mean0_layer",    "sub_geometries":["mean0"], "render_target": "ms0_rt" },
+			{ "layer": "contour_mean1_layer",    "sub_geometries":["mean1"], "render_target": "ms1_rt" },
+			{ "layer": "contour_mean2_layer",    "sub_geometries":["mean2"], "render_target": "ms2_rt" },
+			{ "layer": "contour_mean3_layer",    "sub_geometries":["mean3"], "render_target": "ms3_rt" },
+			{ "layer": "contour_mean4_layer",    "sub_geometries":["mean4"], "render_target": "ms4_rt" },
+			{ "layer": "contour_mean5_layer",    "sub_geometries":["mean5"], "render_target": "ms5_rt" },
+			{ "layer": "contour_mean6_layer",    "sub_geometries":["mean6"], "render_target": "ms6_rt" },
+			{ "layer": "contour_mean7_layer",    "sub_geometries":["mean7"], "render_target": "mean7_rt" },
+			{ "layer": "contour_stddev_layer",   "sub_geometries":["stddev"], "render_target": "stddev_rt" },
+			{ "layer": "contour_stddev0_layer",  "sub_geometries":["stddev0"], "render_target": "ms0_rt" },
+			{ "layer": "contour_stddev1_layer",  "sub_geometries":["stddev1"], "render_target": "ms1_rt" },
+			{ "layer": "contour_stddev2_layer",  "sub_geometries":["stddev2"], "render_target": "ms2_rt" },
+			{ "layer": "contour_stddev3_layer",  "sub_geometries":["stddev3"], "render_target": "ms3_rt" },
+			{ "layer": "contour_stddev4_layer",  "sub_geometries":["stddev4"], "render_target": "ms4_rt" },
+			{ "layer": "contour_stddev5_layer",  "sub_geometries":["stddev5"], "render_target": "ms5_rt" },
+			{ "layer": "contour_stddev6_layer",  "sub_geometries":["stddev6"], "render_target": "ms6_rt" },
+			{ "layer": "contour_stddev7_layer",  "sub_geometries":["stddev7"], "render_target": "ms7_rt" },
+			{ "layer": "contour_tone_layer",     "sub_geometries":["contour/tone"],"render_target": "tone0_rt" },
+
+			{ "layer": "highlighter_blur_hsv_layer", "sub_geometries":["highlighter/blur_hsv"],"render_target": "blur_hsv_rt" },
+			{ "layer": "highlighter_mean_layer",     "sub_geometries":["mean"], "render_target": "mean_rt" },
+			{ "layer": "highlighter_mean0_layer",    "sub_geometries":["mean0"], "render_target": "ms0_rt" },
+			{ "layer": "highlighter_mean1_layer",    "sub_geometries":["mean1"], "render_target": "ms1_rt" },
+			{ "layer": "highlighter_mean2_layer",    "sub_geometries":["mean2"], "render_target": "ms2_rt" },
+			{ "layer": "highlighter_mean3_layer",    "sub_geometries":["mean3"], "render_target": "ms3_rt" },
+			{ "layer": "highlighter_mean4_layer",    "sub_geometries":["mean4"], "render_target": "ms4_rt" },
+			{ "layer": "highlighter_mean5_layer",    "sub_geometries":["mean5"], "render_target": "ms5_rt" },
+			{ "layer": "highlighter_mean6_layer",    "sub_geometries":["mean6"], "render_target": "ms6_rt" },
+			{ "layer": "highlighter_mean7_layer",    "sub_geometries":["mean7"], "render_target": "mean7_rt" },
+			{ "layer": "highlighter_stddev_layer",   "sub_geometries":["stddev"], "render_target": "stddev_rt" },
+			{ "layer": "highlighter_stddev0_layer",  "sub_geometries":["stddev0"], "render_target": "ms0_rt" },
+			{ "layer": "highlighter_stddev1_layer",  "sub_geometries":["stddev1"], "render_target": "ms1_rt" },
+			{ "layer": "highlighter_stddev2_layer",  "sub_geometries":["stddev2"], "render_target": "ms2_rt" },
+			{ "layer": "highlighter_stddev3_layer",  "sub_geometries":["stddev3"], "render_target": "ms3_rt" },
+			{ "layer": "highlighter_stddev4_layer",  "sub_geometries":["stddev4"], "render_target": "ms4_rt" },
+			{ "layer": "highlighter_stddev5_layer",  "sub_geometries":["stddev5"], "render_target": "ms5_rt" },
+			{ "layer": "highlighter_stddev6_layer",  "sub_geometries":["stddev6"], "render_target": "ms6_rt" },
+			{ "layer": "highlighter_stddev7_layer",  "sub_geometries":["stddev7"], "render_target": "ms7_rt" },
+			{ "layer": "highlighter_tone_layer",     "sub_geometries":["highlighter/tone"],"render_target": "tone1_rt" },
+
+			{ "layer": "blush_blur_hsv_layer", "sub_geometries":["blush/blur_hsv"],"render_target": "blur_hsv_rt" },
+			{ "layer": "blush_mean_layer",     "sub_geometries":["mean"], "render_target": "mean_rt" },
+			{ "layer": "blush_mean0_layer",    "sub_geometries":["mean0"], "render_target": "ms0_rt" },
+			{ "layer": "blush_mean1_layer",    "sub_geometries":["mean1"], "render_target": "ms1_rt" },
+			{ "layer": "blush_mean2_layer",    "sub_geometries":["mean2"], "render_target": "ms2_rt" },
+			{ "layer": "blush_mean3_layer",    "sub_geometries":["mean3"], "render_target": "ms3_rt" },
+			{ "layer": "blush_mean4_layer",    "sub_geometries":["mean4"], "render_target": "ms4_rt" },
+			{ "layer": "blush_mean5_layer",    "sub_geometries":["mean5"], "render_target": "ms5_rt" },
+			{ "layer": "blush_mean6_layer",    "sub_geometries":["mean6"], "render_target": "ms6_rt" },
+			{ "layer": "blush_mean7_layer",    "sub_geometries":["mean7"], "render_target": "mean7_rt" },
+			{ "layer": "blush_stddev_layer",   "sub_geometries":["stddev"], "render_target": "stddev_rt" },
+			{ "layer": "blush_stddev0_layer",  "sub_geometries":["stddev0"], "render_target": "ms0_rt" },
+			{ "layer": "blush_stddev1_layer",  "sub_geometries":["stddev1"], "render_target": "ms1_rt" },
+			{ "layer": "blush_stddev2_layer",  "sub_geometries":["stddev2"], "render_target": "ms2_rt" },
+			{ "layer": "blush_stddev3_layer",  "sub_geometries":["stddev3"], "render_target": "ms3_rt" },
+			{ "layer": "blush_stddev4_layer",  "sub_geometries":["stddev4"], "render_target": "ms4_rt" },
+			{ "layer": "blush_stddev5_layer",  "sub_geometries":["stddev5"], "render_target": "ms5_rt" },
+			{ "layer": "blush_stddev6_layer",  "sub_geometries":["stddev6"], "render_target": "ms6_rt" },
+			{ "layer": "blush_stddev7_layer",  "sub_geometries":["stddev7"], "render_target": "ms7_rt" },
+			{ "layer": "blush_tone_layer",     "sub_geometries":["blush/tone"],"render_target": "tone0_rt" },
+
+			{ "layer": "lipstick_blur_hsv_layer", "sub_geometries":["lipstick/blur_hsv"],"render_target": "blur_hsv_rt" },
+			{ "layer": "lipstick_mean_layer",     "sub_geometries":["mean"], "render_target": "mean_rt" },
+			{ "layer": "lipstick_mean0_layer",    "sub_geometries":["mean0"], "render_target": "ms0_rt" },
+			{ "layer": "lipstick_mean1_layer",    "sub_geometries":["mean1"], "render_target": "ms1_rt" },
+			{ "layer": "lipstick_mean2_layer",    "sub_geometries":["mean2"], "render_target": "ms2_rt" },
+			{ "layer": "lipstick_mean3_layer",    "sub_geometries":["mean3"], "render_target": "ms3_rt" },
+			{ "layer": "lipstick_mean4_layer",    "sub_geometries":["mean4"], "render_target": "ms4_rt" },
+			{ "layer": "lipstick_mean5_layer",    "sub_geometries":["mean5"], "render_target": "ms5_rt" },
+			{ "layer": "lipstick_mean6_layer",    "sub_geometries":["mean6"], "render_target": "ms6_rt" },
+			{ "layer": "lipstick_mean7_layer",    "sub_geometries":["mean7"], "render_target": "mean7_rt" },
+			{ "layer": "lipstick_stddev_layer",   "sub_geometries":["stddev"], "render_target": "stddev_rt" },
+			{ "layer": "lipstick_stddev0_layer",  "sub_geometries":["stddev0"], "render_target": "ms0_rt" },
+			{ "layer": "lipstick_stddev1_layer",  "sub_geometries":["stddev1"], "render_target": "ms1_rt" },
+			{ "layer": "lipstick_stddev2_layer",  "sub_geometries":["stddev2"], "render_target": "ms2_rt" },
+			{ "layer": "lipstick_stddev3_layer",  "sub_geometries":["stddev3"], "render_target": "ms3_rt" },
+			{ "layer": "lipstick_stddev4_layer",  "sub_geometries":["stddev4"], "render_target": "ms4_rt" },
+			{ "layer": "lipstick_stddev5_layer",  "sub_geometries":["stddev5"], "render_target": "ms5_rt" },
+			{ "layer": "lipstick_stddev6_layer",  "sub_geometries":["stddev6"], "render_target": "ms6_rt" },
+			{ "layer": "lipstick_stddev7_layer",  "sub_geometries":["stddev7"], "render_target": "ms7_rt" },
+			{ "layer": "lipstick_tone_layer",     "sub_geometries":["lipstick/tone"],"render_target": "tone1_rt" },
+
+			{ "layer": "lipsliner_blur_hsv_layer", "sub_geometries":["lipsliner/blur_hsv"],"render_target": "blur_hsv_rt" },
+			{ "layer": "lipsliner_mean_layer",     "sub_geometries":["mean"], "render_target": "mean_rt" },
+			{ "layer": "lipsliner_mean0_layer",    "sub_geometries":["mean0"], "render_target": "ms0_rt" },
+			{ "layer": "lipsliner_mean1_layer",    "sub_geometries":["mean1"], "render_target": "ms1_rt" },
+			{ "layer": "lipsliner_mean2_layer",    "sub_geometries":["mean2"], "render_target": "ms2_rt" },
+			{ "layer": "lipsliner_mean3_layer",    "sub_geometries":["mean3"], "render_target": "ms3_rt" },
+			{ "layer": "lipsliner_mean4_layer",    "sub_geometries":["mean4"], "render_target": "ms4_rt" },
+			{ "layer": "lipsliner_mean5_layer",    "sub_geometries":["mean5"], "render_target": "ms5_rt" },
+			{ "layer": "lipsliner_mean6_layer",    "sub_geometries":["mean6"], "render_target": "ms6_rt" },
+			{ "layer": "lipsliner_mean7_layer",    "sub_geometries":["mean7"], "render_target": "mean7_rt" },
+			{ "layer": "lipsliner_stddev_layer",   "sub_geometries":["stddev"], "render_target": "stddev_rt" },
+			{ "layer": "lipsliner_stddev0_layer",  "sub_geometries":["stddev0"], "render_target": "ms0_rt" },
+			{ "layer": "lipsliner_stddev1_layer",  "sub_geometries":["stddev1"], "render_target": "ms1_rt" },
+			{ "layer": "lipsliner_stddev2_layer",  "sub_geometries":["stddev2"], "render_target": "ms2_rt" },
+			{ "layer": "lipsliner_stddev3_layer",  "sub_geometries":["stddev3"], "render_target": "ms3_rt" },
+			{ "layer": "lipsliner_stddev4_layer",  "sub_geometries":["stddev4"], "render_target": "ms4_rt" },
+			{ "layer": "lipsliner_stddev5_layer",  "sub_geometries":["stddev5"], "render_target": "ms5_rt" },
+			{ "layer": "lipsliner_stddev6_layer",  "sub_geometries":["stddev6"], "render_target": "ms6_rt" },
+			{ "layer": "lipsliner_stddev7_layer",  "sub_geometries":["stddev7"], "render_target": "ms7_rt" },
+			{ "layer": "lipsliner_tone_layer",     "sub_geometries":["lipsliner/tone"],"render_target": "tone0_rt" },
+
+			{ "layer": "eyeshadow0_blur_hsv_layer", "sub_geometries":["eyeshadow0/blur_hsv"],"render_target": "blur_hsv_rt" },
+			{ "layer": "eyeshadow0_mean_layer",     "sub_geometries":["mean"], "render_target": "mean_rt" },
+			{ "layer": "eyeshadow0_mean0_layer",    "sub_geometries":["mean0"], "render_target": "ms0_rt" },
+			{ "layer": "eyeshadow0_mean1_layer",    "sub_geometries":["mean1"], "render_target": "ms1_rt" },
+			{ "layer": "eyeshadow0_mean2_layer",    "sub_geometries":["mean2"], "render_target": "ms2_rt" },
+			{ "layer": "eyeshadow0_mean3_layer",    "sub_geometries":["mean3"], "render_target": "ms3_rt" },
+			{ "layer": "eyeshadow0_mean4_layer",    "sub_geometries":["mean4"], "render_target": "ms4_rt" },
+			{ "layer": "eyeshadow0_mean5_layer",    "sub_geometries":["mean5"], "render_target": "ms5_rt" },
+			{ "layer": "eyeshadow0_mean6_layer",    "sub_geometries":["mean6"], "render_target": "ms6_rt" },
+			{ "layer": "eyeshadow0_mean7_layer",    "sub_geometries":["mean7"], "render_target": "mean7_rt" },
+			{ "layer": "eyeshadow0_stddev_layer",   "sub_geometries":["stddev"], "render_target": "stddev_rt" },
+			{ "layer": "eyeshadow0_stddev0_layer",  "sub_geometries":["stddev0"], "render_target": "ms0_rt" },
+			{ "layer": "eyeshadow0_stddev1_layer",  "sub_geometries":["stddev1"], "render_target": "ms1_rt" },
+			{ "layer": "eyeshadow0_stddev2_layer",  "sub_geometries":["stddev2"], "render_target": "ms2_rt" },
+			{ "layer": "eyeshadow0_stddev3_layer",  "sub_geometries":["stddev3"], "render_target": "ms3_rt" },
+			{ "layer": "eyeshadow0_stddev4_layer",  "sub_geometries":["stddev4"], "render_target": "ms4_rt" },
+			{ "layer": "eyeshadow0_stddev5_layer",  "sub_geometries":["stddev5"], "render_target": "ms5_rt" },
+			{ "layer": "eyeshadow0_stddev6_layer",  "sub_geometries":["stddev6"], "render_target": "ms6_rt" },
+			{ "layer": "eyeshadow0_stddev7_layer",  "sub_geometries":["stddev7"], "render_target": "ms7_rt" },
+			{ "layer": "eyeshadow0_tone_layer",     "sub_geometries":["eyeshadow0/tone"],"render_target": "tone1_rt" },
+
+			{ "layer": "eyeshadow1_blur_hsv_layer", "sub_geometries":["eyeshadow1/blur_hsv"],"render_target": "blur_hsv_rt" },
+			{ "layer": "eyeshadow1_mean_layer",     "sub_geometries":["mean"], "render_target": "mean_rt" },
+			{ "layer": "eyeshadow1_mean0_layer",    "sub_geometries":["mean0"], "render_target": "ms0_rt" },
+			{ "layer": "eyeshadow1_mean1_layer",    "sub_geometries":["mean1"], "render_target": "ms1_rt" },
+			{ "layer": "eyeshadow1_mean2_layer",    "sub_geometries":["mean2"], "render_target": "ms2_rt" },
+			{ "layer": "eyeshadow1_mean3_layer",    "sub_geometries":["mean3"], "render_target": "ms3_rt" },
+			{ "layer": "eyeshadow1_mean4_layer",    "sub_geometries":["mean4"], "render_target": "ms4_rt" },
+			{ "layer": "eyeshadow1_mean5_layer",    "sub_geometries":["mean5"], "render_target": "ms5_rt" },
+			{ "layer": "eyeshadow1_mean6_layer",    "sub_geometries":["mean6"], "render_target": "ms6_rt" },
+			{ "layer": "eyeshadow1_mean7_layer",    "sub_geometries":["mean7"], "render_target": "mean7_rt" },
+			{ "layer": "eyeshadow1_stddev_layer",   "sub_geometries":["stddev"], "render_target": "stddev_rt" },
+			{ "layer": "eyeshadow1_stddev0_layer",  "sub_geometries":["stddev0"], "render_target": "ms0_rt" },
+			{ "layer": "eyeshadow1_stddev1_layer",  "sub_geometries":["stddev1"], "render_target": "ms1_rt" },
+			{ "layer": "eyeshadow1_stddev2_layer",  "sub_geometries":["stddev2"], "render_target": "ms2_rt" },
+			{ "layer": "eyeshadow1_stddev3_layer",  "sub_geometries":["stddev3"], "render_target": "ms3_rt" },
+			{ "layer": "eyeshadow1_stddev4_layer",  "sub_geometries":["stddev4"], "render_target": "ms4_rt" },
+			{ "layer": "eyeshadow1_stddev5_layer",  "sub_geometries":["stddev5"], "render_target": "ms5_rt" },
+			{ "layer": "eyeshadow1_stddev6_layer",  "sub_geometries":["stddev6"], "render_target": "ms6_rt" },
+			{ "layer": "eyeshadow1_stddev7_layer",  "sub_geometries":["stddev7"], "render_target": "ms7_rt" },
+			{ "layer": "eyeshadow1_tone_layer",     "sub_geometries":["eyeshadow1/tone"],"render_target": "tone0_rt" },
+
+			{ "layer": "eyeshadow2_blur_hsv_layer", "sub_geometries":["eyeshadow2/blur_hsv"],"render_target": "blur_hsv_rt" },
+			{ "layer": "eyeshadow2_mean_layer",     "sub_geometries":["mean"], "render_target": "mean_rt" },
+			{ "layer": "eyeshadow2_mean0_layer",    "sub_geometries":["mean0"], "render_target": "ms0_rt" },
+			{ "layer": "eyeshadow2_mean1_layer",    "sub_geometries":["mean1"], "render_target": "ms1_rt" },
+			{ "layer": "eyeshadow2_mean2_layer",    "sub_geometries":["mean2"], "render_target": "ms2_rt" },
+			{ "layer": "eyeshadow2_mean3_layer",    "sub_geometries":["mean3"], "render_target": "ms3_rt" },
+			{ "layer": "eyeshadow2_mean4_layer",    "sub_geometries":["mean4"], "render_target": "ms4_rt" },
+			{ "layer": "eyeshadow2_mean5_layer",    "sub_geometries":["mean5"], "render_target": "ms5_rt" },
+			{ "layer": "eyeshadow2_mean6_layer",    "sub_geometries":["mean6"], "render_target": "ms6_rt" },
+			{ "layer": "eyeshadow2_mean7_layer",    "sub_geometries":["mean7"], "render_target": "mean7_rt" },
+			{ "layer": "eyeshadow2_stddev_layer",   "sub_geometries":["stddev"], "render_target": "stddev_rt" },
+			{ "layer": "eyeshadow2_stddev0_layer",  "sub_geometries":["stddev0"], "render_target": "ms0_rt" },
+			{ "layer": "eyeshadow2_stddev1_layer",  "sub_geometries":["stddev1"], "render_target": "ms1_rt" },
+			{ "layer": "eyeshadow2_stddev2_layer",  "sub_geometries":["stddev2"], "render_target": "ms2_rt" },
+			{ "layer": "eyeshadow2_stddev3_layer",  "sub_geometries":["stddev3"], "render_target": "ms3_rt" },
+			{ "layer": "eyeshadow2_stddev4_layer",  "sub_geometries":["stddev4"], "render_target": "ms4_rt" },
+			{ "layer": "eyeshadow2_stddev5_layer",  "sub_geometries":["stddev5"], "render_target": "ms5_rt" },
+			{ "layer": "eyeshadow2_stddev6_layer",  "sub_geometries":["stddev6"], "render_target": "ms6_rt" },
+			{ "layer": "eyeshadow2_stddev7_layer",  "sub_geometries":["stddev7"], "render_target": "ms7_rt" },
+			{ "layer": "eyeshadow2_tone_layer",     "sub_geometries":["eyeshadow2/tone"],"render_target": "tone1_rt" },
+
+			{ "layer": "eyeliner_blur_hsv_layer", "sub_geometries":["eyeliner/blur_hsv"],"render_target": "blur_hsv_rt" },
+			{ "layer": "eyeliner_mean_layer",     "sub_geometries":["mean"], "render_target": "mean_rt" },
+			{ "layer": "eyeliner_mean0_layer",    "sub_geometries":["mean0"], "render_target": "ms0_rt" },
+			{ "layer": "eyeliner_mean1_layer",    "sub_geometries":["mean1"], "render_target": "ms1_rt" },
+			{ "layer": "eyeliner_mean2_layer",    "sub_geometries":["mean2"], "render_target": "ms2_rt" },
+			{ "layer": "eyeliner_mean3_layer",    "sub_geometries":["mean3"], "render_target": "ms3_rt" },
+			{ "layer": "eyeliner_mean4_layer",    "sub_geometries":["mean4"], "render_target": "ms4_rt" },
+			{ "layer": "eyeliner_mean5_layer",    "sub_geometries":["mean5"], "render_target": "ms5_rt" },
+			{ "layer": "eyeliner_mean6_layer",    "sub_geometries":["mean6"], "render_target": "ms6_rt" },
+			{ "layer": "eyeliner_mean7_layer",    "sub_geometries":["mean7"], "render_target": "mean7_rt" },
+			{ "layer": "eyeliner_stddev_layer",   "sub_geometries":["stddev"], "render_target": "stddev_rt" },
+			{ "layer": "eyeliner_stddev0_layer",  "sub_geometries":["stddev0"], "render_target": "ms0_rt" },
+			{ "layer": "eyeliner_stddev1_layer",  "sub_geometries":["stddev1"], "render_target": "ms1_rt" },
+			{ "layer": "eyeliner_stddev2_layer",  "sub_geometries":["stddev2"], "render_target": "ms2_rt" },
+			{ "layer": "eyeliner_stddev3_layer",  "sub_geometries":["stddev3"], "render_target": "ms3_rt" },
+			{ "layer": "eyeliner_stddev4_layer",  "sub_geometries":["stddev4"], "render_target": "ms4_rt" },
+			{ "layer": "eyeliner_stddev5_layer",  "sub_geometries":["stddev5"], "render_target": "ms5_rt" },
+			{ "layer": "eyeliner_stddev6_layer",  "sub_geometries":["stddev6"], "render_target": "ms6_rt" },
+			{ "layer": "eyeliner_stddev7_layer",  "sub_geometries":["stddev7"], "render_target": "ms7_rt" },
+			{ "layer": "eyeliner_tone_layer",     "sub_geometries":["eyeliner/tone"],"render_target": "tone0_rt" },
+
+			{ "layer": "eyebrows_blur_hsv_layer", "sub_geometries":["eyebrows/blur_hsv"],"render_target": "blur_hsv_rt" },
+			{ "layer": "eyebrows_mean_layer",     "sub_geometries":["mean"], "render_target": "mean_rt" },
+			{ "layer": "eyebrows_mean0_layer",    "sub_geometries":["mean0"], "render_target": "ms0_rt" },
+			{ "layer": "eyebrows_mean1_layer",    "sub_geometries":["mean1"], "render_target": "ms1_rt" },
+			{ "layer": "eyebrows_mean2_layer",    "sub_geometries":["mean2"], "render_target": "ms2_rt" },
+			{ "layer": "eyebrows_mean3_layer",    "sub_geometries":["mean3"], "render_target": "ms3_rt" },
+			{ "layer": "eyebrows_mean4_layer",    "sub_geometries":["mean4"], "render_target": "ms4_rt" },
+			{ "layer": "eyebrows_mean5_layer",    "sub_geometries":["mean5"], "render_target": "ms5_rt" },
+			{ "layer": "eyebrows_mean6_layer",    "sub_geometries":["mean6"], "render_target": "ms6_rt" },
+			{ "layer": "eyebrows_mean7_layer",    "sub_geometries":["mean7"], "render_target": "mean7_rt" },
+			{ "layer": "eyebrows_stddev_layer",   "sub_geometries":["stddev"], "render_target": "stddev_rt" },
+			{ "layer": "eyebrows_stddev0_layer",  "sub_geometries":["stddev0"], "render_target": "ms0_rt" },
+			{ "layer": "eyebrows_stddev1_layer",  "sub_geometries":["stddev1"], "render_target": "ms1_rt" },
+			{ "layer": "eyebrows_stddev2_layer",  "sub_geometries":["stddev2"], "render_target": "ms2_rt" },
+			{ "layer": "eyebrows_stddev3_layer",  "sub_geometries":["stddev3"], "render_target": "ms3_rt" },
+			{ "layer": "eyebrows_stddev4_layer",  "sub_geometries":["stddev4"], "render_target": "ms4_rt" },
+			{ "layer": "eyebrows_stddev5_layer",  "sub_geometries":["stddev5"], "render_target": "ms5_rt" },
+			{ "layer": "eyebrows_stddev6_layer",  "sub_geometries":["stddev6"], "render_target": "ms6_rt" },
+			{ "layer": "eyebrows_stddev7_layer",  "sub_geometries":["stddev7"], "render_target": "ms7_rt" },
+			{ "layer": "eyebrows_tone_layer",     "sub_geometries":["eyebrows/tone"],"render_target": "tone1_rt" }, 
+
+			{ "layer": "eyelashes_tone_layer",    "render_target": "tone1_rt" },
+			{ "layer": "lips_morphing",    "render_target": "tone1_rt" } 
+		]
+	},
+	"render_targets": 
+	{
+		"liner_rt": { "attachments": [ "lipsliner" ], "width": 384, "height": 384 },
+		"liner1_rt": { "attachments": [ "lipsliner1"  ], "width": 384, "height": 384 },
+
+		"nn_combine_rt":      [ "skin_brows_lips_nn", "nn_z" ],
+		"blur_hsv_rt":  [ "blur_hsv" ],
+
+		"mean_rt":     { "attachments": [ "mean0" ], "width": 256, "height": 256 },
+		"ms0_rt":     { "attachments": [ "ms1" ], "width": 128, "height": 128 },
+		"ms1_rt":     { "attachments": [ "ms2" ], "width":  64, "height":  64 },
+		"ms2_rt":     { "attachments": [ "ms3" ], "width":  32, "height":  32 },
+		"ms3_rt":     { "attachments": [ "ms4" ], "width":  16, "height":  16 },
+		"ms4_rt":     { "attachments": [ "ms5" ], "width":   8, "height":   8 },
+		"ms5_rt":     { "attachments": [ "ms6" ], "width":   4, "height":   4 },
+		"ms6_rt":     { "attachments": [ "ms7" ], "width":   2, "height":   2 },
+		"mean7_rt":     { "attachments": [ "mean8" ], "width":   1, "height":   1 },
+		"stddev_rt":    { "attachments": [ "stddev0" ], "width": 256, "height": 256 },
+		"ms7_rt":   { "attachments": [ "stddev8" ], "width":   1, "height":   1 },
+
+		"face_tex_rt": [ "consiler_contour_highlighter_blush_tex_c", "shadows_eyeliner_tex_c", "tex_z" ],
+
+		"tone0_rt":      [ "tone0" ],
+		"tone1_rt":      [ "tone1" ]
+	},
+	"scene": "tone",
+	"script": 
+	{
+		"entry_point": "config.js",
+		"type": "latest"
+	}
+}

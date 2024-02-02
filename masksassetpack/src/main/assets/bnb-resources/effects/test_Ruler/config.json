@@ -1,0 +1,87 @@
+{
+  "assets": {
+    "attachments": {
+      "main_color": {
+        "type": "color"
+      }
+    },
+    "images": {
+      "camera": {
+        "type": "procedural_texture",
+        "algorithm": "camera_composer"
+      }
+    },
+
+    "materials": {
+      "$builtin$materials/copy_pixels.0": {
+        "parameters": {},
+        "samplers": [
+          {
+            "image": "camera",
+            "name": "tex_src"
+          }
+        ],
+        "state": {
+          "backfaces": true,
+          "blend": "off",
+          "colorwrite": true,
+          "ztest": false,
+          "zwrite": false
+        }
+      }
+    },
+
+    "meshes": {
+      "quad_surface": "quad.bsm2"
+    }
+  },
+
+  "components": {
+    "copy_camera": {
+      "materials": ["$builtin$materials/copy_pixels.0"],
+      "mesh": "quad_surface",
+      "type": "mesh_instance"
+    }
+  },
+
+  "entities": {
+    "copy_camera": {
+      "components": [
+        "copy_camera"
+      ],
+      "layer": "camera"
+    }
+  },
+
+  "hierarchy": {
+    "root": [
+      "copy_camera"
+    ]
+  },
+
+  "layers": {
+    "camera": {}
+  },
+
+  "render_list": {
+    "default": [
+      {
+        "layer": "camera",
+        "render_target": "Main"
+      }
+    ]
+  },
+
+  "render_targets": {
+    "Main": [
+      "main_color"
+    ]
+  },
+
+
+  "scene": "test_ruler",
+  "script": {
+    "type": "latest",
+    "entry_point": "config.js"
+  }
+}

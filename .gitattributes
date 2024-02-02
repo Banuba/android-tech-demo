@@ -1,0 +1,6 @@
+*.aar filter=lfs diff=lfs merge=lfs -binary
+
+*.vert linguist-detectable=false
+*.frag linguist-detectable=false
+*.js linguist-detectable=false
+*.glsl linguist-detectable=false

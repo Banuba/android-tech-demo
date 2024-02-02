@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "778269280171",
+    "project_id": "tech-demo-ead82",
+    "storage_bucket": "tech-demo-ead82.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:778269280171:android:c38f60fd37bb33bcdef4ee",
+        "android_client_info": {
+          "package_name": "com.banuba.tech.demo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "778269280171-8v7sec55r7ch9lflv4cec8ou3sf5g4ml.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBM4VEKS4Q8cGXUOVZyuOASKey3Zi1_CpM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "778269280171-8v7sec55r7ch9lflv4cec8ou3sf5g4ml.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "778269280171-teld14prljgdf7abc89f63r1eq4bfmar.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.banuba.rnd-sdk.demo.TechDemo",
+                "app_store_id": "1435804709"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

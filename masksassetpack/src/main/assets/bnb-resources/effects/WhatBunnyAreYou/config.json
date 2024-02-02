@@ -1,0 +1,959 @@
+{
+    "assets": {
+        "attachments": {
+            "ComposerRT_color": {
+                "type": "color"
+            },
+            "EffectRT0_color": {
+                "type": "color"
+            },
+            "EffectRT0_depth": {
+                "clear": [
+                    1.0
+                ],
+                "type": "depth"
+            },
+            "finalColorFilterRT_color": {
+                "type": "color"
+            }
+        },
+        "faces": {
+            "face0": {
+                "index": 0,
+                "mesh": "!glfx_FACE"
+            }
+        },
+        "images": {
+            "background": {
+                "active": false,
+                "recognizer_feature_name": "background",
+                "type": "segmentation_mask"
+            },
+            "brdf.ktx": {
+                "file_name": "images/brdf.ktx",
+                "type": "texture"
+            },
+            "btn_bunny.png": {
+                "file_name": "images/btn_bunny.png",
+                "type": "texture"
+            },
+            "camera: tex_rgb": {
+                "format": "rgba",
+                "type": "camera"
+            },
+            "camera: tex_uv": {
+                "format": "uv",
+                "type": "camera"
+            },
+            "camera: tex_y": {
+                "format": "y",
+                "type": "camera"
+            },
+            "hair": {
+                "active": false,
+                "recognizer_feature_name": "hair",
+                "type": "segmentation_mask"
+            },
+            "ibl_diff.ktx": {
+                "file_name": "images/ibl_diff.ktx",
+                "type": "cubemap"
+            },
+            "ibl_spec.ktx": {
+                "file_name": "images/ibl_spec.ktx",
+                "type": "cubemap"
+            },
+            "left_eye": {
+                "active": false,
+                "recognizer_feature_name": "left_eye",
+                "type": "segmentation_mask"
+            },
+            "lips": {
+                "active": false,
+                "recognizer_feature_name": "lips",
+                "type": "segmentation_mask"
+            },
+            "lut3d_eyes_middle.png": {
+                "file_name": "images/lut3d_eyes_middle.png",
+                "type": "lut",
+                "weight": 1
+            },
+            "lut3d_teeth_middle.png": {
+                "file_name": "images/lut3d_teeth_middle.png",
+                "type": "lut",
+                "weight": 1
+            },
+            "make_up.png": {
+                "file_name": "images/make_up.png",
+                "type": "texture"
+            },
+            "mustache_mat_Base_Color.ktx": {
+                "file_name": "images/mustache_mat_Base_Color.ktx",
+                "type": "texture"
+            },
+            "mustache_mat_MRAO.ktx": {
+                "file_name": "images/mustache_mat_MRAO.ktx",
+                "type": "texture"
+            },
+            "mustache_mat_Normal.ktx": {
+                "file_name": "images/mustache_mat_Normal.ktx",
+                "type": "texture"
+            },
+            "null_image.png": {
+                "file_name": "images/null_image.png",
+                "type": "texture"
+            },
+            "null_lut.png": {
+                "file_name": "images/null_lut.png",
+                "type": "texture"
+            },
+            "pinkvine.png": {
+                "file_name": "images/pinkvine.png",
+                "type": "texture"
+            },
+            "preview.png": {
+                "file_name": "images/preview.png",
+                "type": "texture"
+            },
+            "rabbit_Base_Color_1.ktx": {
+                "file_name": "images/rabbit_Base_Color_1.ktx",
+                "type": "texture"
+            },
+            "rabbit_Base_Color_2.ktx": {
+                "file_name": "images/rabbit_Base_Color_2.ktx",
+                "type": "texture"
+            },
+            "rabbit_Base_Color_3.png": {
+                "file_name": "images/rabbit_Base_Color_3.png",
+                "type": "texture"
+            },
+            "rabbit_Base_Color_4.ktx": {
+                "file_name": "images/rabbit_Base_Color_4.ktx",
+                "type": "texture"
+            },
+            "rabbit_MRAO.ktx": {
+                "file_name": "images/rabbit_MRAO.ktx",
+                "type": "texture"
+            },
+            "rabbit_Normal.ktx": {
+                "file_name": "images/rabbit_Normal.ktx",
+                "type": "texture"
+            },
+            "right_eye": {
+                "active": false,
+                "recognizer_feature_name": "right_eye",
+                "type": "segmentation_mask"
+            },
+            "skin": {
+                "active": false,
+                "recognizer_feature_name": "skin",
+                "type": "segmentation_mask"
+            },
+            "soft_doll.png": {
+                "file_name": "images/soft_doll.png",
+                "type": "texture"
+            }
+        },
+        "materials": {
+            "$builtin$materials/camera": {
+                "parameters": {
+                    "bnb_camera_orientation": {
+                        "type": "vec4",
+                        "value": [
+                            1,
+                            0,
+                            0,
+                            1
+                        ]
+                    },
+                    "bnb_camera_scale": {
+                        "type": "vec4",
+                        "value": [
+                            1,
+                            0,
+                            0,
+                            1
+                        ]
+                    },
+                    "bnb_view_width_fraction": {
+                        "type": "vec4",
+                        "value": [
+                            1,
+                            0,
+                            0,
+                            0
+                        ]
+                    }
+                },
+                "samplers": [
+                    {
+                        "image": "camera: tex_y",
+                        "name": "tex_y"
+                    },
+                    {
+                        "image": "camera: tex_uv",
+                        "name": "tex_uv"
+                    },
+                    {
+                        "image": "camera: tex_rgb",
+                        "name": "tex_rgb"
+                    }
+                ],
+                "state": {
+                    "backfaces": true,
+                    "blend": "off",
+                    "colorwrite": true,
+                    "ztest": false,
+                    "zwrite": false
+                }
+            },
+            "$builtin$materials/copy_pixels.0": {
+                "parameters": {},
+                "samplers": [
+                    {
+                        "image": "ComposerRT_color",
+                        "name": "tex_src"
+                    }
+                ],
+                "state": {
+                    "backfaces": true,
+                    "blend": "off",
+                    "colorwrite": true,
+                    "ztest": false,
+                    "zwrite": false
+                }
+            },
+            "shaders/Quad_L1": {
+                "built_in_samplers": [],
+                "samplers": [
+                    {
+                        "image": "btn_bunny.png",
+                        "name": "tex"
+                    }
+                ],
+                "state": {
+                    "backfaces": true,
+                    "blend": "alpha",
+                    "colorwrite": true,
+                    "ztest": true,
+                    "zwrite": true
+                }
+            },
+            "shaders/finalColorFilter.fsh": {
+                "samplers": [
+                    {
+                        "image": "EffectRT0_color",
+                        "name": "s_src"
+                    },
+                    {
+                        "image": "pinkvine.png",
+                        "name": "lookupTexture"
+                    }
+                ],
+                "state": {
+                    "backfaces": true,
+                    "blend": "off",
+                    "colorwrite": true,
+                    "ztest": false,
+                    "zwrite": false
+                }
+            },
+            "shaders/mat_Rabbit": {
+                "built_in_samplers": [
+                    "bnb_BONES"
+                ],
+                "samplers": [
+                    {
+                        "image": "null_image.png",
+                        "legacy_meshfx_index": 0,
+                        "name": "tex_diffuse"
+                    },
+                    {
+                        "name": "bnb_BONES"
+                    }
+                ],
+                "state": {
+                    "backfaces": false,
+                    "blend": "alpha",
+                    "colorwrite": true,
+                    "ztest": true,
+                    "zwrite": true
+                }
+            },
+            "shaders/mat_RabbitEart": {
+                "built_in_samplers": [
+                    "bnb_BONES"
+                ],
+                "samplers": [
+                    {
+                        "image": "frx",
+                        "name": "glfx_VIDEO"
+                    },
+                    {
+                        "name": "bnb_BONES"
+                    }
+                ],
+                "state": {
+                    "backfaces": false,
+                    "blend": "alpha",
+                    "colorwrite": true,
+                    "ztest": true,
+                    "zwrite": true
+                }
+            },
+            "shaders/mat_ear": {
+                "built_in_samplers": [
+                    "bnb_BONES",
+                    "bnb_UVMORPH_FISHEYE",
+                    "bnb_MORPH"
+                ],
+                "samplers": [
+                    {
+                        "image": "frx",
+                        "name": "glfx_VIDEO"
+                    },
+                    {
+                        "name": "bnb_BONES"
+                    },
+                    {
+                        "name": "bnb_UVMORPH_FISHEYE"
+                    },
+                    {
+                        "name": "bnb_MORPH"
+                    }
+                ],
+                "state": {
+                    "backfaces": false,
+                    "blend": "alpha",
+                    "colorwrite": true,
+                    "ztest": true,
+                    "zwrite": true
+                }
+            },
+            "shaders/mat_morph": {
+                "built_in_samplers": [
+                    "bnb_BONES",
+                    "bnb_UVMORPH_FISHEYE",
+                    "bnb_MORPH"
+                ],
+                "samplers": [
+                    {
+                        "name": "bnb_BONES"
+                    },
+                    {
+                        "name": "bnb_UVMORPH_FISHEYE"
+                    },
+                    {
+                        "name": "bnb_MORPH"
+                    }
+                ],
+                "state": {
+                    "backfaces": false,
+                    "blend": "off",
+                    "colorwrite": false,
+                    "ztest": true,
+                    "zwrite": true
+                }
+            },
+            "shaders/mat_mustache": {
+                "built_in_samplers": [
+                    "bnb_BONES",
+                    "bnb_UVMORPH_FISHEYE",
+                    "bnb_MORPH"
+                ],
+                "samplers": [
+                    {
+                        "image": "mustache_mat_Base_Color.ktx",
+                        "name": "tex_diffuse"
+                    },
+                    {
+                        "image": "mustache_mat_Normal.ktx",
+                        "name": "tex_normal"
+                    },
+                    {
+                        "image": "brdf.ktx",
+                        "name": "tex_brdf"
+                    },
+                    {
+                        "image": "ibl_diff.ktx",
+                        "name": "tex_ibl_diff"
+                    },
+                    {
+                        "image": "ibl_spec.ktx",
+                        "name": "tex_ibl_spec"
+                    },
+                    {
+                        "image": "mustache_mat_MRAO.ktx",
+                        "name": "tex_mrao"
+                    },
+                    {
+                        "name": "bnb_BONES"
+                    },
+                    {
+                        "name": "bnb_UVMORPH_FISHEYE"
+                    },
+                    {
+                        "name": "bnb_MORPH"
+                    }
+                ],
+                "state": {
+                    "backfaces": false,
+                    "blend": "alpha",
+                    "colorwrite": true,
+                    "ztest": false,
+                    "zwrite": true
+                }
+            },
+            "shaders/plane_2": {
+                "built_in_samplers": [
+                    "bnb_BONES",
+                    "bnb_UVMORPH_FISHEYE",
+                    "bnb_MORPH"
+                ],
+                "samplers": [
+                    {
+                        "image": "frx",
+                        "name": "glfx_VIDEO"
+                    },
+                    {
+                        "name": "bnb_BONES"
+                    },
+                    {
+                        "name": "bnb_UVMORPH_FISHEYE"
+                    },
+                    {
+                        "name": "bnb_MORPH"
+                    }
+                ],
+                "state": {
+                    "backfaces": true,
+                    "blend": "alpha",
+                    "colorwrite": true,
+                    "ztest": false,
+                    "zwrite": false
+                }
+            },
+            "shaders/retouch": {
+                "built_in_samplers": [],
+                "samplers": [
+                    {
+                        "image": "lut3d_teeth_middle.png",
+                        "name": "lookupTexTeeth"
+                    },
+                    {
+                        "image": "lut3d_eyes_middle.png",
+                        "name": "lookupTexEyes"
+                    },
+                    {
+                        "image": "soft_doll.png",
+                        "name": "tex_softLight"
+                    },
+                    {
+                        "image": "make_up.png",
+                        "name": "tex_normalMakeup"
+                    },
+                    {
+                        "image": "ComposerRT_color",
+                        "name": "glfx_BACKGROUND"
+                    }
+                ],
+                "state": {
+                    "backfaces": false,
+                    "blend": "off",
+                    "colorwrite": true,
+                    "ztest": true,
+                    "zwrite": true
+                }
+            }
+        },
+        "media": {
+            "frx": {
+                "file_name": "videos/Bunny.mp4",
+                "looped": false,
+                "play": false,
+                "type": "video"
+            },
+            "music.ogg": {
+                "file_name": "audios/music.ogg",
+                "type": "audio"
+            }
+        },
+        "meshes": {
+            "!glfx_FACE": "$builtin$meshes/face.stream:0",
+            "2d.bsm2": "meshes/2d.bsm2",
+            "2d_1.bsm2": "meshes/2d_1.bsm2",
+            "Ears_v1.bsm2": "meshes/Ears_v1.bsm2",
+            "camera_surface": "$builtin$meshes/fs_tri",
+            "morph.bsm2": "meshes/morph.bsm2",
+            "mustache.bsm2": "meshes/mustache.bsm2",
+            "plane.bsm2": "meshes/plane.bsm2",
+            "quad_L1.bsm2": "meshes/quad_L1.bsm2",
+            "rabbit.bsm2": "meshes/rabbit.bsm2"
+        },
+        "morphs": {
+            "morph0": {
+                "type": "mesh"
+            }
+        }
+    },
+    "components": {
+        "ComposerRT_copy": {
+            "materials": [
+                "$builtin$materials/copy_pixels.0"
+            ],
+            "mesh": "camera_surface",
+            "type": "mesh_instance"
+        },
+        "camera_surface": {
+            "materials": [
+                "$builtin$materials/camera"
+            ],
+            "mesh": "camera_surface",
+            "type": "mesh_instance"
+        },
+        "face_tracker:0": {
+            "face": "face0",
+            "type": "face_tracker"
+        },
+        "finalColorFilter": {
+            "materials": [
+                "shaders/finalColorFilter.fsh"
+            ],
+            "mesh": "camera_surface",
+            "type": "mesh_instance"
+        },
+        "internal_morph__": {
+            "morph": "morph0",
+            "type": "face_morphing"
+        }
+    },
+    "entities": {
+        "ComposerRT_copy_append_to_root__": {
+            "components": [
+                "ComposerRT_copy"
+            ],
+            "layer": "ComposerRT_copy"
+        },
+        "camera": {
+            "components": [
+                "camera_surface"
+            ],
+            "layer": "composer_pre"
+        },
+        "face_tracker0": {
+            "components": [
+                "face_tracker:0"
+            ]
+        },
+        "finalColorFilter_append_to_root__": {
+            "components": "finalColorFilter",
+            "layer": "finalColorFilter"
+        },
+        "internal_morph": {
+            "components": [
+                "internal_morph__"
+            ],
+            "layer": "internal_face_morph__"
+        },
+        "spawn_entity0": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "mat_morph",
+                "mat_ear",
+                "mat_Rabbit",
+                "mat_mustache",
+                "mat_RabbitEart",
+                "Quad_L1",
+                "plane_2"
+            ]
+        },
+        "spawn_entity1": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "mat_morph",
+                "mat_ear",
+                "mat_Rabbit",
+                "mat_mustache",
+                "mat_RabbitEart",
+                "Quad_L1",
+                "plane_2"
+            ]
+        },
+        "spawn_entity10": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "mat_morph",
+                "mat_ear",
+                "mat_Rabbit",
+                "mat_mustache",
+                "mat_RabbitEart",
+                "Quad_L1",
+                "plane_2"
+            ]
+        },
+        "spawn_entity11": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "mat_morph",
+                "mat_ear",
+                "mat_Rabbit",
+                "mat_mustache",
+                "mat_RabbitEart",
+                "Quad_L1",
+                "plane_2"
+            ]
+        },
+        "spawn_entity12": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "mat_morph",
+                "mat_ear",
+                "mat_Rabbit",
+                "mat_mustache",
+                "mat_RabbitEart",
+                "Quad_L1",
+                "plane_2"
+            ]
+        },
+        "spawn_entity13": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "mat_morph",
+                "mat_ear",
+                "mat_Rabbit",
+                "mat_mustache",
+                "mat_RabbitEart",
+                "Quad_L1",
+                "plane_2"
+            ]
+        },
+        "spawn_entity14": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "mat_morph",
+                "mat_ear",
+                "mat_Rabbit",
+                "mat_mustache",
+                "mat_RabbitEart",
+                "Quad_L1",
+                "plane_2"
+            ]
+        },
+        "spawn_entity15": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "mat_morph",
+                "mat_ear",
+                "mat_Rabbit",
+                "mat_mustache",
+                "mat_RabbitEart",
+                "Quad_L1",
+                "plane_2"
+            ]
+        },
+        "spawn_entity16": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "mat_morph",
+                "mat_ear",
+                "mat_Rabbit",
+                "mat_mustache",
+                "mat_RabbitEart",
+                "Quad_L1",
+                "plane_2"
+            ]
+        },
+        "spawn_entity17": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "mat_morph",
+                "mat_ear",
+                "mat_Rabbit",
+                "mat_mustache",
+                "mat_RabbitEart",
+                "Quad_L1",
+                "plane_2"
+            ]
+        },
+        "spawn_entity18": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "mat_morph",
+                "mat_ear",
+                "mat_Rabbit",
+                "mat_mustache",
+                "mat_RabbitEart",
+                "Quad_L1",
+                "plane_2"
+            ]
+        },
+        "spawn_entity19": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "mat_morph",
+                "mat_ear",
+                "mat_Rabbit",
+                "mat_mustache",
+                "mat_RabbitEart",
+                "Quad_L1",
+                "plane_2"
+            ]
+        },
+        "spawn_entity2": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "mat_morph",
+                "mat_ear",
+                "mat_Rabbit",
+                "mat_mustache",
+                "mat_RabbitEart",
+                "Quad_L1",
+                "plane_2"
+            ]
+        },
+        "spawn_entity3": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "mat_morph",
+                "mat_ear",
+                "mat_Rabbit",
+                "mat_mustache",
+                "mat_RabbitEart",
+                "Quad_L1",
+                "plane_2"
+            ]
+        },
+        "spawn_entity4": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "mat_morph",
+                "mat_ear",
+                "mat_Rabbit",
+                "mat_mustache",
+                "mat_RabbitEart",
+                "Quad_L1",
+                "plane_2"
+            ]
+        },
+        "spawn_entity5": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "mat_morph",
+                "mat_ear",
+                "mat_Rabbit",
+                "mat_mustache",
+                "mat_RabbitEart",
+                "Quad_L1",
+                "plane_2"
+            ]
+        },
+        "spawn_entity6": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "mat_morph",
+                "mat_ear",
+                "mat_Rabbit",
+                "mat_mustache",
+                "mat_RabbitEart",
+                "Quad_L1",
+                "plane_2"
+            ]
+        },
+        "spawn_entity7": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "mat_morph",
+                "mat_ear",
+                "mat_Rabbit",
+                "mat_mustache",
+                "mat_RabbitEart",
+                "Quad_L1",
+                "plane_2"
+            ]
+        },
+        "spawn_entity8": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "mat_morph",
+                "mat_ear",
+                "mat_Rabbit",
+                "mat_mustache",
+                "mat_RabbitEart",
+                "Quad_L1",
+                "plane_2"
+            ]
+        },
+        "spawn_entity9": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "mat_morph",
+                "mat_ear",
+                "mat_Rabbit",
+                "mat_mustache",
+                "mat_RabbitEart",
+                "Quad_L1",
+                "plane_2"
+            ]
+        }
+    },
+    "global_params": [
+        "js_uv"
+    ],
+    "hierarchy": {
+        "face_tracker0": [
+            "internal_morph",
+            "spawn_entity0",
+            "spawn_entity1",
+            "spawn_entity2",
+            "spawn_entity3",
+            "spawn_entity4",
+            "spawn_entity5",
+            "spawn_entity6",
+            "spawn_entity7",
+            "spawn_entity8",
+            "spawn_entity9",
+            "spawn_entity10",
+            "spawn_entity11",
+            "spawn_entity12",
+            "spawn_entity13",
+            "spawn_entity14",
+            "spawn_entity15",
+            "spawn_entity16",
+            "spawn_entity17",
+            "spawn_entity18",
+            "spawn_entity19"
+        ],
+        "root": [
+            "camera",
+            "face_tracker0",
+            "ComposerRT_copy_append_to_root__",
+            "finalColorFilter_append_to_root__"
+        ]
+    },
+    "layers": {
+        "ComposerRT_copy": {},
+        "Quad_L1": {},
+        "composer_pre": {},
+        "finalColorFilter": {},
+        "internal_face_morph__": {},
+        "mat_Rabbit": {},
+        "mat_RabbitEart": {},
+        "mat_ear": {},
+        "mat_morph": {},
+        "mat_mustache": {},
+        "plane_2": {},
+        "retouch": {}
+    },
+    "render_list": {
+        "default": [
+            {
+                "layer": "composer_pre",
+                "render_target": "ComposerRT"
+            },
+            {
+                "layer": "ComposerRT_copy",
+                "render_target": "EffectRT0"
+            },
+            {
+                "layer": "retouch",
+                "render_target": "EffectRT0",
+                "sub_geometries": [
+                    "retouch"
+                ]
+            },
+            {
+                "layer": "internal_face_morph__",
+                "render_target": "EffectRT0"
+            },
+            {
+                "layer": "mat_morph",
+                "render_target": "EffectRT0",
+                "sub_geometries": [
+                    "mat_morph"
+                ]
+            },
+            {
+                "layer": "mat_ear",
+                "render_target": "EffectRT0",
+                "sub_geometries": [
+                    "mat_ear"
+                ]
+            },
+            {
+                "layer": "mat_Rabbit",
+                "render_target": "EffectRT0",
+                "sub_geometries": [
+                    "mat_Rabbit"
+                ]
+            },
+            {
+                "layer": "mat_mustache",
+                "render_target": "EffectRT0",
+                "sub_geometries": [
+                    "mat_mustache"
+                ]
+            },
+            {
+                "layer": "mat_RabbitEart",
+                "render_target": "EffectRT0",
+                "sub_geometries": [
+                    "mat_RabbitEart"
+                ]
+            },
+            {
+                "layer": "Quad_L1",
+                "render_target": "EffectRT0",
+                "sub_geometries": [
+                    "Quad_L1"
+                ]
+            },
+            {
+                "layer": "plane_2",
+                "render_target": "EffectRT0",
+                "sub_geometries": [
+                    "plane_2"
+                ]
+            },
+            {
+                "layer": "finalColorFilter",
+                "render_target": "finalColorFilterRT"
+            }
+        ]
+    },
+    "render_targets": {
+        "ComposerRT": [
+            "ComposerRT_color"
+        ],
+        "EffectRT0": [
+            "EffectRT0_color",
+            "EffectRT0_depth"
+        ],
+        "finalColorFilterRT": [
+            "finalColorFilterRT_color"
+        ]
+    },
+    "scene": "WhatBunnyAreYou",
+    "script": {
+        "entry_point": "config.js",
+        "type": "legacy"
+    }
+}

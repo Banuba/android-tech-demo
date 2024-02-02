@@ -1,0 +1,829 @@
+{
+    "assets": {
+        "attachments": {
+            "ComposerRT_color": {
+                "type": "color"
+            },
+            "EffectRT0_color": {
+                "type": "color"
+            },
+            "EffectRT0_depth": {
+                "clear": [
+                    1.0
+                ],
+                "type": "depth"
+            },
+            "EffectRT1_color": {
+                "type": "color"
+            },
+            "EffectRT1_depth": {
+                "clear": [
+                    1.0
+                ],
+                "type": "depth"
+            },
+            "OnlyGeom_color": {
+                "type": "color"
+            },
+            "OnlyGeom_depth": {
+                "clear": [
+                    1.0
+                ],
+                "type": "depth"
+            },
+            "ColorCorrection_color": {
+                "type": "color"
+            },
+            "ColorCorrection_depth": {
+                "clear": [
+                    1.0
+                ],
+                "type": "depth"
+            },
+            "EffectRT2_color": {
+                "type": "color"
+            },
+            "EffectRT2_depth": {
+                "clear": [
+                    1.0
+                ],
+                "type": "depth"
+            }
+        },
+        "faces": {
+            "face0": {
+                "index": 0,
+                "mesh": "!glfx_FACE"
+            }
+        },
+        "images": {
+            "brdf.ktx": {
+                "file_name": "images/brdf.ktx",
+                "type": "texture"
+            },
+            "camera_image": {
+                "algorithm": "camera_composer",
+                "type": "procedural_texture"
+            },
+            "diamond_Base_Color.png": {
+                "file_name": "images/diamond_Base_Color.png",
+                "type": "texture"
+            },
+            "diamond_Metallic.png": {
+                "file_name": "images/diamond_Metallic.png",
+                "type": "texture"
+            },
+            "diamond_Roughness.png": {
+                "file_name": "images/diamond_Roughness.png",
+                "type": "texture"
+            },
+            "gold_Base_Color.png": {
+                "file_name": "images/gold_Base_Color.png",
+                "type": "texture"
+            },
+            "gold_Metallic.png": {
+                "file_name": "images/gold_Metallic.png",
+                "type": "texture"
+            },
+            "gold_Roughness.png": {
+                "file_name": "images/gold_Roughness.png",
+                "type": "texture"
+            },
+            "ibl_diff.ktx": {
+                "file_name": "images/ibl_diff.ktx",
+                "type": "cubemap"
+            },
+            "ibl_spec.ktx": {
+                "file_name": "images/ibl_spec.ktx",
+                "type": "cubemap"
+            },
+            "no_Normal.png": {
+                "file_name": "images/no_Normal.png",
+                "type": "texture"
+            },
+            "null_image.png": {
+                "file_name": "images/null_image.png",
+                "type": "texture"
+            },
+            "null_lut.png": {
+                "file_name": "images/null_lut.png",
+                "type": "texture"
+            },
+            "preview.png": {
+                "file_name": "images/preview.png",
+                "type": "texture"
+            }
+        },
+        "materials": {
+            "$builtin$materials/copy_pixels.-1": {
+                "parameters": {},
+                "samplers": [
+                    {
+                        "image": "camera_image",
+                        "name": "tex_src"
+                    }
+                ],
+                "state": {
+                    "backfaces": true,
+                    "blend": "off",
+                    "colorwrite": true,
+                    "ztest": false,
+                    "zwrite": false
+                }
+            },
+            "$builtin$materials/copy_pixels.0": {
+                "parameters": {},
+                "samplers": [
+                    {
+                        "image": "ComposerRT_color",
+                        "name": "tex_src"
+                    }
+                ],
+                "state": {
+                    "backfaces": true,
+                    "blend": "off",
+                    "colorwrite": true,
+                    "ztest": false,
+                    "zwrite": false
+                }
+            },
+            "$builtin$materials/copy_pixels.1": {
+                "parameters": {},
+                "samplers": [
+                    {
+                        "image": "EffectRT0_color",
+                        "name": "tex_src"
+                    }
+                ],
+                "state": {
+                    "backfaces": true,
+                    "blend": "off",
+                    "colorwrite": true,
+                    "ztest": false,
+                    "zwrite": false
+                }
+            },
+            "$builtin$materials/copy_pixels.2": {
+                "parameters": {},
+                "samplers": [
+                    {
+                        "image": "EffectRT1_color",
+                        "name": "tex_src"
+                    }
+                ],
+                "state": {
+                    "backfaces": true,
+                    "blend": "off",
+                    "colorwrite": true,
+                    "ztest": false,
+                    "zwrite": false
+                }
+            },
+            "shaders/TriMat": {
+                "built_in_samplers": [],
+                "samplers": [
+                    {
+                        "image": "EffectRT0_color",
+                        "name": "glfx_BACKGROUND"
+                    }
+                ],
+                "state": {
+                    "backfaces": true,
+                    "blend": "off",
+                    "colorwrite": true,
+                    "ztest": true,
+                    "zwrite": false
+                }
+            },
+            "shaders/color_correction": {
+                "built_in_samplers": [],
+                "samplers": [
+                    {
+                        "image": "OnlyGeom_color",
+                        "name": "glfx_BACKGROUND"
+                    }
+                ],
+                "state": {
+                    "backfaces": true,
+                    "blend": "off",
+                    "colorwrite": true,
+                    "ztest": true,
+                    "zwrite": false
+                }
+            },
+            "shaders/mat_cut": {
+                "built_in_samplers": [
+                    "bnb_BONES",
+                    "bnb_UVMORPH_FISHEYE",
+                    "bnb_MORPH"
+                ],
+                "samplers": [
+                    {
+                        "name": "bnb_BONES"
+                    },
+                    {
+                        "name": "bnb_UVMORPH_FISHEYE"
+                    },
+                    {
+                        "name": "bnb_MORPH"
+                    }
+                ],
+                "state": {
+                    "backfaces": false,
+                    "blend": "off",
+                    "colorwrite": false,
+                    "ztest": true,
+                    "zwrite": true
+                }
+            },
+            "shaders/mat_diamond": {
+                "built_in_samplers": [
+                    "bnb_BONES",
+                    "bnb_UVMORPH_FISHEYE",
+                    "bnb_MORPH"
+                ],
+                "samplers": [
+                    {
+                        "image": "diamond_Base_Color.png",
+                        "name": "tex_diffuse"
+                    },
+                    {
+                        "image": "no_Normal.png",
+                        "name": "tex_normal"
+                    },
+                    {
+                        "image": "diamond_Metallic.png",
+                        "name": "tex_metallic"
+                    },
+                    {
+                        "image": "diamond_Roughness.png",
+                        "name": "tex_roughness"
+                    },
+                    {
+                        "image": "brdf.ktx",
+                        "name": "tex_brdf"
+                    },
+                    {
+                        "image": "ibl_diff.ktx",
+                        "name": "tex_ibl_diff"
+                    },
+                    {
+                        "image": "ibl_spec.ktx",
+                        "name": "tex_ibl_spec"
+                    },
+                    {
+                        "image": "ibl_spec.ktx",
+                        "name": "tex_skybox"
+                    },
+                    {
+                        "image": "EffectRT1_color",
+                        "name": "glfx_BACKGROUND"
+                    },
+                    {
+                        "name": "bnb_BONES"
+                    },
+                    {
+                        "name": "bnb_UVMORPH_FISHEYE"
+                    },
+                    {
+                        "name": "bnb_MORPH"
+                    }
+                ],
+                "state": {
+                    "backfaces": false,
+                    "blend": "alpha",
+                    "colorwrite": true,
+                    "ztest": true,
+                    "zwrite": true
+                }
+            },
+            "shaders/mat_gold": {
+                "built_in_samplers": [
+                    "bnb_BONES",
+                    "bnb_UVMORPH_FISHEYE",
+                    "bnb_MORPH"
+                ],
+                "samplers": [
+                    {
+                        "image": "gold_Base_Color.png",
+                        "name": "tex_diffuse"
+                    },
+                    {
+                        "image": "no_Normal.png",
+                        "name": "tex_normal"
+                    },
+                    {
+                        "image": "gold_Metallic.png",
+                        "name": "tex_metallic"
+                    },
+                    {
+                        "image": "gold_Roughness.png",
+                        "name": "tex_roughness"
+                    },
+                    {
+                        "image": "brdf.ktx",
+                        "name": "tex_brdf"
+                    },
+                    {
+                        "image": "ibl_diff.ktx",
+                        "name": "tex_ibl_diff"
+                    },
+                    {
+                        "image": "ibl_spec.ktx",
+                        "name": "tex_ibl_spec"
+                    },
+                    {
+                        "name": "bnb_BONES"
+                    },
+                    {
+                        "name": "bnb_UVMORPH_FISHEYE"
+                    },
+                    {
+                        "name": "bnb_MORPH"
+                    }
+                ],
+                "state": {
+                    "backfaces": false,
+                    "blend": "off",
+                    "colorwrite": true,
+                    "ztest": true,
+                    "zwrite": true
+                }
+            },
+            "shaders/retouch": {
+                "built_in_samplers": [],
+                "lagacy_onface_flag": true,
+                "samplers": [
+                    {
+                        "image": "ComposerRT_color",
+                        "name": "glfx_BACKGROUND"
+                    }
+                ],
+                "state": {
+                    "backfaces": false,
+                    "blend": "off",
+                    "colorwrite": true,
+                    "ztest": true,
+                    "zwrite": true
+                }
+            }
+        },
+        "media": {
+            "frx": {
+                "type": "video"
+            }
+        },
+        "meshes": {
+            "!glfx_FACE": "$builtin$meshes/face.stream:0",
+            "necklace_1.bsm2": "meshes/necklace_1.bsm2",
+            "camera_surface": "$builtin$meshes/fs_tri",
+            "cut.bsm2": "meshes/cut.bsm2",
+            "tri.bsm2": "meshes/tri.bsm2"
+        },
+        "morphs": {}
+    },
+    "components": {
+        "color_correction": {
+            "materials": [
+                "shaders/color_correction"
+            ],
+            "mesh": "camera_surface",
+            "type": "mesh_instance"
+        },
+        "!glfx_UPDATE_BG0": {
+            "materials": [
+                "$builtin$materials/copy_pixels.1"
+            ],
+            "mesh": "camera_surface",
+            "type": "mesh_instance"
+        },
+        "!glfx_UPDATE_BG1": {
+            "materials": [
+                "$builtin$materials/copy_pixels.2"
+            ],
+            "mesh": "camera_surface",
+            "type": "mesh_instance"
+        },
+        "ComposerRT_copy": {
+            "materials": [
+                "$builtin$materials/copy_pixels.0"
+            ],
+            "mesh": "camera_surface",
+            "type": "mesh_instance"
+        },
+        "composer_camera_copy": {
+            "materials": [
+                "$builtin$materials/copy_pixels.-1"
+            ],
+            "mesh": "camera_surface",
+            "type": "mesh_instance"
+        },
+        "face_tracker:0": {
+            "face": "face0",
+            "type": "face_tracker"
+        }
+    },
+    "entities": {
+        "!glfx_UPDATE_BG0": {
+            "components": [
+                "!glfx_UPDATE_BG0"
+            ],
+            "layer": "!glfx_UPDATE_BG0"
+        },
+        "!glfx_UPDATE_BG1": {
+            "components": [
+                "!glfx_UPDATE_BG1"
+            ],
+            "layer": "!glfx_UPDATE_BG1"
+        },
+        "ComposerRT_copy_append_to_root__": {
+            "components": [
+                "ComposerRT_copy"
+            ],
+            "layer": "ComposerRT_copy"
+        },
+        "composer_camera_copy": {
+            "components": [
+                "composer_camera_copy"
+            ],
+            "layer": "camera_copy"
+        },
+        "face_tracker0": {
+            "components": [
+                "face_tracker:0"
+            ]
+        },
+        "spawn_entity0": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "TriMat",
+                "mat_cut",
+                "mat_gold",
+                "mat_diamond"
+            ]
+        },
+        "spawn_entity1": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "TriMat",
+                "mat_cut",
+                "mat_gold",
+                "mat_diamond"
+            ]
+        },
+        "spawn_entity10": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "TriMat",
+                "mat_cut",
+                "mat_gold",
+                "mat_diamond"
+            ]
+        },
+        "spawn_entity11": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "TriMat",
+                "mat_cut",
+                "mat_gold",
+                "mat_diamond"
+            ]
+        },
+        "spawn_entity12": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "TriMat",
+                "mat_cut",
+                "mat_gold",
+                "mat_diamond"
+            ]
+        },
+        "spawn_entity13": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "TriMat",
+                "mat_cut",
+                "mat_gold",
+                "mat_diamond"
+            ]
+        },
+        "spawn_entity14": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "TriMat",
+                "mat_cut",
+                "mat_gold",
+                "mat_diamond"
+            ]
+        },
+        "spawn_entity15": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "TriMat",
+                "mat_cut",
+                "mat_gold",
+                "mat_diamond"
+            ]
+        },
+        "spawn_entity16": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "TriMat",
+                "mat_cut",
+                "mat_gold",
+                "mat_diamond"
+            ]
+        },
+        "spawn_entity17": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "TriMat",
+                "mat_cut",
+                "mat_gold",
+                "mat_diamond"
+            ]
+        },
+        "spawn_entity18": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "TriMat",
+                "mat_cut",
+                "mat_gold",
+                "mat_diamond"
+            ]
+        },
+        "spawn_entity19": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "TriMat",
+                "mat_cut",
+                "mat_gold",
+                "mat_diamond"
+            ]
+        },
+        "spawn_entity2": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "TriMat",
+                "mat_cut",
+                "mat_gold",
+                "mat_diamond"
+            ]
+        },
+        "spawn_entity3": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "TriMat",
+                "mat_cut",
+                "mat_gold",
+                "mat_diamond"
+            ]
+        },
+        "spawn_entity4": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "TriMat",
+                "mat_cut",
+                "mat_gold",
+                "mat_diamond"
+            ]
+        },
+        "spawn_entity5": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "TriMat",
+                "mat_cut",
+                "mat_gold",
+                "mat_diamond"
+            ]
+        },
+        "spawn_entity6": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "TriMat",
+                "mat_cut",
+                "mat_gold",
+                "mat_diamond"
+            ]
+        },
+        "spawn_entity7": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "TriMat",
+                "mat_cut",
+                "mat_gold",
+                "mat_diamond"
+            ]
+        },
+        "spawn_entity8": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "TriMat",
+                "mat_cut",
+                "mat_gold",
+                "mat_diamond"
+            ]
+        },
+        "spawn_entity9": {
+            "add_to_legacy_entities_list": true,
+            "layers": [
+                "retouch",
+                "TriMat",
+                "mat_cut",
+                "mat_gold",
+                "mat_diamond"
+            ]
+        },
+        "color_correction_entity": {
+            "components": ["color_correction"],
+            "layers": [
+                "color_correction"
+            ]
+        }
+    },
+    "hierarchy": {
+        "face_tracker0": [
+            "spawn_entity0",
+            "spawn_entity1",
+            "spawn_entity2",
+            "spawn_entity3",
+            "spawn_entity4",
+            "spawn_entity5",
+            "spawn_entity6",
+            "spawn_entity7",
+            "spawn_entity8",
+            "spawn_entity9",
+            "spawn_entity10",
+            "spawn_entity11",
+            "spawn_entity12",
+            "spawn_entity13",
+            "spawn_entity14",
+            "spawn_entity15",
+            "spawn_entity16",
+            "spawn_entity17",
+            "spawn_entity18",
+            "spawn_entity19"
+        ],
+        "root": [
+            "color_correction_entity",
+            "face_tracker0",
+            "composer_camera_copy",
+            "ComposerRT_copy_append_to_root__",
+            "!glfx_UPDATE_BG0",
+            "!glfx_UPDATE_BG1"
+        ]
+    },
+    "layers": {
+        "color_correction": {},
+        "!glfx_UPDATE_BG0": {},
+        "!glfx_UPDATE_BG1": {},
+        "ComposerRT_copy": {},
+        "TriMat": {},
+        "camera_copy": {},
+        "composer_pre": {},
+        "internal_face_morph__": {},
+        "mat_cut": {},
+        "mat_diamond": {},
+        "mat_gold": {},
+        "retouch": {}
+    },
+    "main_camera": {
+        "adjust_znear": 150
+    },
+    "render_list": {
+        "default": [
+            {
+                "layer": "camera_copy",
+                "render_target": "ComposerRT"
+            },
+            {
+                "layer": "ComposerRT_copy",
+                "render_target": "EffectRT0"
+            },
+            {
+                "layer": "retouch",
+                "render_target": "EffectRT0",
+                "sub_geometries": [
+                    "retouch"
+                ]
+            },
+            {
+                "layer": "!glfx_UPDATE_BG0",
+                "render_target": "EffectRT1"
+            },
+            {
+                "layer": "TriMat",
+                "render_target": "EffectRT1",
+                "sub_geometries": [
+                    "TriMat"
+                ]
+            },
+            {
+                "layer": "!glfx_UPDATE_BG1",
+                "render_target": "EffectRT2"
+            },
+            {
+                "layer": "mat_cut",
+                "render_target": "EffectRT2",
+                "sub_geometries": [
+                    "mat_cut"
+                ]
+            },
+            {
+                "layer": "mat_gold",
+                "render_target": "EffectRT2",
+                "sub_geometries": [
+                    "mat_gold"
+                ]
+            },
+            {
+                "layer": "mat_diamond",
+                "render_target": "EffectRT2",
+                "sub_geometries": [
+                    "mat_diamond"
+                ]
+            },
+            {
+                "layer": "internal_face_morph__",
+                "render_target": "EffectRT2"
+            },
+            {
+                "layer": "mat_cut",
+                "render_target": "OnlyGeomRT",
+                "sub_geometries": [
+                    "mat_cut"
+                ]
+            },
+            {
+                "layer": "mat_gold",
+                "render_target": "OnlyGeomRT",
+                "sub_geometries": [
+                    "mat_gold"
+                ]
+            },
+            {
+                "layer": "mat_diamond",
+                "render_target": "OnlyGeomRT",
+                "sub_geometries": [
+                    "mat_diamond"
+                ]
+            },
+            {
+                "layer": "color_correction",
+                "render_target": "ColorCorrectionRT"
+            }
+        ]
+    },
+    "render_targets": {
+        "ComposerRT": [
+            "ComposerRT_color"
+        ],
+        "EffectRT0": [
+            "EffectRT0_color",
+            "EffectRT0_depth"
+        ],
+        "EffectRT1": [
+            "EffectRT1_color",
+            "EffectRT1_depth"
+        ],
+        "EffectRT2": {
+            "attachments":[
+            "EffectRT2_color",
+            "EffectRT2_depth"
+        ],
+        "samples_count": 4
+        },
+        "OnlyGeomRT": [
+            "OnlyGeom_color",
+            "OnlyGeom_depth"
+        ],
+        "ColorCorrectionRT": [
+            "ColorCorrection_color",
+            "ColorCorrection_depth"
+        ]
+    },
+    "scene": "necklace_01",
+    "script": {
+        "entry_point": "config.js",
+        "type": "legacy"
+    }
+}

@@ -16,7 +16,7 @@ Feel free to [contact us](https://docs.banuba.com/face-ar-sdk-v1/support) if you
 
 1. Clone the repository
 2. Copy and Paste your client token into appropriate section of 
-[`app/src/main/java/com/banuba/tech/demo/Application.kt`](app/src/main/java/com/banuba/tech/demo/Application.kt#L7)
+[`client_token/com/banuba/sdk/example/common/BanubaClientToken.kt`](client_token/com/banuba/sdk/example/common/BanubaClientToken.kt)
 3. Open the project in Android Studio.
 4. Сlick on the "Run" -> "Edit configurations..."
 5. In the field "Deploy:", change "Default APK" to "APK from app bundle"

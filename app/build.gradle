@@ -46,6 +46,16 @@ android {
     androidExtensions { experimental = true }
 
     assetPacks = [":masksassetpack"]
+
+    // Add client_token sources shared across example projects.
+    // You may just move the BanubaClientToken.kt in your app, if such sharing is not neccessary.
+    sourceSets {
+        main {
+            java {
+                srcDir '../client_token'
+            }
+        }
+    }
 }
 
 dependencies {

@@ -1,22 +1,28 @@
 package com.banuba.tech.demo.camera
 
+import android.annotation.SuppressLint
 import android.app.Application
-import android.graphics.Bitmap
 import android.net.Uri
 import android.view.SurfaceView
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.banuba.sdk.effect_player.CameraOrientation
 import com.banuba.sdk.effect_player.Effect
-import com.banuba.sdk.entity.RecordedVideoInfo
+import com.banuba.sdk.frame.FramePixelBuffer
+import com.banuba.sdk.input.CameraDevice
+import com.banuba.sdk.input.CameraDeviceConfigurator
+import com.banuba.sdk.input.CameraInput
+import com.banuba.sdk.input.IInput
+import com.banuba.sdk.input.PhotoInput
 import com.banuba.sdk.manager.BanubaSdkManager
-import com.banuba.sdk.manager.BanubaSdkTouchListener
-import com.banuba.sdk.manager.IEventCallback
-import com.banuba.sdk.types.Data
-import com.banuba.sdk.types.FullImageData
-import com.banuba.sdk.types.FullImageData.Orientation
+import com.banuba.sdk.output.FrameOutput
+import com.banuba.sdk.output.IOutput
+import com.banuba.sdk.output.SurfaceOutput
+import com.banuba.sdk.player.Player
+import com.banuba.sdk.player.PlayerTouchListener
+import com.banuba.sdk.types.Touch
 import com.banuba.tech.demo.R
 import com.banuba.tech.demo.adapters.SelectableItem
 import com.banuba.tech.demo.data.DataRepository
@@ -32,11 +38,10 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
-import com.banuba.sdk.types.Touch
-import kotlinx.coroutines.isActive
 
 
 class CameraViewModel(application: Application) : AndroidViewModel(application) {
@@ -47,8 +52,11 @@ class CameraViewModel(application: Application) : AndroidViewModel(application) 
         private const val VOLUME_OFF = 0f
     }
 
-    private val banubaSdkManager by lazy(LazyThreadSafetyMode.NONE) {
-        BanubaSdkManager(application)
+    private var cameraDevice: CameraDevice? = null
+    private var surfaceOutput: SurfaceOutput? = null
+
+    private val player by lazy(LazyThreadSafetyMode.NONE) {
+        Player()
     }
 
     private var _listOfTechnology = listOf<SelectableItem>()
@@ -94,22 +102,37 @@ class CameraViewModel(application: Application) : AndroidViewModel(application) 
     val effectCategoryScrollPosition: SharedFlow<Int> = _effectCategoryScrollPosition
 
 
-    private var cameraFacing = CameraFacing.FRONT
+    private var cameraFacing = CameraDeviceConfigurator.LensSelector.FRONT
 
     private var maskCallbackJobs: MutableList<Job> = mutableListOf()
     private var oneTimeEventJob: Job? = null
 
     private var hasPhotoTooltipShowed: Boolean = false
 
-    private var previewBitmap: Bitmap? = null
+    private var previewFramePixelBuffer: FramePixelBuffer? = null
+
+    fun openCamera(lifecycleOwner: LifecycleOwner) {
+        cameraDevice = CameraDevice(getApplication<Application>(), lifecycleOwner)
+        player.use(CameraInput(cameraDevice!!))
+        cameraDevice!!.start()
+        player.play()
+    }
+
+    fun closeCamera() {
+        if (cameraDevice != null) {
+            player.use(null as IInput?)
+            cameraDevice!!.close()
+        }
+        player.pause()
+    }
 
     fun changeCameraFacing() {
-        cameraFacing = if (cameraFacing == CameraFacing.BACK) {
-            CameraFacing.FRONT
+        cameraFacing = if (cameraFacing == CameraDeviceConfigurator.LensSelector.BACK) {
+            CameraDeviceConfigurator.LensSelector.FRONT
         } else {
-            CameraFacing.BACK
+            CameraDeviceConfigurator.LensSelector.BACK
         }
-        banubaSdkManager.setCameraFacing(cameraFacing.facing, cameraFacing.mirroring)
+        cameraDevice!!.configurator.setLens(cameraFacing).commit()
     }
 
     fun takePhoto() {
@@ -117,10 +140,25 @@ class CameraViewModel(application: Application) : AndroidViewModel(application) 
 
         applyEffect(selectedEffect)
 
-        banubaSdkManager.setCallback(eventCallback)
-        banubaSdkManager.takePhoto(null)
+        val photoInput = PhotoInput()
+        player.use(photoInput)
+        photoInput.take(cameraDevice!!, null)
+        captureNextFrame()
+        cameraDevice!!.stop()
 
         _mediaMode.value = MediaMode.PHOTO_EDITING
+    }
+
+    private fun captureNextFrame() {
+        val frameOutput = FrameOutput(object : FrameOutput.IFramePixelBufferProvider {
+            override fun onFrame(output: IOutput?, frame: FramePixelBuffer?) {
+                previewFramePixelBuffer = frame
+                val self = output as FrameOutput
+                player.removeOutput(self)
+                self.close()
+            }
+        })
+        player.addOutput(frameOutput)
     }
 
     fun closePhotoEditing() {
@@ -129,20 +167,23 @@ class CameraViewModel(application: Application) : AndroidViewModel(application) 
     }
 
     private fun endPhotoEditing() {
-        banubaSdkManager.unloadEffect(appliedEffect)
-        banubaSdkManager.stopEditingImage()
-
-        banubaSdkManager.openCamera()
-        banubaSdkManager.setCameraFacing(cameraFacing.facing, cameraFacing.mirroring)
+        player.loadAsync("")
+        player.use(CameraInput(cameraDevice!!))
+        cameraDevice!!.start()
+        previewFramePixelBuffer = null
     }
 
     fun onImagePreviewTouched(touchId : Int, touchX: Float, touchY: Float, size: Float) {
         val map: HashMap<Long, Touch> = HashMap(1)
         map[touchId.toLong()] = Touch(touchX, touchY, size.toLong())
-        banubaSdkManager.effectPlayer.inputManager?.onTouchesEnded(map)
+        player.effectPlayer.inputManager?.onTouchesEnded(map)
 
-        if (previewBitmap != null) {
-            banubaSdkManager.startEditingImage(FullImageData(previewBitmap, Orientation(CameraOrientation.DEG_0)))
+        val frame = previewFramePixelBuffer
+        if (frame != null) {
+            val photoInput = PhotoInput()
+            player.use(photoInput)
+            photoInput.take(frame)
+            captureNextFrame()
         }
     }
 
@@ -203,22 +244,21 @@ class CameraViewModel(application: Application) : AndroidViewModel(application) 
         prepareEffect(selectableEffectConfig.effectConfig)
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     fun attachSurface(surface: SurfaceView) {
-        banubaSdkManager.attachSurface(surface)
-        banubaSdkManager.openCamera()
-        banubaSdkManager.effectManager.setEffectVolume(VOLUME_ON)
-        surface.setOnTouchListener(
-            BanubaSdkTouchListener(
-                surface.context,
-                banubaSdkManager.effectPlayer
-            )
-        )
+        surfaceOutput = SurfaceOutput(surface.holder)
+        player.addOutput(surfaceOutput!!)
+        player.effectPlayer.effectManager()!!.setEffectVolume(VOLUME_ON)
+        surface.setOnTouchListener(PlayerTouchListener(getApplication<Application>(), player))
     }
 
     fun releaseSurface() {
-        banubaSdkManager.releaseSurface()
-        banubaSdkManager.closeCamera()
-        banubaSdkManager.effectManager.setEffectVolume(VOLUME_OFF)
+        if (surfaceOutput != null) {
+            player.removeOutput(surfaceOutput!!)
+            surfaceOutput!!.close()
+            surfaceOutput = null
+        }
+        player.effectPlayer.effectManager()?.setEffectVolume(VOLUME_OFF)
     }
 
     private val decimalFormatSymbols by lazy {
@@ -249,7 +289,7 @@ class CameraViewModel(application: Application) : AndroidViewModel(application) 
         _showSimpleDialog.value = null
     }
     private fun resetEffect() {
-        banubaSdkManager.unloadEffect(appliedEffect)
+        player.loadAsync("")
         if (_mediaMode.value == MediaMode.PHOTO_EDITING) {
             endPhotoEditing()
         }
@@ -282,7 +322,7 @@ class CameraViewModel(application: Application) : AndroidViewModel(application) 
 
     private fun applyEffect(effectData: EffectConfig) {
         _uiConfig.value = effectData.uiConfig
-        appliedEffect = banubaSdkManager.effectManager.loadAsync(
+        appliedEffect = player.loadAsync(
             if (effectData.effectPath.isEmpty()) "" else buildPath(effectData.effectPath)
         )
 
@@ -449,35 +489,6 @@ class CameraViewModel(application: Application) : AndroidViewModel(application) 
             .appendPath(maskName)
             .build()
             .toString()
-    }
-
-    private val eventCallback = object : IEventCallback {
-        override fun onScreenshotReady(screenshot: Bitmap): Unit {
-            previewBitmap = screenshot
-            banubaSdkManager.startEditingImage(FullImageData(screenshot, Orientation(CameraOrientation.DEG_0)))
-        }
-
-        override fun onCameraOpenError(p0: Throwable) {
-        }
-
-        override fun onCameraStatus(p0: Boolean) {
-        }
-
-        override fun onHQPhotoReady(p0: Bitmap) {
-        }
-
-        override fun onVideoRecordingFinished(p0: RecordedVideoInfo) {
-        }
-
-        override fun onVideoRecordingStatusChange(p0: Boolean) {
-        }
-
-        override fun onImageProcessed(p0: Bitmap) {
-        }
-
-        override fun onFrameRendered(p0: Data, p1: Int, p2: Int) {
-        }
-
     }
 }
 

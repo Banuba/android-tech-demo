@@ -83,12 +83,14 @@ class CameraFragment : Fragment(), TechnologiesBottomSheet.TechnologyListener {
 
     override fun onStart() {
         super.onStart()
+        viewModel.openCamera(viewLifecycleOwner)
         viewModel.attachSurface(binding.surfaceView)
     }
 
     override fun onStop() {
         super.onStop()
         viewModel.releaseSurface()
+        viewModel.closeCamera()
     }
 
     override fun onDestroyView() {

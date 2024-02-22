@@ -71,9 +71,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
     // Banuba SDK dependencies
-    implementation "com.banuba.sdk:banuba_sdk:1.8.1-1-ga20bfa5af8"
-
-    //implementation fileTree(dir: 'libs', include: ['banuba_effect_player-release.aar', 'banuba_sdk-release.aar'])
+    implementation "com.banuba.sdk:banuba_sdk:1+"
 
     implementation 'com.google.firebase:firebase-crashlytics-ktx'
     implementation 'com.google.firebase:firebase-analytics-ktx'

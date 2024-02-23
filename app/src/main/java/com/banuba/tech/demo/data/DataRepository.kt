@@ -140,20 +140,19 @@ object DataRepository {
                                 ),
                             )
                         ),
-                        // TODO: fix the acne removal and restore code below
-//                        EffectsGroup(
-//                            "Acne", listOf(
-//                                EffectConfig(
-//                                    R.drawable.ic_empty_effect, effectPath = "test_Acne",
-//                                    uiConfig = UIConfig.SEEKBAR, jsMethod = "onDataUpdate",
-//                                    requiredMode = MediaMode.PHOTO,
-//                                    jsConfig = listOf(
-//                                        JsConfig.Background("GetTouchStatus()", 300, R.string.acne_tooltip),
-//                                        JsConfig.SimpleConfig("setFitMode(1); resetAcne()")
-//                                    )
-//                                ),
-//                            )
-//                        )
+                        EffectsGroup(
+                            "Acne", listOf(
+                                EffectConfig(
+                                    R.drawable.ic_empty_effect, effectPath = "test_Acne",
+                                    uiConfig = UIConfig.SEEKBAR, jsMethod = "onDataUpdate",
+                                    requiredMode = MediaMode.PHOTO,
+                                    jsConfig = listOf(
+                                        JsConfig.Background("GetTouchStatus()", 300, R.string.acne_tooltip),
+                                        JsConfig.SimpleConfig("setFitMode(1); resetAcne()")
+                                    )
+                                ),
+                            )
+                        )
                     )
                 ),
                 EffectsCategory(

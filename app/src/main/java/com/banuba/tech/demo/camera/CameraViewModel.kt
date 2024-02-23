@@ -10,15 +10,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.banuba.sdk.effect_player.Effect
-import com.banuba.sdk.frame.FramePixelBuffer
 import com.banuba.sdk.input.CameraDevice
+import com.banuba.sdk.input.CameraDevice.FrameProvider
 import com.banuba.sdk.input.CameraDeviceConfigurator
 import com.banuba.sdk.input.CameraInput
 import com.banuba.sdk.input.IInput
 import com.banuba.sdk.input.PhotoInput
 import com.banuba.sdk.manager.BanubaSdkManager
-import com.banuba.sdk.output.FrameOutput
-import com.banuba.sdk.output.IOutput
 import com.banuba.sdk.output.SurfaceOutput
 import com.banuba.sdk.player.Player
 import com.banuba.sdk.player.PlayerTouchListener
@@ -109,12 +107,26 @@ class CameraViewModel(application: Application) : AndroidViewModel(application) 
 
     private var hasPhotoTooltipShowed: Boolean = false
 
-    private var previewFramePixelBuffer: FramePixelBuffer? = null
+    private var touchMap: HashMap<Long, Touch>? = null
+
+    private var cameraLocks = 1 // because camera is not started
+
+    fun startCamera() {
+        if (--cameraLocks == 0) {
+            cameraDevice!!.start()
+        }
+    }
+
+    fun stopCamera() {
+        if (++cameraLocks != 0) {
+            cameraDevice!!.stop()
+        }
+    }
 
     fun openCamera(lifecycleOwner: LifecycleOwner) {
         cameraDevice = CameraDevice(getApplication<Application>(), lifecycleOwner)
+        cameraDevice!!.configurator.setImageCaptureSize(CameraDeviceConfigurator.QHD_CAPTURE_SIZE).commit()
         player.use(CameraInput(cameraDevice!!))
-        cameraDevice!!.start()
         player.play()
     }
 
@@ -143,22 +155,15 @@ class CameraViewModel(application: Application) : AndroidViewModel(application) 
         val photoInput = PhotoInput()
         player.use(photoInput)
         photoInput.take(cameraDevice!!, null)
-        captureNextFrame()
-        cameraDevice!!.stop()
+        touchMap = HashMap()
+
+        cameraDevice!!.takePhoto(object : CameraDevice.ICapturedFrameInput {
+            override fun onFrame(frame: FrameProvider?) {
+                stopCamera()
+            }
+        }, null);
 
         _mediaMode.value = MediaMode.PHOTO_EDITING
-    }
-
-    private fun captureNextFrame() {
-        val frameOutput = FrameOutput(object : FrameOutput.IFramePixelBufferProvider {
-            override fun onFrame(output: IOutput?, frame: FramePixelBuffer?) {
-                previewFramePixelBuffer = frame
-                val self = output as FrameOutput
-                player.removeOutput(self)
-                self.close()
-            }
-        })
-        player.addOutput(frameOutput)
     }
 
     fun closePhotoEditing() {
@@ -169,22 +174,14 @@ class CameraViewModel(application: Application) : AndroidViewModel(application) 
     private fun endPhotoEditing() {
         player.loadAsync("")
         player.use(CameraInput(cameraDevice!!))
-        cameraDevice!!.start()
-        previewFramePixelBuffer = null
+        startCamera()
+        player.setRenderMode(Player.RenderMode.LOOP)
+        touchMap = null
     }
 
     fun onImagePreviewTouched(touchId : Int, touchX: Float, touchY: Float, size: Float) {
-        val map: HashMap<Long, Touch> = HashMap(1)
-        map[touchId.toLong()] = Touch(touchX, touchY, size.toLong())
-        player.effectPlayer.inputManager?.onTouchesEnded(map)
-
-        val frame = previewFramePixelBuffer
-        if (frame != null) {
-            val photoInput = PhotoInput()
-            player.use(photoInput)
-            photoInput.take(frame)
-            captureNextFrame()
-        }
+        touchMap?.set(touchId.toLong(), Touch(touchX, touchY, size.toLong()))
+        player.effectPlayer.inputManager?.onTouchesEnded(touchMap!!)
     }
 
     fun selectTechnology(technology: SelectableItem, selectFirstCategory: Boolean = true) {

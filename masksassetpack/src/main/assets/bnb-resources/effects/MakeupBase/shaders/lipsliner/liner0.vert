@@ -6,10 +6,7 @@ BNB_OUT(0) vec2 var_uv;
 
 void main()
 {
-	gl_Position = vec4( attrib_pos.xy, 0., 1. );
-	var_uv = attrib_pos.xy*0.5 + 0.5;
-
-#ifdef BNB_VK_1
-	var_uv.y = 1. - var_uv.y;
-#endif
+	vec2 v = attrib_pos.xy;
+	gl_Position = vec4( v, 0., 1. );
+	var_uv = vec2(vec4(v,1.,1.) * lips_nn_transform);
 }

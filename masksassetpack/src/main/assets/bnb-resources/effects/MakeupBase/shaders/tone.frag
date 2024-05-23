@@ -45,7 +45,7 @@ void main()
 
 	vec3 I = BNB_TEXTURE_2D_LOD( BNB_SAMPLER_2D(tex_input), var_uv, 0. ).xyz;
 	vec3 I_ = BNB_TEXTURE_2D_LOD( BNB_SAMPLER_2D(tex_blur_hsv), var_uv, 0. ).xyz;
-	vec4 I_mean_ = BNB_TEXTURE_2D_LOD( BNB_SAMPLER_2D(tex_mean), vec2(0.5), 0. );
+	vec4 I_mean_ = texelFetch( BNB_SAMPLER_2D(tex_mean), ivec2(0,0), 8 );
 	vec3 I_mean = I_mean_.xyz/max(I_mean_.w,0.00001);
 
 	vec4 makeup;

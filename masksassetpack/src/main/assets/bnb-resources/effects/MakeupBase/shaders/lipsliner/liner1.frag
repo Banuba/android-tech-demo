@@ -2,48 +2,27 @@
 
 BNB_DECLARE_SAMPLER_2D(0, 1, liner0);
 
-float gauss( float x, float y, float sigma_mult )
+float bin_sample( ivec2 iuv )
 {
-	return exp( -sigma_mult*(x*x + y*y) );
-}
-
-float blur1( BNB_DECLARE_SAMPLER_2D_ARGUMENT(img), ivec2 iuv, float r )
-{
-	ivec2 isz1 = textureSize(BNB_SAMPLER_2D(img),0) - 1;
-	float c = texelFetch( BNB_SAMPLER_2D(img), iuv, 0 ).x;
-
-	float sigma = (r*2.+1.)/4.;
-	float sigma_mult = 1./(2.*sigma*sigma);
-
-	float blurred = c;
-	float mult_sum = 1.;
-	int ir = int(r)+1;
-	for( int y = 0; y <= ir; ++y )
-	{
-		for( int x = 1; x <= ir; ++x )
-		{
-			float mult = gauss(float(x),float(y),sigma_mult);
-			mult_sum += mult*4.;
-			blurred += mult*(
-				texelFetch( BNB_SAMPLER_2D(img), clamp( iuv + ivec2( x, y), ivec2(0), isz1 ), 0 ).x + 
-				texelFetch( BNB_SAMPLER_2D(img), clamp( iuv + ivec2(-y, x), ivec2(0), isz1 ), 0 ).x +
-				texelFetch( BNB_SAMPLER_2D(img), clamp( iuv + ivec2(-x,-y), ivec2(0), isz1 ), 0 ).x +
-				texelFetch( BNB_SAMPLER_2D(img), clamp( iuv + ivec2( y,-x), ivec2(0), isz1 ), 0 ).x);
-		}
-	}
-	blurred *= 1./mult_sum;
-	blurred = clamp( blurred, 0., 1. );
-	return blurred;
+	return step( 0.5, texelFetch( BNB_SAMPLER_2D(liner0), iuv, 0 ).x );
 }
 
 void main()
 {
-	float m = blur1( BNB_PASS_SAMPLER_ARGUMENT(liner0), ivec2(gl_FragCoord.xy), lipsliner_r1_r2.x );
+	ivec2 iuv = ivec2(gl_FragCoord.xy);
+	ivec2 isz1 = textureSize( BNB_SAMPLER_2D(liner0), 0 ) - 1;
+
+	float cmm = bin_sample(clamp(iuv+ivec2(-1,-1),ivec2(0),isz1));
+	float c0m = bin_sample(clamp(iuv+ivec2( 0,-1),ivec2(0),isz1));
+	float cpm = bin_sample(clamp(iuv+ivec2( 1,-1),ivec2(0),isz1));
+
+	float cm0 = bin_sample(clamp(iuv+ivec2(-1, 0),ivec2(0),isz1));
+	float c00 = bin_sample(iuv);
+	float cp0 = bin_sample(clamp(iuv+ivec2( 1, 0),ivec2(0),isz1));
+
+	float cmp = bin_sample(clamp(iuv+ivec2(-1, 1),ivec2(0),isz1));
+	float c0p = bin_sample(clamp(iuv+ivec2( 0, 1),ivec2(0),isz1));
+	float cpp = bin_sample(clamp(iuv+ivec2( 1, 1),ivec2(0),isz1));
 	
-	if( m > 0.99 || m < 0.01 ) 
-		m = 0.;
-	else
-		m = 1.;
-	
-	bnb_FragColor = vec4(m,0.,0.,0.);
+	bnb_FragColor = vec4(c00*8.-(cmm+c0m+cpm+cm0+cp0+cmp+c0p+cpp),0.,0.,0.);
 }

@@ -2,8 +2,6 @@ package com.banuba.tech.demo.data
 
 enum class MakeupJSConfig(val js: String) {
     EYES_SHADOW_COSNOVA("""
- const { setState, setMode } = require("./js/index.js")
-
     Object.assign(globalThis, { setState, setMode })
     setState({})
     setMode("speed")
@@ -19,8 +17,6 @@ enum class MakeupJSConfig(val js: String) {
     )
     """),
     EYES_SHADOW_GUCCI("""
-            const { setState, setMode } = require("./js/index.js")
-
     Object.assign(globalThis, { setState, setMode })
     setState({})
     setMode("speed")
@@ -36,8 +32,6 @@ enum class MakeupJSConfig(val js: String) {
      )
     """),
     LIPSTICK_APRICOT("""
-            const { setState, setMode } = require("./js/index.js")
-
     Object.assign(globalThis, { setState, setMode })
     setState({})
     setMode("speed")
@@ -53,8 +47,6 @@ enum class MakeupJSConfig(val js: String) {
      )
     """),
     LIPSTICK_PLUM("""
-            const { setState, setMode } = require("./js/index.js")
-
     Object.assign(globalThis, { setState, setMode })
     setState({})
     setMode("speed")
@@ -70,8 +62,6 @@ enum class MakeupJSConfig(val js: String) {
      )
     """),
     FOUNDATION_GUCCI("""
-            const { setState, setMode } = require("./js/index.js")
-
     Object.assign(globalThis, { setState, setMode })
     setState({})
     setMode("speed")
@@ -87,8 +77,6 @@ enum class MakeupJSConfig(val js: String) {
      )
     """),
     FOUNDATION_LOREAL("""
-            const { setState, setMode } = require("./js/index.js")
-
     Object.assign(globalThis, { setState, setMode })
 
     setState({})
@@ -105,8 +93,6 @@ enum class MakeupJSConfig(val js: String) {
      )
     """),
     LOOK_GUCCI("""
-const { setState, setMode } = require("./js/index.js")
-
     Object.assign(globalThis, { setState, setMode })
     setState({})
     setMode("speed")
@@ -142,8 +128,6 @@ const { setState, setMode } = require("./js/index.js")
      )
     """),
     LOOK_REVLON("""
-                const { setState, setMode } = require("./js/index.js")
-
     Object.assign(globalThis, { setState, setMode })
     setState({})
     setMode("speed")

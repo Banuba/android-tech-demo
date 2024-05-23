@@ -20,8 +20,8 @@ void main()
 	var_uv.y = 1. - var_uv.y;
 #endif
 
-	vec4 I_stddev_ = BNB_TEXTURE_2D_LOD( BNB_SAMPLER_2D(tex_stddev), vec2(0.5), 0. );
-	I_stddev = sqrt( I_stddev_.xyz/max(I_stddev_.w,0.00001) );
+	vec4 I_stddev_ = texelFetch( BNB_SAMPLER_2D(tex_stddev), ivec2(0,0), 8 );
+	I_stddev = sqrt( I_stddev_.xyz/max(I_stddev_.w,0.00001) )/100.; // /100. to adjust values back from scaled in stddev.frag
 
 	int f = int(attrib_pos.z);
 	if( f == 0 )

@@ -5,9 +5,13 @@ BNB_LAYOUT_LOCATION(2) BNB_IN vec2 attrib_uv;
 BNB_OUT(0) vec4 var_uv;
 BNB_OUT(1) vec2 var_face_uv;
 
+BNB_DECLARE_SAMPLER_2D(8, 9, correction_morph);
+
 void main()
 {
-	gl_Position = bnb_MVP * vec4( attrib_pos, 1. );
+	vec3 vpos = attrib_pos;
+	vpos += texelFetch(BNB_SAMPLER_2D(correction_morph), ivec2(gl_VertexID % (3308 / 2), gl_VertexID / (3308 / 2)), 0).xyz;
+	gl_Position = bnb_MVP * vec4(vpos, 1.);
 	vec2 v = gl_Position.xy/gl_Position.w;
 	vec2 mask_uv = v*0.5 + 0.5;
 #ifdef BNB_VK_1

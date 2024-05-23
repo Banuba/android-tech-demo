@@ -1,4 +1,5 @@
 #include <bnb/glsl.frag>
+#include <bnb/texture_bicubic.glsl>
 
 BNB_IN(0) vec4 var_brow_uv;
 BNB_IN(1) vec4 var_skin_lips_uv;
@@ -23,8 +24,10 @@ void main()
 	float brows = lbrow + rbrow;
 
 	float lips_box = box01(var_skin_lips_uv.zw);
-	float lips = BNB_TEXTURE_2D_LOD( BNB_SAMPLER_2D(tex_lips), var_skin_lips_uv.zw, 0. ).x*lips_box;
-	float lips_liner = BNB_TEXTURE_2D_LOD( BNB_SAMPLER_2D(tex_liner), var_skin_lips_uv.zw, 0. ).x*lips_box;
+	const float threshold = 0.2;
+	float lips = bnb_texture_bicubic(BNB_PASS_SAMPLER_ARGUMENT(tex_lips), var_skin_lips_uv.zw).x;
+	lips = max((lips - threshold)/(1. - threshold),0.)*lips_box;
+	float lips_liner = texelFetch( BNB_SAMPLER_2D(tex_liner), ivec2(gl_FragCoord.xy), 0 ).x;
 
 	float skin;
 	if( fake_skin_nn_active.x < 0.5 )

@@ -73,8 +73,6 @@ const apply = (region, { color, finish, coverage, strength }) => {
   if (["eyelashes", "eyeliner"].includes(region))
     bnb.scene.enableRecognizerFeature(bnb.FeatureID.EYES_CORRECTION)
 
-  bnb.scene.enableRecognizerFeature(bnb.FeatureID.FACE_MESH_CORRECTION)
-
   makeupRegion.color(color)
   makeupRegion.parameters({ K, ...rest })
   if (texture) makeupRegion.texture(texture)
@@ -83,7 +81,6 @@ const clear = () => {
   bnb.scene.disableRecognizerFeature(bnb.FeatureID.BROWS_CORRECTION)
   bnb.scene.disableRecognizerFeature(bnb.FeatureID.EYES_CORRECTION)
   bnb.scene.disableRecognizerFeature(bnb.FeatureID.LIPS_CORRECTION)
-  bnb.scene.disableRecognizerFeature(bnb.FeatureID.FACE_MESH_CORRECTION)
 
   for (const makeupRegion of Object.values(MakeupRegions)) makeupRegion.clear()
 }
